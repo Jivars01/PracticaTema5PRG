@@ -11,7 +11,7 @@ public class GameTest {
         c1.setNivel(nivel);
         c1.setPv(pv);
         c1.setAtq(atq);
-        c1.setDef(def);
+        c1.setArm(def);
         return c1;
     }
 
@@ -22,7 +22,7 @@ public class GameTest {
         Random r= new Random();
         c2.setPv(r.nextInt(1,33));
         c2.setAtq(r.nextInt(r.nextInt(1,33)));
-        c2.setDef(r.nextInt(1,33));
+        c2.setArm(r.nextInt(1,33));
         return c2;
     }
 }

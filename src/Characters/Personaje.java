@@ -1,6 +1,5 @@
 package Characters;
 
-import java.util.Objects;
 import java.util.Random;
 
 import GameMap.Trampa;
@@ -9,32 +8,40 @@ public class Personaje {
     private String nombre;
     private int pv;
     private int atq;
-    private int def;
+    private int arm;
     private int nivel;
+    private int res;
+    private int vel;
 
     public Personaje() {
         nombre = "";
-        pv = 0;
-        atq = 0;
-        def = 0;
-        nivel = 0;
+        pv = 100;
+        atq = 10;
+        arm = 10;
+        nivel = 1;
+        res = 10;
+        vel = 10;
     }
 
 
-    public Personaje(String nombre, int pv, int atq, int def, int nivel) {
+    public Personaje(String nombre, int pv, int atq, int arm, int nivel, int vel, int res) {
         setNombre(nombre);
         setPv(pv);
         setAtq(atq);
-        setDef(def);
+        setArm(arm);
         setNivel(nivel);
+        setRes(res);
+        setVel(vel);
     }
 
     public Personaje(Personaje copia) {
         this.nombre = copia.nombre;
         this.pv = copia.pv;
         this.atq = copia.atq;
-        this.def = copia.def;
+        this.arm = copia.arm;
         this.nivel = copia.nivel;
+        this.vel = copia.vel;
+        this.res = copia.res;
     }
 
     public Personaje(String name) { //Ejercicio 4.1
@@ -43,8 +50,9 @@ public class Personaje {
         Random r = new Random();
         pv = (r.nextInt(1, 33));
         atq = (r.nextInt(r.nextInt(1, 33)));
-        def = (r.nextInt(1, 33));
-
+        arm = (r.nextInt(1, 33));
+        vel = r.nextInt(1, 33);
+        res = r.nextInt(1, 33);
     }
 
     public Personaje(String nomm, int level) { //Ejercicio4.2
@@ -53,7 +61,9 @@ public class Personaje {
         Random r = new Random();
         pv = (r.nextInt(1, 33));
         atq = (r.nextInt(r.nextInt(1, 33)));
-        def = (r.nextInt(1, 33));
+        arm = (r.nextInt(1, 33));
+        res = (r.nextInt(1, 33));
+        vel = (r.nextInt(1, 33));
         subirNivel();
         for (int i = 1; i < level; i++) {
             subirNivel();
@@ -67,7 +77,7 @@ public class Personaje {
     public void setNombre(String n) {
         if (n.equals("")) {
             System.err.println("Error. El nombre debe tener caracteres válidos.");
-        } else if (n.contains("GM")) { //contains
+        } else if (n.contains("GM")) {
             System.err.println("Error. El nombre no puede contener GM");
         } else if (n.length() < 2) {
             System.err.println("Error. El nombre debe tener mas de dos caracteres");
@@ -98,16 +108,17 @@ public class Personaje {
         } else atq = ataque;
     }
 
-    public int getDef() {
-        return def;
+    public int getArm() {
+
+        return arm;
     }
 
-    public void setDef(int defensa) {
+    public void setArm(int defensa) {
         if (defensa < 1 && checkAtributos(defensa, "def")) {
             System.out.println("Perfecto, la defensa se econtrara en  uno");
-            def = 1;
-            def = defensa;
-        } else def = defensa;
+            arm = 1;
+            arm = defensa;
+        } else arm = defensa;
     }
 
     public int getNivel() {
@@ -118,11 +129,11 @@ public class Personaje {
         boolean res = false;
         switch (atributo) {
             case "pv":
-                if ((nuevoValor + def + atq) > 100)
+                if ((nuevoValor + arm + atq) > 100)
                     res = true;
                 break;
             case "atq":
-                if ((pv + nuevoValor + def) > 100)
+                if ((pv + nuevoValor + arm) > 100)
                     res = true;
                 break;
             case "def":
@@ -141,6 +152,26 @@ public class Personaje {
         }
     }
 
+    public int getRes() {
+        return res;
+    }
+
+    public void setRes(int res) {
+        if (res <= 0) {
+            this.res = 0;
+        }
+    }
+
+    public int getVel() {
+        return vel;
+    }
+
+    public void setVel(int vel) {
+        if (vel <= 0) {
+            this.vel = 0;
+        }
+    }
+
     public void beberPocion(int pocion) {
         if (pv <= 30) {
             pv += pocion;
@@ -153,7 +184,7 @@ public class Personaje {
                 atq += cantidad;
                 break;
             case ("Defensa"):
-                def += cantidad;
+                arm += cantidad;
                 break;
         }
     }
@@ -162,12 +193,24 @@ public class Personaje {
         int c;
         Random a = new Random();
         c = a.nextInt(100);
-        if (c < 33 && c > 0) {
+        if (c < 50 && c > 0) {
             pv++;
-        } else if (c <= 66 && c > 33) {
+        }
+        c = a.nextInt(100);
+        if (c <= 50 && c > 0) {
             atq++;
-        } else {
-            def++;
+        }
+        c = a.nextInt(100);
+        if (c <= 50 && c > 0) {
+            arm++;
+        }
+        c = a.nextInt(100);
+        if ((c <= 50 && c > 0)) {
+            res++;
+        }
+        c = a.nextInt(100);
+        if ((c <= 50 && c > 0)) {
+            vel++;
         }
         nivel++;
     }
@@ -195,8 +238,8 @@ public class Personaje {
             case "Brea":
                 System.out.println("Aceite viscoso cae de pronto sobre " + getNombre() + ", impidiéndole moverse con libertad. La defensa del personaje ha bajado");
                 int nuevadefensa;
-                nuevadefensa = getDef() - t.getPerjuicio();
-                setDef(nuevadefensa);
+                nuevadefensa = getArm() - t.getPerjuicio();
+                setArm(nuevadefensa);
                 break;
             case "Serpientes":
                 System.out.println("Un nido de víboras y culebras aparece frente a " + getNombre() + "La visión es tan terrorífica que pierde las ganas de continuar. Se reduce" + t.getPerjuicio() + " puntos el atq del Characters.Personaje.");
@@ -209,13 +252,13 @@ public class Personaje {
     }
 
     public String toString() {
-        String resultado = "El personaje " + getNombre() + " con las estadisticas de " + getAtq() + " de ataque, " + getDef() + " de defensa, " + getPv() + " de vida, "
+        String resultado = "El personaje " + getNombre() + " con las estadisticas de " + getAtq() + " de ataque, " + getArm() + " de defensa, " + getPv() + " de vida, "
                 + "con el nivel " + getNivel() + " esta creado.";
         return resultado;
     }
 
     public Personaje clone() {
-        Personaje clon = new Personaje(this.nombre, this.atq, this.def, this.pv, this.nivel);
+        Personaje clon = new Personaje(this.nombre, this.atq, this.arm, this.pv, this.nivel, this.vel, this.res);
         return clon;
     }
 
@@ -227,7 +270,7 @@ public class Personaje {
         if (this.atq != otro.atq)
             res = false;
 
-        if ((this.def != otro.def))
+        if ((this.arm != otro.arm))
             res = false;
 
         if (this.pv != otro.pv)
@@ -239,19 +282,31 @@ public class Personaje {
         return res;
     }
 
-    public int ataque(){
-        getAtq();
-        return atq;
+    public int ataque() {
+        return getAtq();
     }
 
-    public int defender(int defe){
+    public int defender(int defefisico,String tipo) {
 
-        defe -= atq;
-        if (defe <= 0) {
-            defe = 0;
+        switch (tipo){
+            case "Fisico":
+                defefisico = arm;
+            case "Magico":
+                defefisico = res;
         }
 
-        return defe;
+        defefisico -= atq;
+        if (defefisico <= 0) {
+            defefisico = 0;
+        }
+        return defefisico;
     }
+    public void RealizaTurno(String tipo){
+            switch (tipo){
+                case "1":
+
+            }
+    }
+
 
 }
