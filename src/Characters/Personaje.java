@@ -1,6 +1,7 @@
 package Characters;
 
 import java.util.Random;
+import java.util.Scanner;
 
 import GameMap.Trampa;
 
@@ -286,13 +287,17 @@ public class Personaje {
         return getAtq();
     }
 
-    public int defender(int defefisico,String tipo) {
+    public int defender(int defefisico, String tipo) {
 
-        switch (tipo){
+        switch (tipo) {
             case "Fisico":
                 defefisico = arm;
+                break;
             case "Magico":
                 defefisico = res;
+                break;
+            default:
+                defefisico = defefisico = 0;
         }
 
         defefisico -= atq;
@@ -301,11 +306,33 @@ public class Personaje {
         }
         return defefisico;
     }
-    public void RealizaTurno(String tipo){
-            switch (tipo){
-                case "1":
 
-            }
+    public void RealizaTurno() {
+        String tipo;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Introudza por mensaje que es lo que vas a hacer:" +
+                "1.Atacar" +
+                "2.Ataque especial (Solo algunos categorias pueden hacerlo" +
+                "3.Defender" +
+                "4.Pasar turno");
+        tipo = scan.nextLine();
+        switch (tipo) {
+            case "1":
+
+                break;
+            case "2":
+
+                break;
+
+            case "3":
+
+                break;
+
+            case "4":
+
+                break;
+
+        }
     }
 
 

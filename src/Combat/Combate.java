@@ -13,8 +13,6 @@ public class Combate {
     private Trampa trampa;
     private String turno;
     Scanner scan = new Scanner (System.in);
-
-
     /**
      *Para implementar la trampa:
      *-> Crear un objeto de la clase GameMap.Trampa como variable local dentro del método combatir
@@ -28,16 +26,13 @@ public class Combate {
         System.out.println("Empieza el combate entre " + c1.getNombre() + " y " + c2.getNombre());
         Trampa trampa = new Trampa(inicializaTrampa());
 
-
         do {
             if (c1.getVel() > c2.getVel()) {
                 System.out.println(c1.getNombre() + "Empieza el combate");
-
-                System.out.println("Introudza por mensaje que es lo que vas a hacer:" +
-                        "1.Atacar" +
-                        "2.Ataque especial (Solo algunos categorias pueden hacerlo" +
-                        "3.Defender" +
-                        "4.Pasar turno" );
+                if(c1.getVel() > c2.getVel()*2){
+                    c1.RealizaTurno();
+                }
+               c1.RealizaTurno();
 
                 if (trampa.activatrampa() != 0) {
                     c1.caerTrampa(trampa);
@@ -63,7 +58,6 @@ public class Combate {
                 }
             }
 
-
             int nuevaVida = 0;
 
             c1.ataque();
@@ -86,8 +80,6 @@ public class Combate {
                 c2.inspirar(trampa.getPerjuicio(), "def");
             }
             int nuevaVida2 = 0;
-
-
             c2.ataque();
             c1.defender(c1.getArm(),"Magico");
             nuevaVida2 = c1.getPv() - c2.ataque();
