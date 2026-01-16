@@ -87,8 +87,7 @@ public class Combate {
 
             c1.ataque();
             c2.defender(c2.getArm(),"Fisico");
-            nuevaVida = c2.getPv() - c1.ataque();
-            c2.setPv(nuevaVida);
+
 
             System.out.println("Daño total causado: " + c1.ataque() + " puntos.");
 

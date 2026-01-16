@@ -264,6 +264,12 @@ public class Area {
         return clon;
     }
 
+    /**
+     * Metodo equals que se encarga de asegurar si el objeto que recibe por parametros es igual a
+     * el areas establecida
+     * @param otro Objeto de la clase Area que asegura si es igual al area creada
+     * @return True si son todos iguales o flase si falla alguna coincidencia
+     */
     public boolean equals(Area otro) {
         boolean res = true;
         if (!this.nombre.equals((otro.nombre)))
@@ -279,6 +285,11 @@ public class Area {
 
         return res;
     }
+
+    /**
+     * Metodo toString que indica el estado en el que se encuentra la clase Area
+     * @return Devuelve el estado del Area
+     */
 
     public String toString() {
         String resultado = "El area" + getNombre() + " con un bioma de " + getNombre() + "  con una dificultad de "

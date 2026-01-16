@@ -132,6 +132,7 @@ public class Personaje {
     /**
      * Setter de nobre que establece que el nombre del personaje no pueda estar en vacio,
      * No puede tener menos de dos digitos y no puede contener el caracter GM
+     *
      * @param n String que recibe por parametro el nombre
      */
 
@@ -162,6 +163,7 @@ public class Personaje {
     /**
      * Setter de vida que establece que la vida no puede ser menor a 1 y debe de cumplir con el metodo
      * checkAtributossino se establece a  1 directamente
+     *
      * @param vida representa la vida del personaje que se recibe por parametros
      */
 
@@ -221,6 +223,7 @@ public class Personaje {
     public int getNivel() {
         return nivel;
     }
+
     /**
      * Metodo checkAtributos para limitar que la suma del atq, def y pv
      * no sean superiores a 100 y cumpla con lo establecido
@@ -263,6 +266,7 @@ public class Personaje {
 
     /**
      * Getter de resistencia magica que devuelve su valor
+     *
      * @return el valor de la resistencia magica
      */
 
@@ -272,6 +276,7 @@ public class Personaje {
 
     /**
      * Setter de resistencia que establece que la resistencia noi puede ser <= a 0
+     *
      * @param res Int que se recibe por parametros representa la resistencia magica
      */
 
@@ -283,6 +288,7 @@ public class Personaje {
 
     /**
      * Getter de velocidad que devuelve la velocidad del personaje
+     *
      * @return Valor de la velocidad (INT)
      */
 
@@ -292,6 +298,7 @@ public class Personaje {
 
     /**
      * Setter de velocidad que establece que la velocidad no puede ser <=0
+     *
      * @param vel Recibe un entero de la velocidad del personaje
      */
 
@@ -301,11 +308,25 @@ public class Personaje {
         }
     }
 
+    /**
+     * Metodo beberpocion que permite devolver vida al personaje si su vida es menor o igual a 30
+     *
+     * @param pocion Entero que recibe un numero que se usara para devolver la vida al personaje
+     */
+
     public void beberPocion(int pocion) {
         if (pv <= 30) {
             pv += pocion;
         }
     }
+
+    /**
+     * Metodo inspirar que se encarga de recuperar ataque o defensa (segun se indica) cada vez
+     * que la trampa falle y este aumente alguna de las dos estadisticas
+     *
+     * @param cantidad Establece la cantidad de ataque/defensa que recupera
+     * @param tipo     Indica el tipo de atributo que recupera/aumenta
+     */
 
     public void inspirar(int cantidad, String tipo) {
         switch (tipo) {
@@ -318,6 +339,10 @@ public class Personaje {
         }
     }
 
+    /**
+     * Metodo subirNivel que se encarga de subir estadisticas con un 50% de posibilidad por cada atributo
+     * cada vez que el personaje suba de nivel.
+     */
     public void subirNivel() {
         int c;
         Random a = new Random();
@@ -344,6 +369,12 @@ public class Personaje {
         nivel++;
     }
 
+    /**
+     * Metodo estarMuerto que se encarga de asegurar si el personaje esta a una vida menor o igual a 0
+     *
+     * @return True si su vida es menor o igual a 0 o false si la vida es mayor a 0
+     */
+
     public boolean estarMuerto() {
         boolean muerto;
         if (pv <= 0) {
@@ -353,6 +384,13 @@ public class Personaje {
         }
         return muerto;
     }
+
+    /**
+     * Metodo caerTrampa que se encarga de colocar el daño que realiza la trampa sobre el personaje cuando
+     * la trampa se activa, se usa un switch para establecer un mensaje distinto segun la trampa activada
+     *
+     * @param t Objeto Trampa que establece los valores de dicha clase
+     */
 
     public void caerTrampa(Trampa t) {
         String tipo = "";
@@ -381,8 +419,8 @@ public class Personaje {
     }
 
     public String toString() {
-        String resultado = "El personaje " + getNombre() + " con las estadisticas de " + getAtq() + " de ataque, " + getArm() + " de defensa, " + getPv() + " de vida, "
-                + "con el nivel " + getNivel() + " esta creado.";
+        String resultado = "El personaje " + getNombre() + " con las estadisticas: " + getAtq() + " de ataque, " + getArm() + " de defensa, " + getPv() + " de vida,  \n"
+                + getRes() + "de resistencia magica, " + getVel() + "de velocidad " + "de nivel " + getNivel() + " esta creado.";
         return resultado;
     }
 
@@ -415,34 +453,39 @@ public class Personaje {
         return getAtq();
     }
 
-    public int defender(int defefisico, String tipo) {
-
+    public int defender(int daño, String tipo) {
+        //this.pv = (daño - arm)
         switch (tipo) {
             case "Fisico":
-                defefisico = arm;
-                break;
-            case "Magico":
-                defefisico = res;
-                break;
-            default:
-                defefisico = defefisico = 0;
-        }
+                if (daño <= 0) {
+                    daño = 0;
+                }
+                this.pv = daño - arm;
 
-        defefisico -= atq;
-        if (defefisico <= 0) {
-            defefisico = 0;
+                break;
+
+            case "Magico":
+                if (daño <= 0) {
+                    daño = 0;
+                }
+                this.pv = daño - res;
+
+                break;
+
+            default:
+                daño = 0;
         }
-        return defefisico;
+        return pv;
     }
 
     public void RealizaTurno() {
         String tipo;
         Scanner scan = new Scanner(System.in);
         System.out.println("Introudza por mensaje que es lo que vas a hacer:" +
-                "1.Atacar" +
-                "2.Ataque especial (Solo algunos categorias pueden hacerlo" +
-                "3.Defender" +
-                "4.Pasar turno");
+                "\n1.Atacar" +
+                "\n2.Ataque especial (Solo algunos categorias pueden hacerlo" +
+                "\n3.Defender" +
+                "\n4.Pasar turno");
         tipo = scan.nextLine();
         switch (tipo) {
             case "1":

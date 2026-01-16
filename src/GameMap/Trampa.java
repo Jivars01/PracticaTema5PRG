@@ -15,9 +15,10 @@ import java.util.Random;
 
 
 public class Trampa {
-    private String categoria;
-    private int perjuicio;
-    private double fracaso;
+    private String categoria; /** String que establece la categoria que es la trampa*/
+    private int perjuicio; /**Establece el daño que realiza la trampa al personaje*/
+    private double fracaso; /**Establece el fracaso para que la trampa no funciona */
+
 
     /**
      * Constructor por defecto de trampa qe inicia los valores a 0 en
@@ -60,7 +61,10 @@ public class Trampa {
         setFracaso();
     }
 
-
+    /**
+     * Constructor de copia que realiza una copia en profundidad de los atributos de la clase trampa
+     * @param copia Objeto de la classe Trampa que recibe los parametros establecidos
+     */
     public Trampa(Trampa copia) {
         this.categoria = copia.categoria;
         this.perjuicio = copia.perjuicio;
@@ -170,6 +174,12 @@ public class Trampa {
         return fracaso;
     }
 
+    /**
+     * Metodo equals que se encarga de asegurar que los atributos son iguales a los de la copia
+     * @param otro Que recibe un objeto Trampa para asegurar que son iguales
+     * @return Devuelve un true si son iguales o un false si no son iguales
+     */
+
     public boolean equals(Trampa otro) {
         boolean res = true;
         if (!this.categoria.equals((otro.categoria)))
@@ -183,6 +193,11 @@ public class Trampa {
 
         return res;
     }
+
+    /**
+     * Metodo toString que indica el estado en el que se encuentra la clase Trampa
+     * @return Como se encuentra la trampa establecida
+     */
 
     public String toString() {
         String resultado = "La trampa " + getCategoria() + "con las un perjuicio de " + getPerjuicio() + "  con un nivel de fracaso de " + getFracaso() + "esta preparada para usarse";
