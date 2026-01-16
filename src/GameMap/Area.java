@@ -6,12 +6,28 @@ import Characters.Personaje;
 import java.security.PublicKey;
 import java.util.Random;
 
+/**
+ * Clase Area basada en un area para un nivel que contiene un String nombre,un string bioma,
+ * un int dificultad y un objeto Trampa de la clase trampa.
+ *
+ * @author Jesús Ivars
+ * @version 2.0
+ * @see Trampa se referencia y se usa la clase trampa
+ */
+
+
 public class Area {
     private String nombre;
     private String bioma;
     private int dificultad;
     private Trampa trampa;
 
+    /**
+     * Constructor por defecto que estable el sting nombre con tres interrogaciones
+     * el bioma se estbalece como pradera por defecto y la dificultad a 1 ademas
+     * de establecer una trampa de la clase trampa
+     * @see Trampa que se usa para crear trampa
+     */
     public Area() {
         nombre = "???";
         bioma = "Pradera";
@@ -19,12 +35,28 @@ public class Area {
         trampa = new Trampa();
     }
 
+    /**
+     * Constructor por parametros que establece los valores que recibe y pasa por sus
+     * respectivos setters para onfirmar que cumple con la condicion
+     * @param nombre String para el nombre
+     * @param bioma String para el bioma
+     * @param dificultad int para la dificultad
+     * @param trampa Trampa para establecert la trampa
+     */
+
     public Area(String nombre, String bioma, int dificultad, Trampa trampa) {
         setNombre(nombre);
         setBioma(bioma);
         this.dificultad = dificultad;
         setTrampa(trampa);
     }
+
+    /**
+     * Constructor que recibe por parametros el nombre y el bioma que establece el nivel
+     * automaticamente segun el bioma escogido entre los niveles que pueden ser los biomas
+     * @param name String para el nombre del nivel
+     * @param bio String para el nombre del bioma
+     */
 
     public Area(String name, String bio) {
         setNombre(name);
@@ -49,6 +81,11 @@ public class Area {
         }
     }
 
+    /**
+     * Constructor de copia
+     * @param copia
+     */
+
 
     public Area(Area copia) {
         this.nombre = copia.nombre;
@@ -57,21 +94,48 @@ public class Area {
         this.trampa = copia.trampa;
     }
 
+    /**
+     * Getter de nombre que devuelve el nombre
+     * @return
+     */
+
     public String getNombre() {
         return nombre;
     }
+
+    /**
+     * Getter de bioma
+     * @return
+     */
 
     public String getBioma() {
         return bioma;
     }
 
+    /**
+     * Getter de dificultad
+     * @return
+     */
+
     public int getDificultad() {
         return dificultad;
     }
 
+    /**
+     * setter de trampa
+     * @param trampa
+     */
+
     public void setTrampa(Trampa trampa) {
         this.trampa = new Trampa(trampa);
     }
+
+    /**
+     * Setter de nombre que limita a que el nombre no puede estar vacio,
+     * ni contener espacios en el nombre y se debera cambiar por guiones
+     * aunque se puede cambiar y establecer que los espacios se cambien por _
+     * @param n2 coloca el string del nombre deseado
+     */
 
     public void setNombre(String n2) {
         if (n2.equals("")) {
@@ -83,6 +147,13 @@ public class Area {
         }
     }
 
+    /**
+     * Setter de bioma que limita a que el bioma solo pueda ser "Pradera", "Jungla",
+     * "Desierto", "Montaña", "Mazmorra" y sino se establece por defecto un mensaje de error
+     *
+     * @param bio
+     */
+
     public void setBioma(String bio) {
         switch (bio) {
             case "Pradera", "Jungla", "Desierto", "Montaña", "Mazmorra":
@@ -93,6 +164,13 @@ public class Area {
                 System.out.println("Lo siento, pero el bioma no concluye con los especificado, compruebe las mayusculas");
         }
     }
+
+    /**
+     * Metodo  asignarNivel que se encarga de asignar un nivel limitando la dificultad
+     * dependiendo del bioma escogido y que si se pasa del nivel posible saldra un mesaje de error.
+     * Usamos un switch para las distintas categorias de Bioma
+     * @param dif referencia un entero que coloca la dificultad deseada
+     */
 
     public void asignarNivel(int dif) {
         switch (bioma) {
@@ -131,6 +209,14 @@ public class Area {
         }
     }
 
+    /**
+     * Metodo generar pocion que sirve para curar la vida pero depende del bioma
+     * escogido ya que cada bioma tiene distinto comportamienbto
+     *
+     * @param cura indica la vida que se quiere recuperar
+     * @return devuelve la cantidad de vida que se va a recuperar
+     */
+
     public int generarPocion(int cura) {
         if (bioma.equals("Pradera")) {
             cura = 15;
@@ -154,6 +240,16 @@ public class Area {
         } else System.out.println("El nivel concuerda con el bioma");
         return cura;
     }
+
+    /**
+     * Metodo generarTrampa para que la trampa se establezca segun el bioma escogido
+     * variando su daño o probabilidad que suceda en x biomas especificos.
+     * Este recibe por prametro la categoria y el perjuicio ademas que establece el
+     * Fracaso pero al ser por azar no depende de parametros
+     * @param t String que indica la categoria escogida
+     * @param p int que indica el perjuicio escogido
+     * @return Devuelve la trampa establecida
+     */
 
     public static Trampa generarTrampa(String t, int p) {
         Trampa trampa = new Trampa();

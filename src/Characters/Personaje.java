@@ -5,6 +5,15 @@ import java.util.Scanner;
 
 import GameMap.Trampa;
 
+/**
+ * Esta clase personaje sirve para poder crear a un personaje que tiene varias estadisticas
+ * de numeros enteros que son vida, ataque , armadura (daño fisico), nivel , resistencia magica
+ * (daño magico), velocidad y un string con el nombre
+ *
+ * @author Jesús Ivars
+ * Version 2.0
+ */
+
 public class Personaje {
     private String nombre;
     private int pv;
@@ -13,6 +22,11 @@ public class Personaje {
     private int nivel;
     private int res;
     private int vel;
+
+    /**
+     * Constructor por defecto que establece el valor de nombre con cadena vacia, la vida con 100
+     * y el resto de estadisticas a 10 menos el nivel que se establece a 1
+     */
 
     public Personaje() {
         nombre = "";
@@ -23,6 +37,19 @@ public class Personaje {
         res = 10;
         vel = 10;
     }
+
+    /**
+     * Constructor por parametros que establece el valor que recibe y pasa por los setters para asegurar
+     * que cumple con lo establecido
+     *
+     * @param nombre String con el nombre del personaje
+     * @param pv     Int para la vida
+     * @param atq    Int para el ataque
+     * @param arm    Int para la armadura
+     * @param nivel  Int para el nivel
+     * @param vel    Int para la velocidad
+     * @param res    Int para la resistencia magica
+     */
 
 
     public Personaje(String nombre, int pv, int atq, int arm, int nivel, int vel, int res) {
@@ -35,6 +62,12 @@ public class Personaje {
         setVel(vel);
     }
 
+    /**
+     * Constructor de copia que copia los atributos
+     *
+     * @param copia de Personaje que copia todos los atributos dihos anteriormente
+     */
+
     public Personaje(Personaje copia) {
         this.nombre = copia.nombre;
         this.pv = copia.pv;
@@ -44,6 +77,13 @@ public class Personaje {
         this.vel = copia.vel;
         this.res = copia.res;
     }
+
+    /**
+     * Sobrecarga de constructor que recibe el nombre por parametro y establece los atributos
+     * entre el 1 y el 32 y establece el nivel a 1
+     *
+     * @param name String que establece el nombre por parametro
+     */
 
     public Personaje(String name) { //Ejercicio 4.1
         setNombre(name);
@@ -55,6 +95,14 @@ public class Personaje {
         vel = r.nextInt(1, 33);
         res = r.nextInt(1, 33);
     }
+
+    /**
+     * Sobrecarga de constructor que recibe un string para el nombre y un int
+     * para el nivel, usando el metodo subir nivel para subir una estadistica aleatoria
+     *
+     * @param nomm  String para el nombre
+     * @param level Int para el nivel
+     */
 
     public Personaje(String nomm, int level) { //Ejercicio4.2
         setNombre(nomm);
@@ -71,23 +119,51 @@ public class Personaje {
         }
     }
 
+    /**
+     * Getter de nombre que devuelve el nombre
+     *
+     * @return devuelve el nombre
+     */
+
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Setter de nobre que establece que el nombre del personaje no pueda estar en vacio,
+     * No puede tener menos de dos digitos y no puede contener el caracter GM
+     * @param n String que recibe por parametro el nombre
+     */
+
     public void setNombre(String n) {
         if (n.equals("")) {
             System.err.println("Error. El nombre debe tener caracteres válidos.");
+            nombre = "";
         } else if (n.contains("GM")) {
             System.err.println("Error. El nombre no puede contener GM");
+            nombre = "";
         } else if (n.length() < 2) {
             System.err.println("Error. El nombre debe tener mas de dos caracteres");
+            nombre = "";
         } else nombre = n;
     }
+
+    /**
+     * Getter de vida que devuelve la vida
+     *
+     * @return devuelve la vida
+     */
+
 
     public int getPv() {
         return pv;
     }
+
+    /**
+     * Setter de vida que establece que la vida no puede ser menor a 1 y debe de cumplir con el metodo
+     * checkAtributossino se establece a  1 directamente
+     * @param vida representa la vida del personaje que se recibe por parametros
+     */
 
     public void setPv(int vida) {
         if (vida < 1 && checkAtributos(vida, "pv")) {
@@ -97,9 +173,23 @@ public class Personaje {
         } else pv = vida;
     }
 
+    /**
+     * Getter de ataque que devuelve el ataque
+     *
+     * @return devuelve el ataque
+     */
+
     public int getAtq() {
         return atq;
     }
+
+    /**
+     * Setter de ataque para limitar que sea mayor a 1 y la suma
+     * de sus estadisticas no sean mayor a 100, sino se establece
+     * el ataque a 1
+     *
+     * @param ataque donde se coloca el ataque deseado
+     */
 
     public void setAtq(int ataque) {
         if (ataque < 1 && checkAtributos(ataque, "atq")) {
@@ -109,10 +199,16 @@ public class Personaje {
         } else atq = ataque;
     }
 
-    public int getArm() {
+    /**
+     * Getter de armadura que devuelve la armadura
+     *
+     * @return devuelve la armadura
+     */
 
+    public int getArm() {
         return arm;
     }
+
 
     public void setArm(int defensa) {
         if (defensa < 1 && checkAtributos(defensa, "def")) {
@@ -125,6 +221,12 @@ public class Personaje {
     public int getNivel() {
         return nivel;
     }
+    /**
+     * Metodo checkAtributos para limitar que la suma del atq, def y pv
+     * no sean superiores a 100 y cumpla con lo establecido
+     *
+     * @return devuelve True si la suma supera el 100 y si no se devuelve false
+     */
 
     public boolean checkAtributos(int nuevoValor, String atributo) {
         boolean res = false;
@@ -145,6 +247,12 @@ public class Personaje {
         return res;
     }
 
+    /**
+     * Setter del nivel que limita que sea mayor a 1 y menor a 100
+     *
+     * @param level donde se coloca el nivel deseado
+     */
+
     public void setNivel(int level) {
         if (level < 1 || level > 100) {
             System.err.println("Lo siento, no puedo poner un valor menor a 1.");
@@ -153,9 +261,19 @@ public class Personaje {
         }
     }
 
+    /**
+     * Getter de resistencia magica que devuelve su valor
+     * @return el valor de la resistencia magica
+     */
+
     public int getRes() {
         return res;
     }
+
+    /**
+     * Setter de resistencia que establece que la resistencia noi puede ser <= a 0
+     * @param res Int que se recibe por parametros representa la resistencia magica
+     */
 
     public void setRes(int res) {
         if (res <= 0) {
@@ -163,9 +281,19 @@ public class Personaje {
         }
     }
 
+    /**
+     * Getter de velocidad que devuelve la velocidad del personaje
+     * @return Valor de la velocidad (INT)
+     */
+
     public int getVel() {
         return vel;
     }
+
+    /**
+     * Setter de velocidad que establece que la velocidad no puede ser <=0
+     * @param vel Recibe un entero de la velocidad del personaje
+     */
 
     public void setVel(int vel) {
         if (vel <= 0) {

@@ -7,20 +7,46 @@ import GameMap.Trampa;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Clase Combate que crea un combate entre dos personajes que usaran el objeto de la
+ * clase personaje para establecer sus valores y asi pelearse entre ellos e indicar
+ * quien gana o pierde el combate ademas se crearan dos atributos que son la trampa
+ * de la clase Trampa y un string para indicar el turno admeas de un scanner que
+ * usaremos para poder indicar el turno por teclado
+ *
+ * @author Jesús Ivars
+ * @version 2.0
+ */
+
 public class Combate {
+
+
 
 
     private Trampa trampa;
     private String turno;
     Scanner scan = new Scanner (System.in);
-    /**
+
+    /*
      *Para implementar la trampa:
-     *-> Crear un objeto de la clase GameMap.Trampa como variable local dentro del método combatir
+     *-> Crear un objeto de la clase GameMap.Trampa como variable local dentro del metodo combatir
      *-> Para cada ronda de cada personaje (dos veces por turno) comprobar si la trampa se activa. USAR METODO DE TRAMPA
      *-> Aplicar efecto de la trampa si procede
      *-> Si la trampa se activa (activarTrampa() != 0): aplicar perjuicio según tipo de trampa
-     *-> Si la trampa no se activa (activarTrampa() == 0): inspirar usando el método de la clase Characters.Personaje con el valor del perjuicio obtenido de activarTrampa()
+     *-> Si la trampa no se activa (activarTrampa() == 0): inspirar usando el metodo de la clase Characters.Personaje con el valor del perjuicio obtenido de activarTrampa()
      */
+
+    /**
+     * Metodo Combate de la Clase Personaje que establece el combate entre dos personajes
+     * que pueden ser de disintas clases, la velocidad indicara quien empieza el combate
+     * incluyendo que si un personaje tiene el doble de velocidad que el otro
+     * haga doble turno, y se podra indicar al personaje que haga una accion de cuatro disponibles,
+     * atacar fisicamente, atacar magicamente, pasar turno o defenderte
+     * @param c1 De la clase personaje que crea al primer jugador
+     * @param c2 De la clase personaje que crea al segundo jugador
+     * @return devuelve quien es el ganador del combate
+     */
+
     public static Personaje combatir(Personaje c1, Personaje c2) {
         Personaje resultado = new Personaje();
         System.out.println("Empieza el combate entre " + c1.getNombre() + " y " + c2.getNombre());
@@ -57,7 +83,6 @@ public class Combate {
                     }
                 }
             }
-
             int nuevaVida = 0;
 
             c1.ataque();
@@ -138,9 +163,19 @@ public class Combate {
         return resultado;
     }
 
+    /**
+     * Metodo que se usa para imprimir un mesaje segun el ganador del combate
+     * @param p Recibe el personaje ganador por parametro
+     */
     public static void Imprimeganador(Personaje p) {
         System.out.println("El personaje " + p.getNombre() + "es el ganador");
     }
+
+    /**
+     * Metodo que establece una trampa dentro del combate qe ademas
+     * variara algunos valores segun la trampa este en un bioma indicado
+     * @return La trampa establecida al combate
+     */
 
     public static Trampa inicializaTrampa() {
         Trampa trampa = new Trampa();
