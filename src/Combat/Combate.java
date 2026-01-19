@@ -19,13 +19,9 @@ import java.util.Scanner;
  */
 
 public class Combate {
-
-
-
-
     private Trampa trampa;
     private String turno;
-    Scanner scan = new Scanner (System.in);
+    Scanner scan = new Scanner(System.in);
 
     /*
      *Para implementar la trampa:
@@ -42,51 +38,57 @@ public class Combate {
      * incluyendo que si un personaje tiene el doble de velocidad que el otro
      * haga doble turno, y se podra indicar al personaje que haga una accion de cuatro disponibles,
      * atacar fisicamente, atacar magicamente, pasar turno o defenderte
+     *
      * @param c1 De la clase personaje que crea al primer jugador
      * @param c2 De la clase personaje que crea al segundo jugador
      * @return devuelve quien es el ganador del combate
      */
 
+    //public static void combatir(...)
     public static Personaje combatir(Personaje c1, Personaje c2) {
-        Personaje resultado = new Personaje();
+        Personaje resultado = new Personaje(); //Sobra
         System.out.println("Empieza el combate entre " + c1.getNombre() + " y " + c2.getNombre());
         Trampa trampa = new Trampa(inicializaTrampa());
 
         do {
             if (c1.getVel() > c2.getVel()) {
-                System.out.println(c1.getNombre() + "Empieza el combate");
-                if(c1.getVel() > c2.getVel()*2){
-                    c1.RealizaTurno();
-                }
-               c1.RealizaTurno();
-
                 if (trampa.activatrampa() != 0) {
                     c1.caerTrampa(trampa);
                 } else if (trampa.getCategoria().equals("Brea")) {
                     c1.inspirar(trampa.getPerjuicio(), "def");
                 }
-                if (c1.getVel()>c2.getVel()*2){
+                System.out.println(c1.getNombre() + "Empieza el combate");
+                if (c1.getVel() > c2.getVel() * 2) {
+                    c1.realizaTurno();
+                    //También toca calcular el daño realizado con defender
+                }
+                c1.realizaTurno();
+
+
+                if (c1.getVel() > c2.getVel() * 2) { //Ya estás considerando previamente el doble turno
                     System.out.println("El personaje realiza doble turno debido a su gran velocidad");
                     int nuevaVida = 0;
 
-                    c1.ataque();
-                    c2.defender(c2.getArm(),"Fisico");
+                    //c1.ataque(); Sobra
+                    //Defender ya cambia los pv del defensor, pero debe recibir como parámetro la cantidad de daño que dependerá de lo que hagas con RealizaTurno
+                    c2.defender(c1.getAtq(), "Fisico");
+                    //Si implementas bien defender sobran las dos siguientes lineas
                     nuevaVida = c2.getPv() - c1.ataque();
                     c2.setPv(nuevaVida);
 
+                    //Encuentra otra forma de expresarlo (por ejemplo, tomando el valor que recuperes de realizaTurno()
                     System.out.println("Daño total causado: " + c1.ataque() + " puntos.");
 
                     System.out.println("El personaje 2 posee ahora mismo " + c2.getPv() + " puntos de vida");
                     if (c2.getPv() <= 0) {
                         System.out.println("Characters.Personaje 1 gana.");
-                        break;
                     }
                 }
             }
             int nuevaVida = 0;
 
             c1.ataque();
-            c2.defender(c2.getArm(),"Fisico");
+            c2.defender(c2.getArm(), "Fisico");
 
 
             System.out.println("Daño total causado: " + c1.ataque() + " puntos.");
@@ -105,7 +107,7 @@ public class Combate {
             }
             int nuevaVida2 = 0;
             c2.ataque();
-            c1.defender(c1.getArm(),"Magico");
+            c1.defender(c1.getArm(), "Magico");
             nuevaVida2 = c1.getPv() - c2.ataque();
             c1.setPv(nuevaVida2);
 
@@ -121,12 +123,12 @@ public class Combate {
                 if (trampa.activatrampa() != 0) {
                     c2.caerTrampa(trampa);
                 } else if (trampa.getCategoria().equals("Brea")) {
-                    c2.inspirar(trampa.getPerjuicio(),"def");
+                    c2.inspirar(trampa.getPerjuicio(), "def");
                 }
                 c2.ataque();
-                c2.defender(c1.getArm(),"Fisico");
+                c2.defender(c1.getArm(), "Fisico");
 
-                nuevaVida2 = c1.getPv() - c2.defender(c2.getArm(),"Magico");
+               // nuevaVida2 = c1.getPv() - c2.defender(c2.getArm(), "Magico");
                 c1.setPv(nuevaVida2);
 
                 System.out.println("Daño total causado: " + c2.ataque() + " puntos.");
@@ -141,11 +143,11 @@ public class Combate {
                 if (trampa.activatrampa() != 0) {
                     c1.caerTrampa(trampa);
                 } else if (trampa.getCategoria().equals("Brea")) {
-                    c1.inspirar(trampa.getPerjuicio(),"def");
+                    c1.inspirar(trampa.getPerjuicio(), "def");
                 }
 
                 c1.ataque();
-                c2.defender(c2.getArm(),"Fisico");
+                c2.defender(c2.getArm(), "Fisico");
                 nuevaVida = c2.getPv() - c1.ataque();
                 c2.setPv(nuevaVida);
 
@@ -162,8 +164,46 @@ public class Combate {
         return resultado;
     }
 
+    public static void combatir2(Personaje c1, Personaje c2){
+        /*
+            REALIZARTURNO SOLO LO UTILIZA EL PERSONAJE JUGABLE
+            Bucle do-while del combate
+            0. Comprobar que personaje tiene más velocidad
+            1. Ejecutar primera posibilidad
+                1.1. Comprobar si el personaje más veloz tiene doble turno
+                1.2. Realizar el turno adicional primero SI LO HUBIERA, utilizando defender con la cantidad de daño obtenida de realizarTurno
+                1.3. Realizar el turno habitual, utilizando igual defender con la cantidad de la llamada a realizarTurno
+                1.4. Realizar el turno del oponente
+                1.* DESPUÉS DE CADA GOLPE HAY QUE COMPROBAR SI EL GOLPE HA MATADO Y EL COMBATE TERMINA
+            2. Ejecutar segunda posibilidad
+                2.1. Repetir los pasos 1.1. a 1.*. con c1 y c2 invertidos
+            3. Declarar el ganador cuando se salga del bucle
+         */
+
+        System.out.println("Empieza el combate entre " + c1.getNombre() + "y" + c2.getNombre());
+        if (c1.getVel()>c2.getVel()){
+            System.out.println("El personaje 1 empieza el combate ");
+
+            if(c1.getVel() >= c2.getVel()*2){
+                c1.realizaTurno();
+            }
+        } else
+            System.out.println("El personaje rival empieza el combate");
+        if(c1.getVel() >= c2.getVel()*2){
+            c1.realizaTurno();
+        }
+        c1.realizaTurno();
+
+        do {
+
+        }while (!c1.estarMuerto()&&c2.estarMuerto());
+
+
+    }
+
     /**
      * Metodo que se usa para imprimir un mesaje segun el ganador del combate
+     *
      * @param p Recibe el personaje ganador por parametro
      */
     public static void Imprimeganador(Personaje p) {
@@ -173,6 +213,7 @@ public class Combate {
     /**
      * Metodo que establece una trampa dentro del combate qe ademas
      * variara algunos valores segun la trampa este en un bioma indicado
+     *
      * @return La trampa establecida al combate
      */
 

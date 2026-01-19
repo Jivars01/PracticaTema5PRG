@@ -448,61 +448,65 @@ public class Personaje {
 
         return res;
     }
-
+//Ataque esta bien implementada _Jesus
     public int ataque() {
         return getAtq();
     }
-
-    public int defender(int daño, String tipo) {
+    //Si mantienes esta implementación defender debería devolver void
+    public void defender(int daño, String tipo) {
         //this.pv = (daño - arm)
         switch (tipo) {
             case "Fisico":
-                if (daño <= 0) {
+                //Si el daño - la armadura será menor que 0
+                if (daño - arm <= 0) {
                     daño = 0;
                 }
                 this.pv = daño - arm;
-
                 break;
-
             case "Magico":
-                if (daño <= 0) {
+                //Aquí igual pero con la RM
+                if (daño-res <= 0) {
                     daño = 0;
                 }
                 this.pv = daño - res;
-
                 break;
 
             default:
                 daño = 0;
         }
-        return pv;
     }
 
-    public void RealizaTurno() {
+    //RealizarTurno debería devolver la cantidad de daño a realizar -> atacar es el ataque estándar, la accion especial depende de la subclase y defender y pasar turno devuelven 0
+    public void realizaTurno() {
         String tipo;
         Scanner scan = new Scanner(System.in);
-        System.out.println("Introudza por mensaje que es lo que vas a hacer:" +
+        System.out.println("Introduzca por teclado que es lo que vas a hacer:" +
                 "\n1.Atacar" +
-                "\n2.Ataque especial (Solo algunos categorias pueden hacerlo" +
+                "\n2.Ataque especial (Solo algunos categorias pueden hacerlo)" +
                 "\n3.Defender" +
                 "\n4.Pasar turno");
         tipo = scan.nextLine();
         switch (tipo) {
             case "1":
-
+                System.out.println("Has decidido atacar");
+                ataque();
+                defender(ataque(),"Fisico");
                 break;
             case "2":
-
+                System.out.println("Un personaje generico no tiene ataque especial");
                 break;
 
             case "3":
-
+                System.out.println("Has decidido defender");
+                res += (res*0.20);
+                arm *= (arm*0.20);
                 break;
 
             case "4":
-
+                System.out.println("Has decidido pasar el turno tu personaje no hara ninguna accion");
                 break;
-
+            default:
+                System.out.println("La opcion escogida no corresponde a las especificadas");
         }
     }
 
