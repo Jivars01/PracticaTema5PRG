@@ -74,7 +74,8 @@ public class Guerrero extends Personaje{
 
     @Override
     public String toString() {
-        return super.toString() + "Es un Guerrero";
+        return super.toString() + "Es un Guerrero con la posiblidad de entrar en furia y duplicar su daño "+
+                "\n Sin embargo este recibe el doble de daño durante dicho estado";
     }
 
 }
