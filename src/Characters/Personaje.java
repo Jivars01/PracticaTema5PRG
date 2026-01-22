@@ -477,7 +477,8 @@ public class Personaje {
     }
 
     //RealizarTurno debería devolver la cantidad de daño a realizar -> atacar es el ataque estándar, la accion especial depende de la subclase y defender y pasar turno devuelven 0
-    public void realizaTurno() {
+    public int realizaTurno() {
+        int daño = 0;
         String tipo;
         Scanner scan = new Scanner(System.in);
         System.out.println("Introduzca por teclado que es lo que vas a hacer:" +
@@ -489,25 +490,26 @@ public class Personaje {
         switch (tipo) {
             case "1":
                 System.out.println("Has decidido atacar");
-                ataque();
+                daño = ataque();
                 defender(ataque(),"Fisico");
                 break;
             case "2":
                 System.out.println("Un personaje generico no tiene ataque especial");
                 break;
-
             case "3":
                 System.out.println("Has decidido defender");
                 res += (res*0.20);
                 arm *= (arm*0.20);
+                daño = 0;
                 break;
-
             case "4":
                 System.out.println("Has decidido pasar el turno tu personaje no hara ninguna accion");
+                daño = 0;
                 break;
             default:
                 System.out.println("La opcion escogida no corresponde a las especificadas");
         }
+        return daño;
     }
 
 

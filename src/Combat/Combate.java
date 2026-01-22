@@ -128,7 +128,7 @@ public class Combate {
                 c2.ataque();
                 c2.defender(c1.getArm(), "Fisico");
 
-               // nuevaVida2 = c1.getPv() - c2.defender(c2.getArm(), "Magico");
+                // nuevaVida2 = c1.getPv() - c2.defender(c2.getArm(), "Magico");
                 c1.setPv(nuevaVida2);
 
                 System.out.println("Daño total causado: " + c2.ataque() + " puntos.");
@@ -164,7 +164,7 @@ public class Combate {
         return resultado;
     }
 
-    public static void combatir2(Personaje c1, Personaje c2){
+    public static void combatir2(Personaje c1, Personaje c2) {
         /*
             REALIZARTURNO SOLO LO UTILIZA EL PERSONAJE JUGABLE
             Bucle do-while del combate
@@ -180,25 +180,37 @@ public class Combate {
             3. Declarar el ganador cuando se salga del bucle
          */
 
-        System.out.println("Empieza el combate entre " + c1.getNombre() + "y" + c2.getNombre());
-        if (c1.getVel()>c2.getVel()){
-            System.out.println("El personaje 1 empieza el combate ");
-
-            if(c1.getVel() >= c2.getVel()*2){
-                c1.realizaTurno();
-            }
-        } else
-            System.out.println("El personaje rival empieza el combate");
-        if(c1.getVel() >= c2.getVel()*2){
-            c1.realizaTurno();
-        }
-        c1.realizaTurno();
 
         do {
+            System.out.println("Empieza el combate entre " + c1.getNombre() + "y" + c2.getNombre());
+            if (c1.getVel() > c2.getVel()) { //1
+                System.out.println("El personaje 1 empieza el combate ");
+                if (c1.getVel() >= c2.getVel() * 2) { //1.1
+                    c2.defender(c1.realizaTurno(), "fisico");
+                    if (c2.getPv() <= 0) {
+                        Imprimeganador(c1);
+                    }else{
+                    }
+                }
+                c2.defender(c1.realizaTurno(), "fisico");
+                if (c2.getPv() <= 0) {
+                    Imprimeganador(c1);
+                } else{
 
-        }while (!c1.estarMuerto()&&c2.estarMuerto());
-
-
+                }
+            } else //2
+                System.out.println("El personaje rival empieza el combate");
+            if (c1.getVel() >= c2.getVel() * 2) {
+                c1.defender(c2.ataque(), "fisico");
+                if (c2.getPv() <= 0) {
+                    Imprimeganador(c2);
+                }
+            }
+            c1.defender(c2.ataque(), "fisico");
+            if (c2.getPv() <= 0) {
+                Imprimeganador(c2);
+            }
+        } while (!c1.estarMuerto() && c2.estarMuerto());
     }
 
     /**

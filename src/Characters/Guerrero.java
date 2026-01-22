@@ -67,7 +67,7 @@ public class Guerrero extends Personaje{
 
     @Override
     public void defender(int defefisico, String tipo) {
-        if (furia = true)
+        if (furia == true)
              super.defender(defefisico * 2, tipo);
         else super.defender(defefisico,tipo);
     }

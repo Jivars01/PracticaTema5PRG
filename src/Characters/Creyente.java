@@ -8,8 +8,17 @@ public abstract class Creyente extends Personaje{
         fe =0;
     }
 
-    public Creyente (String nombre, int pv, int atq, int arm, int nivel, int vel, int res){
+    public int getFe() {
+        return fe;
+    }
+
+    public void setFe(int fe) {
+        this.fe = fe;
+    }
+
+    public Creyente (String nombre, int pv, int atq, int arm, int nivel, int vel, int res,int fe){
         super(nombre,pv, atq, arm, nivel,  vel, res);
+        setFe(fe);
     }
     public abstract int plegaria();
     public String toString() {
