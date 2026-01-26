@@ -44,6 +44,26 @@ public class Clerigo extends Creyente {
     }
 
     public int plegaria() {
+        int eleccion = 1;
+        switch (eleccion) {
+            case 1:
+                System.out.println("Has elegido Sanacion");
+                int cantidadSanacion = (int) (getFe() * 0.70);
+                setPv(getPv() + cantidadSanacion);
+                break;
+            case 2:
+                System.out.println("Has elegido Rezo Sagrado");
+                int cantidadSanacion2 = (int) (getFe() * 0.30);
+                setPv(getPv() + cantidadSanacion2);
+                break;
+            case 3:
+                System.out.println("Has usado fogonazo sagrado");
+                int dañodefe = (int) (getFe() * 0.55);
+                break;
+            default:
+                return 0;
+        }
         return 0;
     }
 }
+
