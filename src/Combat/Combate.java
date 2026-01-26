@@ -196,7 +196,6 @@ public class Combate {
                 if (c2.getPv() <= 0) {
                     Imprimeganador(c1);
                 } else{
-
                 }
             } else //2
                 System.out.println("El personaje rival empieza el combate");
