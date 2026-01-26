@@ -64,9 +64,9 @@ public class Ladron extends Personaje{
                 break;
             case "3":
                 System.out.println("Has decidido defender");
-                setRes((int) (getRes() * 1.20));
+                setRes((int) (getRes() /0.80));
 
-                setArm((int) ((getArm()) * 1.20));
+                setArm((int) ((getArm()) /0.80));
                 daño = 0;
                 break;
             case "4":

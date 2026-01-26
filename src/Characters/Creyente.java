@@ -22,7 +22,7 @@ public abstract class Creyente extends Personaje{
         super(nombre,pv, atq, arm, nivel,  vel, res);
         setFe(fe);
     }
-    public abstract int plegaria();
+    public abstract int plegaria(Personaje c2);
     public String toString() {
         return super.toString() + "Es un Creyente con la habilidad de efectuar milagros con su fe";
     }

@@ -21,22 +21,21 @@ puntos de su fe.
 ★ Fogonazo sagrado (3): el paladín ciega a su oponente, reduciendo su
 velocidad y resistencia mágica un 40% de sus puntos de fe.
      */
-    public int plegaria() {
+    public int plegaria(Personaje c2) {
         int eleccion = 1;
         switch (eleccion){
             case 1:
                 System.out.println("Has elegido imbuir tu arma de fe");
                 setAtq((int) (getAtq() + (getFe() * 0.80)));
-
                 break;
             case 2:
                 System.out.println("Has elegido Baluarte de fe ");
                 setArm((int)(getArm() * 1.3));
-
                 break;
             case 3 :
                 System.out.println("Has usado fogonazo sagrado");
-
+                c2.setVel((int) (c2.getVel() * 0.40 ));
+                c2.setRes((int) (c2.getRes() * 0.40 ));
                 break;
             default:
                 return 0;
@@ -93,7 +92,8 @@ velocidad y resistencia mágica un 40% de sus puntos de fe.
                 defender(ataque(), "Fisico");
                 break;
             case "2":
-                System.out.println("Has decidido lanzar un conjuro");
+                System.out.println("El paladin se dispone a usar su plegaria");
+               // plegaria();
                 break;
             case "3":
                 System.out.println("Has decidido defender");
@@ -111,4 +111,5 @@ velocidad y resistencia mágica un 40% de sus puntos de fe.
         }
         return daño;
     }
+
 }

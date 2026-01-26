@@ -499,7 +499,7 @@ public class Personaje {
             case "3":
                 System.out.println("Has decidido defender");
                 res += (res*0.20);
-                arm *= (arm*0.20);
+                arm += (arm*0.20);
                 daño = 0;
                 break;
             case "4":
