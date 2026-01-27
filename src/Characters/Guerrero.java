@@ -27,8 +27,7 @@ public class Guerrero extends Personaje {
         }
         c = a.nextInt(100);
         if (c <= 80 && c > 0) {
-            setAtq(getAtq() + 1);
-            ;
+            setAtq(getAtq() + 2);
         }
         c = a.nextInt(100);
         if (c <= 75 && c > 0) {
@@ -67,7 +66,6 @@ public class Guerrero extends Personaje {
         else return super.ataque();
     }
 
-    @Override
     public void defender(int defefisico, String tipo) {
         if (furia == true)
             super.defender(defefisico * 2, tipo);
@@ -106,7 +104,7 @@ public class Guerrero extends Personaje {
 
             case "3":
                 System.out.println("Has decidido defender");
-                //setArm((int)(getArm() * 1.3));
+
                 setRes((int) (getRes() / 0.80));
 
                 setArm((int) ((getArm()) /0.80));
