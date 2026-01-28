@@ -454,7 +454,6 @@ public class Personaje {
     }
     //Si mantienes esta implementación defender debería devolver void
     public void defender(int daño, String tipo) {
-        //this.pv = (daño - arm)
         switch (tipo) {
             case "Fisico":
                 //Si el daño - la armadura será menor que 0
