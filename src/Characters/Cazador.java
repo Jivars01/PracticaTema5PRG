@@ -1,22 +1,68 @@
 package Characters;
 
 import java.util.Random;
+import java.util.Scanner;
+
+/**
+ * Clase Cazador.
+ * Representa un tipo de personaje que puede tener una mascota
+ * que le ayuda en combate y evoluciona junto a él.
+ */
 
 public class Cazador extends Personaje {
 
-    private Mascota mascota;
+    private Mascota mascota; /** Mascota asociada al cazador */
+
+    /**
+     * Constructor por defecto.
+     */
 
     public Cazador() {
         super();
     }
 
+    /**
+     * Constructor por parametros.
+     *
+     * @param nombre Nombre del cazador
+     * @param pv Puntos de vida
+     * @param atq Ataque
+     * @param arm Armadura
+     * @param nivel Nivel del personaje
+     * @param vel Velocidad
+     * @param res Resistencia
+     */
+
     public Cazador(String nombre, int pv, int atq, int arm, int nivel, int vel, int res) {
         super(nombre, pv, atq, arm, nivel, vel, res);
     }
 
+    /**
+     * Calcula el ataque total del cazador sumando
+     * su ataque base y el de su mascota.
+     *
+     * @return daño total de ataque
+     */
+
     public int ataque() {
         return (getAtq() + mascota.getAtq()) ;
     }
+
+    /**
+     * Devuelve una descripción del cazador.
+     *
+     * @return información del cazador
+     */
+
+    public String toString(){
+        return super.toString() + "Es un Cazador con la habilidad de tener una mascota.";
+    }
+
+    /**
+     * Incrementa el nivel del cazador.
+     * Las estadísticas suben de forma aleatoria según probabilidades.
+     * Además, la mascota también sube de nivel.
+     */
 
     public void subirNivel() {
         int c;
@@ -48,16 +94,47 @@ public class Cazador extends Personaje {
 
     public class Mascota extends Personaje {
 
-        private String Rareza;
-        private String nombresMascota;
+        private String Raza; /** Raza de la mascota */
+        private String nombresMascota; /** Nombre de la mascota */
+
+        /**
+         * Constructor por defecto.
+         */
 
         public Mascota (){
-            Rareza = nombresMascota = "";
+            Raza = nombresMascota = "";
         }
+
+
+        /**
+         * Constructor por parametros.
+         *
+         * @param rareza Raza de la mascota
+         * @param nombre Nombre de la mascota
+         */
+
         public Mascota (String rareza, String nombre){
             setNombresMascota(nombre);
-            setRareza(rareza);
+            setRaza(rareza);
         }
+
+        /**
+         * Devuelve la información de la mascota.
+         *
+         * @return descripción de la mascota
+         */
+
+        public String toString() {
+            return super.toString() + "\nEs una mascota cuya raza es " + getRaza() + " de nombre " + getNombresMascota();
+        }
+
+        /**
+         * Asigna estadísticas a la mascota según su raza,
+         * basándose en un porcentaje de las estadísticas del cazador.
+         *
+         * @param raza Raza de la mascota
+         * @return raza seleccionada
+         */
 
         public String seleccionarRareza(String raza) {
             if (raza.equals("Canido")) {
@@ -87,10 +164,15 @@ public class Cazador extends Personaje {
             return raza;
         }
 
+        /**
+         * Sube de nivel la mascota.
+         * Dependiendo de la raza, mejora estadísticas del cazador.
+         */
+
         public void subirNivel() {
             int c;
             Random a = new Random();
-            switch (Rareza) {
+            switch (Raza) {
                 case "Canido":
 
                     Cazador.this.setPv((int) (Cazador.this.getPv() * 0.20));
@@ -110,8 +192,8 @@ public class Cazador extends Personaje {
                     Cazador.this.setRes((int) (Cazador.this.getRes() * 0.15));
                     Cazador.this.setVel((int) (Cazador.this.getVel() * 0.30));
                     setNivel(getNivel() + 1);
-                    setNivel(getNivel() + 1);
                     break;
+
                 case "Rapaz":
 
                     Cazador.this.setPv((int) (Cazador.this.getPv() * 0.05));
@@ -120,30 +202,97 @@ public class Cazador extends Personaje {
                     Cazador.this.setRes((int) (Cazador.this.getRes() * 0.25));
                     Cazador.this.setVel((int) (Cazador.this.getVel() * 0.35));
                     setNivel(getNivel() + 1);
-                    setNivel(getNivel() + 6);
 
             }
         }
 
-        public String getRareza() {
-            return Rareza;
+        /**
+         * @return raza de la mascota
+         */
+        public String getRaza() {
+            return Raza;
         }
 
-        public void setRareza(String rareza) {
-            if (rareza.equals("Canino") || rareza.equals("Rapaz") || rareza.equals("Felino"))
-                this.Rareza = rareza;
+        /**
+         * Setter de raza
+         * @return raza de la mascota si coincide con lo pedido
+         * o Godofredo en caso de lo que no ponga el nombre adecuadamente*/
+
+        public void setRaza(String raza) {
+            if (raza.equals("Canido") || raza.equals("Rapaz") || raza.equals("Felino"))
+                this.Raza = raza;
             else
-                Rareza = rareza;
+                Raza = raza;
         }
+
+        /**
+         * Devuelve el nombre de la mascota.
+         *
+         * @return String con el nombre actual de la mascota.
+         */
 
         public String getNombresMascota() {
             return nombresMascota;
         }
+
+        /**
+         * Establece el nombre de la mascota.
+         * Si el nombre recibido está vacío, se asigna un nombre por defecto ("Godofredo").
+         *
+         * @param nombresMascota Nombre que se desea asignar a la mascota.
+         */
 
         public void setNombresMascota(String nombresMascota) {
             if (!nombresMascota.isEmpty())
                 this.nombresMascota = nombresMascota;
             else this.nombresMascota = "Godofredo";
         }
+    }
+
+    /**
+     * Permite al jugador realizar una acción durante su turno.
+     * Muestra un menú por consola y ejecuta la acción seleccionada.
+     *
+     * @return Daño causado durante el turno
+     */
+
+    public int realizaTurno() {
+        int daño = 0;
+        String tipo;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Introduzca por teclado que es lo que vas a hacer:" +
+                "\n1.Atacar" +
+                "\n2.Ataque especial (Solo algunos categorias pueden hacerlo)" +
+                "\n3.Defender" +
+                "\n4.Pasar turno");
+        tipo = scan.nextLine();
+        switch (tipo) {
+            case "1":
+                System.out.println("Has decidido atacar");
+                daño = ataque();
+                defender(ataque(), "Fisico");
+                break;
+
+            case "2":
+                System.out.println("El cazador no tiene una habilidad especial");
+                break;
+
+            case "3":
+                System.out.println("Has decidido defender");
+                setRes((int) (getRes() / 0.80));
+
+                setArm((int) ((getArm()) / 0.80));
+                daño = 0;
+                break;
+
+            case "4":
+                System.out.println("Has decidido pasar el turno tu personaje no hara ninguna accion");
+                daño = 0;
+                break;
+
+            default:
+                System.out.println("La opcion escogida no corresponde a las especificadas");
+        }
+        return daño;
     }
 }

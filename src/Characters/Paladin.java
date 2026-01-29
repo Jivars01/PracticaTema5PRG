@@ -3,24 +3,51 @@ package Characters;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Clase Paladin.
+ * Representa un personaje de tipo Paladín que hereda de Creyente.
+ * Utiliza la fe para potenciar sus habilidades ofensivas y defensivas.
+ */
+
 public class Paladin extends Creyente{
+
+    /**
+     * Constructor por defecto del Paladín.
+     * Inicializa el objeto usando el constructor de la clase padre.
+     */
 
     public Paladin(){
         super();
     }
 
+    /**
+     * Constructor parametrizado del Paladín.
+     *
+     * @param nombre Nombre del personaje.
+     * @param pv Puntos de vida.
+     * @param atq Ataque.
+     * @param arm Armadura.
+     * @param nivel Nivel del personaje.
+     * @param vel Velocidad.
+     * @param res Resistencia.
+     * @param fe Fe del Paladín.
+     */
+
     public Paladin(String nombre, int pv, int atq, int arm, int nivel, int vel, int res,int fe){
         super(nombre, pv, atq, arm, nivel, vel, res, fe);
     }
 
-    /*
-    Imbuir arma (1): el paladín añade el 80% de sus puntos de fe a sus puntos
-de ataque.
-★ Baluarte de fe (2): el paladín aumenta su propia armadura un 30% de sus
-puntos de su fe.
-★ Fogonazo sagrado (3): el paladín ciega a su oponente, reduciendo su
-velocidad y resistencia mágica un 40% de sus puntos de fe.
+    /**
+     * Permite al Paladín realizar una plegaria especial.
+     * Dependiendo de la elección, puede:
+     * 1. Aumentar el ataque en función de la fe.
+     * 2. Incrementar la armadura.
+     * 3. Reducir la velocidad y resistencia del enemigo.
+     *
+     * @param c2 Personaje objetivo de la plegaria.
+     * @return int Devuelve 0 (no causa daño directo).
      */
+
     public int plegaria(Personaje c2) {
         int eleccion = 1;
         switch (eleccion){
@@ -42,6 +69,12 @@ velocidad y resistencia mágica un 40% de sus puntos de fe.
         }
         return 0;
     }
+
+    /**
+     * Aumenta el nivel del Paladín y mejora sus atributos de forma aleatoria.
+     * Cada estadística tiene una probabilidad distinta de aumentar.
+     */
+
     public void subirNivel() {
         int c;
         Random a = new Random();
@@ -72,9 +105,23 @@ velocidad y resistencia mágica un 40% de sus puntos de fe.
         setNivel(getNivel()+1);
     }
 
+    /**
+     * Devuelve una descripción del Paladín junto con la información heredada.
+     *
+     * @return String con la descripción del personaje.
+     */
+
     public String toString() {
-        return super.toString() + "\n Es un valeroso Paladin que usa su fe para aumentar su fuerza, su defensa o cegar al oponente";
+        return super.toString() + "\n Es un valeroso Paladin que usa su fe para aumentar su fuerza, su defensa o para cegar al oponente";
     }
+
+    /**
+     * Gestiona el turno del Paladín.
+     * Permite atacar, usar plegaria, defenderse o pasar el turno.
+     *
+     * @return int Daño causado durante el turno (0 si no hay ataque).
+     */
+
     public int realizaTurno() {
         int daño = 0;
         String tipo;
@@ -93,7 +140,7 @@ velocidad y resistencia mágica un 40% de sus puntos de fe.
                 break;
             case "2":
                 System.out.println("El paladin se dispone a usar su plegaria");
-                //plegaria(); Revisar porque falla
+                //plegaria(); No funciona
                 break;
             case "3":
                 System.out.println("Has decidido defender");

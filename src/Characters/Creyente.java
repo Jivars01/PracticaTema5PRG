@@ -111,11 +111,9 @@ public abstract class Creyente extends Personaje{
                 setRes((int) (getRes() * 1.20));
 
                 setArm((int) ((getArm()) * 1.20));
-                daño = 0;
                 break;
             case "4":
                 System.out.println("Has decidido pasar el turno tu personaje no hara ninguna accion");
-                daño = 0;
                 break;
             default:
                 System.out.println("La opcion escogida no corresponde a las especificadas");

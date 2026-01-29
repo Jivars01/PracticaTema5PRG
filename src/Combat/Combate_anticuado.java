@@ -6,8 +6,14 @@ import GameMap.Trampa;
 import java.util.Random;
 import java.util.Scanner;
 
-
 @Deprecated
+
+/**
+ * Para Ivan, esta clase posee el combate que esta mal implementado y lo dejo como una clase
+ * para poder recuperar algunas partes si fuera neceseario implementarlo en futuras practicas
+ * como la trampa
+ */
+
 
 public class Combate_anticuado {
     private Trampa trampa;
