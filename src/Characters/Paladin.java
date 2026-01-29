@@ -93,7 +93,7 @@ velocidad y resistencia mágica un 40% de sus puntos de fe.
                 break;
             case "2":
                 System.out.println("El paladin se dispone a usar su plegaria");
-               // plegaria();
+                //plegaria(); Revisar porque falla
                 break;
             case "3":
                 System.out.println("Has decidido defender");

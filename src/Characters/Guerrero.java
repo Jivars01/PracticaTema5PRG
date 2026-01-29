@@ -3,19 +3,50 @@ package Characters;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * La clase Guerrero representa un tipo de personaje que puede entrar en estado de furia.
+ * Cuando el guerrero está en furia, su ataque se duplica, pero también recibe el doble de daño.
+ * @link Personaje Esta clase hereda de Personaje y redefine algunos de sus comportamientos.
+ *
+ * @author Jivars
+ */
+
 public class Guerrero extends Personaje {
 
-    private boolean furia;
+    private boolean furia; /** Indica si el guerrero se encuentra en estado de furia*/
+
+    /**
+     * Constructor por defecto.
+     * Inicializa el guerrero con los valores por defecto del personaje
+     * y con la furia desactivada.
+     */
 
     public Guerrero() {
         super();
         furia = false;
     }
 
+    /**
+     * Constructor con parámetros.
+     *
+     * @param nombre Nombre del guerrero
+     * @param pv Puntos de vida
+     * @param atq Ataque base
+     * @param arm Armadura
+     * @param nivel Nivel del personaje
+     * @param vel Velocidad
+     * @param res Resistencia Magica
+     * @param furia Estado inicial de la furia
+     */
+
     public Guerrero(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, boolean furia) {
         super(nombre, pv, atq, arm, nivel, vel, res);
         setFuria(furia);
     }
+    /**
+     * Aumenta el nivel del guerrero y mejora sus estadísticas
+     * de forma aleatoria según diferentes probabilidades.
+     */
 
     @Override
     public void subirNivel() {
@@ -44,13 +75,32 @@ public class Guerrero extends Personaje {
         setNivel(getNivel() + 1);
     }
 
+    /**
+     * Devuelve el estado actual de la furia.
+     *
+     * @return true si el guerrero está en furia, false en caso contrario
+     */
+
     public boolean isFuria() {
         return furia;
     }
 
+    /**
+     * Establece el estado de la furia.
+     *
+     * @param furia Nuevo estado de la furia
+     */
+
     public void setFuria(boolean furia) {
         this.furia = furia;
     }
+
+    /**
+     * Cambia el estado de la furia.
+     * Si estaba activa, la desactiva, y viceversa.
+     *
+     * @return El nuevo estado de la furia
+     */
 
     public boolean modificaFuria() {
         if (furia = true) {
@@ -59,12 +109,26 @@ public class Guerrero extends Personaje {
         return furia;
     }
 
-    @Override
+    /**
+     * Realiza un ataque.
+     * Si el guerrero está en furia, el daño se duplica.
+     *
+     * @return Daño total infligido
+     */
+
     public int ataque() {
         if (furia = true)
             return super.ataque() * 2;
         else return super.ataque();
     }
+
+    /**
+     * Defiende al guerrero frente a un ataque.
+     * Si está en furia, recibe el doble de daño.
+     *
+     * @param defefisico Daño físico recibido
+     * @param tipo Tipo de daño que recibe (magico o fisico)
+     */
 
     public void defender(int defefisico, String tipo) {
         if (furia == true)
@@ -72,11 +136,24 @@ public class Guerrero extends Personaje {
         else super.defender(defefisico, tipo);
     }
 
+    /**
+     * Devuelve una descripción textual del guerrero.
+     *
+     * @return Cadena con la información del guerrero
+     */
+
     @Override
     public String toString() {
-        return super.toString() + "Es un Guerrero con la posiblidad de entrar en furia y duplicar su daño " +
+        return super.toString() + "\nEs un Guerrero con la posiblidad de entrar en furia y duplicar su daño. " +
                 "\n Sin embargo este recibe el doble de daño durante dicho estado";
     }
+
+    /**
+     * Permite al jugador realizar una acción durante su turno.
+     * Muestra un menú por consola y ejecuta la acción seleccionada.
+     *
+     * @return Daño causado durante el turno
+     */
 
     public int realizaTurno() {
         int daño = 0;

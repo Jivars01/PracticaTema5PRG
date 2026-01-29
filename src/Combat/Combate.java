@@ -19,8 +19,9 @@ import java.util.Scanner;
  */
 
 public class Combate {
+
     /**
-     * Metodo Combate de la Clase Personaje que establece el combate entre dos personajes
+     * Metodo Estatico Combatir de la Clase Personaje que establece el combate entre dos personajes
      * que pueden ser de disintas clases, la velocidad indicara quien empieza el combate
      * incluyendo que si un personaje tiene el doble de velocidad que el otro
      * haga doble turno, y se podra indicar al personaje que haga una accion de cuatro disponibles,
@@ -31,7 +32,7 @@ public class Combate {
      * @return devuelve quien es el ganador del combate
      */
 
-    public static void combatir2(Personaje c1, Personaje c2) {
+    public static void Combatir(Personaje c1, Personaje c2) {
         /*
             REALIZARTURNO SOLO LO UTILIZA EL PERSONAJE JUGABLE
             Bucle do-while del combate
@@ -46,7 +47,6 @@ public class Combate {
                 2.1. Repetir los pasos 1.1. a 1.*. con c1 y c2 invertidos
             3. Declarar el ganador cuando se salga del bucle
          */
-
 
         do {
             System.out.println("Empieza el combate entre " + c1.getNombre() + " y " + c2.getNombre());
@@ -64,7 +64,6 @@ public class Combate {
                             System.out.println("El combate continua");
                     }
                 }
-
             } else //2
                 System.out.println("El personaje rival empieza el combate");
             if (c1.getVel() >= c2.getVel() * 2) {
@@ -120,13 +119,9 @@ public class Combate {
         trampa.setCategoria(ver);
         return trampa;
     }
-/*public void Activartrampa() {
-        Personaje = new Personaje;
-    if (trampa.activatrampa() != 0) {
-        Personaje.caerTrampa(trampa);
-    } else if (trampa.getCategoria().equals("Brea")) {
-        Personaje.inspirar(trampa.getPerjuicio(), "def");
-    }
-} */
+
 }
+
+
+
 

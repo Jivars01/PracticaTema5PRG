@@ -211,6 +211,14 @@ public class Personaje {
         return arm;
     }
 
+    /**
+     * Setter de armadura.
+     * Establece la armadura del personaje asegurando que no sea menor que 1
+     * y que cumpla con las restricciones del metodo
+     * @link checkAtributos(int, String).
+     *
+     * @param defensa Valor de defensa a establecer
+     */
 
     public void setArm(int defensa) {
         if (defensa < 1 && checkAtributos(defensa, "def")) {
@@ -219,6 +227,12 @@ public class Personaje {
             arm = defensa;
         } else arm = defensa;
     }
+
+    /**
+     * Getter del nivel del personaje.
+     *
+     * @return Nivel actual del personaje
+     */
 
     public int getNivel() {
         return nivel;
@@ -418,16 +432,37 @@ public class Personaje {
         }
     }
 
+    /**
+     * Devuelve una representación textual del personaje y sus estadísticas.
+     *
+     * @return Cadena con la información completa del personaje
+     */
+
     public String toString() {
         String resultado = "El personaje " + getNombre() + " con las estadisticas: " + getAtq() + " de ataque, " + getArm() + " de defensa, " + getPv() + " de vida,  \n"
                 + getRes() + "de resistencia magica, " + getVel() + "de velocidad " + "de nivel " + getNivel() + " esta creado.";
         return resultado;
     }
 
+    /**
+     * Crea y devuelve una copia del personaje actual.
+     *
+     * @return Un nuevo objeto Personaje con los mismos valores
+     */
+
     public Personaje clone() {
         Personaje clon = new Personaje(this.nombre, this.atq, this.arm, this.pv, this.nivel, this.vel, this.res);
         return clon;
     }
+
+    /**
+     * Compara dos personajes para comprobar si son iguales.
+     * Dos personajes son iguales si coinciden en nombre, ataque,
+     * armadura, vida y nivel.
+     *
+     * @param otro Personaje con el que se compara
+     * @return true si son iguales, false en caso contrario
+     */
 
     public boolean equals(Personaje otro) {
         boolean res = true;
@@ -448,11 +483,26 @@ public class Personaje {
 
         return res;
     }
-//Ataque esta bien implementada _Jesus
+
+    /**
+     * Realiza un ataque estándar.
+     *
+     * @return Valor del ataque del personaje
+     */
+
     public int ataque() {
         return getAtq();
     }
-    //Si mantienes esta implementación defender debería devolver void
+
+    /**
+     * Permite al personaje defenderse de un ataque.
+     * El daño recibido depende del tipo de daño (físico o mágico)
+     * y de la armadura o resistencia mágica.
+     *
+     * @param daño Daño recibido
+     * @param tipo Tipo de daño ("Fisico" o "Magico")
+     */
+
     public void defender(int daño, String tipo) {
         switch (tipo) {
             case "Fisico":
@@ -475,6 +525,12 @@ public class Personaje {
         }
     }
 
+    /**
+     * Permite al jugador realizar una acción durante su turno.
+     * Muestra un menú por consola y ejecuta la acción seleccionada.
+     *
+     * @return Daño causado durante el turno
+     */
     //RealizarTurno debería devolver la cantidad de daño a realizar -> atacar es el ataque estándar, la accion especial depende de la subclase y defender y pasar turno devuelven 0
     public int realizaTurno() {
         int daño = 0;
@@ -502,7 +558,7 @@ public class Personaje {
                 daño = 0;
                 break;
             case "4":
-                System.out.println("Has decidido pasar el turno tu personaje no hara ninguna accion");
+                System.out.println("Has decidido pasar el turno, tu personaje no hara ninguna accion");
                 daño = 0;
                 break;
             default:

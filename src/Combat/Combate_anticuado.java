@@ -6,6 +6,9 @@ import GameMap.Trampa;
 import java.util.Random;
 import java.util.Scanner;
 
+
+@Deprecated
+
 public class Combate_anticuado {
     private Trampa trampa;
     private String turno;
@@ -189,4 +192,14 @@ public class Combate_anticuado {
         trampa.setCategoria(ver);
         return trampa;
     }
+
+    /*public void Activartrampa() {
+        Personaje = new Personaje;
+    if (trampa.activatrampa() != 0) {
+        Personaje.caerTrampa(trampa);
+    } else if (trampa.getCategoria().equals("Brea")) {
+        Personaje.inspirar(trampa.getPerjuicio(), "def");
+    }
+} */
+    
 }

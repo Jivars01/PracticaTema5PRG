@@ -43,7 +43,7 @@ public class Clerigo extends Creyente {
         setNivel(getNivel() + 1);
     }
 
-    public int plegaria() {
+    public int plegaria(Personaje c2) {
         int eleccion = 1;
         switch (eleccion) {
             case 1:
@@ -59,6 +59,7 @@ public class Clerigo extends Creyente {
             case 3:
                 System.out.println("Has usado fogonazo sagrado");
                 int dañodefe = (int) (getFe() * 0.55);
+
                 break;
             default:
                 return 0;

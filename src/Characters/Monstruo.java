@@ -3,17 +3,51 @@ package Characters;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * Clase Monstruo.
+ * Representa un personaje de tipo monstruo dentro del juego.
+ * Hereda de la clase Personaje y puede pertenecer a distintas categorías
+ * como Bestia, No-Muerto o Gigante.
+ */
+
 public class Monstruo extends Personaje {
-    private String Monstruo;
+    private String Monstruo;  /** * Tipo de monstruo (Bestia, No-Muerto o Gigante) */
+
+    /**
+     * Constructor por defecto.
+     * Inicializa los valores heredados de Personaje
+     * y establece el tipo de monstruo como una cadena vacía.
+     */
 
     public Monstruo() {
         super();
         Monstruo = "";
     }
 
+    /**
+     * Constructor parametrizado.
+     * Inicializa los atributos heredados y el tipo de monstruo.
+     *
+     * @param nombre nombre del personaje
+     * @param pv puntos de vida
+     * @param atq valor de ataque
+     * @param arm valor de armadura
+     * @param nivel nivel del personaje
+     * @param vel velocidad
+     * @param res resistencia
+     * @param Monstruo tipo de monstruo
+     */
+
     public Monstruo(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, String Monstruo) {
         super(nombre, pv, atq, arm, nivel, vel, res);
+        setMonstruo(Monstruo);
     }
+
+    /**
+     * Aumenta el nivel del monstruo y mejora sus atributos
+     * de forma aleatoria según el tipo de monstruo.
+     */
+
 
     public void subirNivel() {
         int c;
@@ -97,18 +131,41 @@ public class Monstruo extends Personaje {
         }
     }
 
+    /**
+     * Devuelve el tipo de monstruo.
+     * @return tipo de monstruo
+     */
+
     public String getMonstruo() {
         return Monstruo;
     }
 
+    /**
+     * Establece el tipo de monstruo.
+     * @param monstruo tipo de monstruo
+     */
+
     public void setMonstruo(String monstruo) {
-        if (Monstruo.isEmpty())
-            this.Monstruo = "";
-        else this.Monstruo = monstruo;
+        if (Monstruo.equals("No-Muerto,")|| Monstruo.equals("Gigante") || Monstruo.equals("Bestia"))
+            this.Monstruo = monstruo;
+        else this.Monstruo = "";
     }
+
+    /**
+     * Devuelve una descripción del monstruo.
+     * @return cadena con la información del personaje
+     */
+
     public String toString() {
-        return super.toString() + "Es un Monstruo que puede ser un no_muerto, un Gigante o una Bestia";
+        return super.toString() + "Es un Monstruo cuya raza es " + getMonstruo() ;
     }
+
+    /**
+     * Gestiona el turno del monstruo.
+     * Permite atacar, defender o pasar turno.
+     *
+     * @return daño realizado durante el turno
+     */
 
     public int realizaTurno() {
         int daño = 0;
