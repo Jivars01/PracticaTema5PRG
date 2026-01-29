@@ -45,6 +45,7 @@ public class Cazador extends Personaje {
      */
 
     public int ataque() {
+
         return (getAtq() + mascota.getAtq());
     }
 
@@ -141,7 +142,7 @@ public class Cazador extends Personaje {
          * @return raza seleccionada
          */
 
-        public String seleccionarRareza(String raza) {
+        public String seleccionarRaza(String raza) {
             if (raza.equals("Canido")) {
 
                 setPv((int) (Cazador.this.getPv() * 0.20));
