@@ -25,12 +25,12 @@ public class Cazador extends Personaje {
      * Constructor por parametros.
      *
      * @param nombre Nombre del cazador
-     * @param pv Puntos de vida
-     * @param atq Ataque
-     * @param arm Armadura
-     * @param nivel Nivel del personaje
-     * @param vel Velocidad
-     * @param res Resistencia
+     * @param pv     Puntos de vida
+     * @param atq    Ataque
+     * @param arm    Armadura
+     * @param nivel  Nivel del personaje
+     * @param vel    Velocidad
+     * @param res    Resistencia
      */
 
     public Cazador(String nombre, int pv, int atq, int arm, int nivel, int vel, int res) {
@@ -45,7 +45,7 @@ public class Cazador extends Personaje {
      */
 
     public int ataque() {
-        return (getAtq() + mascota.getAtq()) ;
+        return (getAtq() + mascota.getAtq());
     }
 
     /**
@@ -54,7 +54,7 @@ public class Cazador extends Personaje {
      * @return información del cazador
      */
 
-    public String toString(){
+    public String toString() {
         return super.toString() + "Es un Cazador con la habilidad de tener una mascota.";
     }
 
@@ -91,17 +91,22 @@ public class Cazador extends Personaje {
         mascota.subirNivel();
     }
 
+    /**
+     * Clase Mascota.
+     * Representa una mascota que acompaña al Cazador.
+     * Hereda de Personaje y sus estadísticas dependen de la raza y del cazador.
+     */
 
     public class Mascota extends Personaje {
 
-        private String Raza; /** Raza de la mascota */
+        private String Raza; /** * Raza de la mascota */
         private String nombresMascota; /** Nombre de la mascota */
 
         /**
          * Constructor por defecto.
          */
 
-        public Mascota (){
+        public Mascota() {
             Raza = nombresMascota = "";
         }
 
@@ -113,7 +118,7 @@ public class Cazador extends Personaje {
          * @param nombre Nombre de la mascota
          */
 
-        public Mascota (String rareza, String nombre){
+        public Mascota(String rareza, String nombre) {
             setNombresMascota(nombre);
             setRaza(rareza);
         }
@@ -215,8 +220,10 @@ public class Cazador extends Personaje {
 
         /**
          * Setter de raza
+         *
          * @return raza de la mascota si coincide con lo pedido
-         * o Godofredo en caso de lo que no ponga el nombre adecuadamente*/
+         * o Godofredo en caso de lo que no ponga el nombre adecuadamente
+         */
 
         public void setRaza(String raza) {
             if (raza.equals("Canido") || raza.equals("Rapaz") || raza.equals("Felino"))
@@ -280,11 +287,10 @@ public class Cazador extends Personaje {
             case "3":
                 System.out.println("Has decidido defender");
                 setRes((int) (getRes() / 0.80));
-
                 setArm((int) ((getArm()) / 0.80));
                 daño = 0;
-                break;
 
+                break;
             case "4":
                 System.out.println("Has decidido pasar el turno tu personaje no hara ninguna accion");
                 daño = 0;

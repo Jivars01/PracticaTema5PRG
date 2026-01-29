@@ -122,7 +122,7 @@ public class Paladin extends Creyente{
      * @return int Daño causado durante el turno (0 si no hay ataque).
      */
 
-    public int realizaTurno() {
+    public int realizaTurno(Personaje c2) {
         int daño = 0;
         String tipo;
         Scanner scan = new Scanner(System.in);
@@ -140,13 +140,14 @@ public class Paladin extends Creyente{
                 break;
             case "2":
                 System.out.println("El paladin se dispone a usar su plegaria");
-                //plegaria(); No funciona
+                plegaria(c2);
                 break;
             case "3":
                 System.out.println("Has decidido defender");
-                setRes((int) (getRes() * 1.20));
 
-                setArm((int) ((getArm()) * 1.20));
+                setRes((int) (getRes() / 0.80));
+
+                setArm((int) ((getArm()) / 0.80));
                 daño = 0;
                 break;
             case "4":

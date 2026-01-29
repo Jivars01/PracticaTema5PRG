@@ -57,7 +57,10 @@ public abstract class Creyente extends Personaje{
      */
 
     public void setFe(int fe) {
-        this.fe = fe;
+        if(fe <= 0){
+            this.fe = 0;
+        } else
+            this.fe = fe;
     }
 
     /**

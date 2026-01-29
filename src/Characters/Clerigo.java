@@ -115,7 +115,7 @@ public class Clerigo extends Creyente {
      * @return Daño causado durante el turno
      */
 
-    public int realizaTurno() {
+    public int realizaTurno(Personaje c2) {
         int daño = 0;
         String tipo;
         Scanner scan = new Scanner(System.in);
@@ -133,7 +133,7 @@ public class Clerigo extends Creyente {
                 break;
             case "2":
                 System.out.println("El clerigo prepara su ataque especial");
-                // No funcionaplegaria(Personaje c1)
+                 plegaria(c2);
                 break;
             case "3":
                 System.out.println("Has decidido defender");
