@@ -50,85 +50,84 @@ public class Monstruo extends Personaje {
 
 
     public void subirNivel() {
-        int c;
-        Random a = new Random();
+
         switch (Monstruo) {
 
             case "Bestia":
-                c = a.nextInt(100);
-                if (c < 50 && c > 0) {
-                    setPv(getPv() + 1);
-                }
-                c = a.nextInt(100);
-                if (c <= 80 && c > 0) {
-                    setAtq(getAtq() + 2);
-
-                }
-                c = a.nextInt(100);
-                if (c <= 15 && c > 0) {
-                    setArm(getArm() + 1);
-                }
-                c = a.nextInt(100);
-                if ((c <= 15 && c > 0)) {
-                    setRes(getRes() + 1);
-                }
-                c = a.nextInt(100);
-                if ((c <= 80 && c > 0)) {
-                    setVel(getVel() + 2);
-                }
-                setNivel(getNivel() + 1);
+                subirnivelBestia();
                 break;
             case "No-Muerto":
-
-                c = a.nextInt(100);
-                if (c < 30 && c > 0) {
-                    setPv(getPv() + 1);
-                }
-                c = a.nextInt(100);
-                if (c <= 50 && c > 0) {
-                    setAtq(getAtq() + 1);
-                }
-                c = a.nextInt(100);
-                if (c <= 30 && c > 0) {
-                    setArm(getArm() + 1);
-                }
-                c = a.nextInt(100);
-                if ((c <= 70 && c > 0)) {
-                    setRes(getRes() + 4);
-                }
-                c = a.nextInt(100);
-                if ((c <= 5 && c > 0)) {
-                    setVel(getVel() + 1);
-                }
-                setNivel(getNivel() + 1);
-                break;
+                subirnivelNo_Muerto();
+            break;
             case "Gigante":
+                subirnivelGigante();
+        }
+    }
 
-                c = a.nextInt(100);
-                if (c < 50) {
-                    setPv(getPv() + 2);
-                } else setPv(getPv()+3);
+    private void subirnivelBestia(){
+        int c;
+        Random a = new Random();
 
-                c = a.nextInt(100);
-                if (c <= 50 && c > 0) {
-                    setAtq(getAtq() + 1);
-
-                }
-                c = a.nextInt(100);
-                if (c <= 50 && c > 0) {
-                    setArm(getArm() + 1);
-                }
-                c = a.nextInt(100);
-                if ((c <= 10 && c > 0)) {
-                    setRes(getRes() + 4);
-                }
-                c = a.nextInt(100);
-                if ((c <= 10 && c > 0)) {
-                    setVel(getVel() + 1);
-                }
-                setNivel(getNivel() + 6);
+        if (a.nextInt(100 ) <= 50){
+            setPv(getPv() + 1);
+        }
+        if (a.nextInt(100 ) <= 80) {
+            setAtq(getAtq() + 2);
 
         }
+        if (a.nextInt(100 ) <= 15){
+            setArm(getArm() + 1);
+        }
+        if (a.nextInt(100 ) <= 15){
+            setRes(getRes() + 1);
+        }
+        if (a.nextInt(100 ) <= 80){
+            setVel(getVel() + 2);
+        }
+        setNivel(getNivel() + 1);
+    }
+
+    private void subirnivelNo_Muerto(){
+        int c;
+        Random a = new Random();
+        if (a.nextInt(100 ) <= 30){
+            setPv(getPv() + 1);
+        }
+        if (a.nextInt(100 ) <= 50) {
+            setAtq(getAtq() + 1);
+        }
+        if (a.nextInt(100 ) <= 30){
+            setArm(getArm() + 1);
+        }
+        if (a.nextInt(100 ) <= 70){
+            setRes(getRes() + 4);
+        }
+        if (a.nextInt(100 ) <= 5){
+            setVel(getVel() + 1);
+        }
+        setNivel(getNivel() + 1);
+    }
+
+    private void subirnivelGigante(){
+        int c;
+        Random a = new Random();
+        if (a.nextInt(100 ) <= 50){
+            setPv(getPv() + 2);
+        } else setPv(getPv()+3);
+
+        if (a.nextInt(100 ) <= 50){
+            setAtq(getAtq() + 1);
+        }
+        if (a.nextInt(100 ) <= 50){
+            setArm(getArm() + 1);
+        }
+        if (a.nextInt(100 ) <= 50){
+            setRes(getRes() + 4);
+        }
+        if (a.nextInt(100 ) <= 50){
+            setVel(getVel() + 1);
+        }
+        setNivel(getNivel() + 6);
     }
 
     /**

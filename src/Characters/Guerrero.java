@@ -103,7 +103,7 @@ public class Guerrero extends Personaje {
      */
 
     public boolean modificaFuria() {
-        if (furia = true) {
+        if (furia == true) {
             furia = false;
         } else furia = true;
         return furia;
@@ -117,7 +117,7 @@ public class Guerrero extends Personaje {
      */
 
     public int ataque() {
-        if (furia = true)
+        if (furia == true)
             return super.ataque() * 2;
         else return super.ataque();
     }
@@ -172,7 +172,7 @@ public class Guerrero extends Personaje {
                 defender(ataque(), "Fisico");
                 break;
             case "2":
-                if (furia = false) {
+                if (furia == false) {
                     System.out.println("El guerrero se enfada y activa su furia");
                     modificaFuria();
                 } else System.out.println("El guerrero se relaja y desactiva su furia");

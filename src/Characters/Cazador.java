@@ -101,27 +101,28 @@ public class Cazador extends Personaje {
     public class Mascota extends Personaje {
 
         private String Raza; /** * Raza de la mascota */
-        private String nombresMascota; /** Nombre de la mascota */
+
 
         /**
          * Constructor por defecto.
          */
 
         public Mascota() {
-            Raza = nombresMascota = "";
+            Raza = "";
         }
 
 
         /**
          * Constructor por parametros.
          *
-         * @param rareza Raza de la mascota
+         * @param raza Raza de la mascota
          * @param nombre Nombre de la mascota
          */
 
-        public Mascota(String rareza, String nombre) {
-            setNombresMascota(nombre);
-            setRaza(rareza);
+        public Mascota(String raza, String nombre) {
+            super(nombre);
+            setRaza(raza);
+            actualizarMascota(raza);
         }
 
         /**
@@ -131,7 +132,7 @@ public class Cazador extends Personaje {
          */
 
         public String toString() {
-            return super.toString() + "\nEs una mascota cuya raza es " + getRaza() + " de nombre " + getNombresMascota();
+            return super.toString() + "\nEs una mascota cuya raza es " + getRaza() ;
         }
 
         /**
@@ -142,7 +143,8 @@ public class Cazador extends Personaje {
          * @return raza seleccionada
          */
 
-        public String seleccionarRaza(String raza) {
+        public String actualizarMascota(String raza) {
+
             if (raza.equals("Canido")) {
 
                 setPv((int) (Cazador.this.getPv() * 0.20));
@@ -231,29 +233,6 @@ public class Cazador extends Personaje {
                 this.Raza = raza;
             else
                 Raza = raza;
-        }
-
-        /**
-         * Devuelve el nombre de la mascota.
-         *
-         * @return String con el nombre actual de la mascota.
-         */
-
-        public String getNombresMascota() {
-            return nombresMascota;
-        }
-
-        /**
-         * Establece el nombre de la mascota.
-         * Si el nombre recibido está vacío, se asigna un nombre por defecto ("Godofredo").
-         *
-         * @param nombresMascota Nombre que se desea asignar a la mascota.
-         */
-
-        public void setNombresMascota(String nombresMascota) {
-            if (!nombresMascota.isEmpty())
-                this.nombresMascota = nombresMascota;
-            else this.nombresMascota = "Godofredo";
         }
     }
 
