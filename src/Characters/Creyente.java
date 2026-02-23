@@ -19,7 +19,7 @@ public abstract class Creyente extends Personaje{
 
     public Creyente(){
         super();
-        fe =0;
+        fe = 0;
     }
 
     /**
@@ -124,4 +124,9 @@ public abstract class Creyente extends Personaje{
         return daño;
     }
 
+    @Override
+    public String devuelveDatos() {
+        return super.devuelveDatos() +
+                "\nFe : " + getFe();
+    }
 }

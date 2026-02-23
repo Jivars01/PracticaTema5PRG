@@ -193,4 +193,10 @@ public class Mago extends Personaje {
         return daño;
     }
 
+
+    public String devuelveDatos() {
+        return super.devuelveDatos() +
+                "\nMagia : " + getMag();
+    }
+
 }

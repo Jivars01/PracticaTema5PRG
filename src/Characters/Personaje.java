@@ -1,5 +1,6 @@
 package Characters;
 
+import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -52,7 +53,7 @@ public class Personaje {
      */
 
 
-    public Personaje(String nombre, int pv, int atq, int arm, int nivel, int vel, int res) {
+    public Personaje(String nombre, int pv, int atq, int arm, int nivel, int res, int vel) {
         setNombre(nombre);
         setPv(pv);
         setAtq(atq);
@@ -74,8 +75,8 @@ public class Personaje {
         this.atq = copia.atq;
         this.arm = copia.arm;
         this.nivel = copia.nivel;
-        this.vel = copia.vel;
         this.res = copia.res;
+        this.vel = copia.vel;
     }
 
     /**
@@ -92,8 +93,8 @@ public class Personaje {
         pv = (r.nextInt(1, 33));
         atq = (r.nextInt(r.nextInt(1, 33)));
         arm = (r.nextInt(1, 33));
-        vel = r.nextInt(1, 33);
         res = r.nextInt(1, 33);
+        vel = r.nextInt(1, 33);
     }
 
     /**
@@ -200,7 +201,6 @@ public class Personaje {
             atq = ataque;
         } else atq = ataque;
     }
-
     /**
      * Getter de armadura que devuelve la armadura
      *
@@ -215,9 +215,9 @@ public class Personaje {
      * Setter de armadura.
      * Establece la armadura del personaje asegurando que no sea menor que 1
      * y que cumpla con las restricciones del metodo
-     * @link checkAtributos(int, String).
      *
      * @param defensa Valor de defensa a establecer
+     * @link checkAtributos(int, String).
      */
 
     public void setArm(int defensa) {
@@ -514,7 +514,7 @@ public class Personaje {
                 break;
             case "Magico":
                 //Aquí igual pero con la RM
-                if (daño-res <= 0) {
+                if (daño - res <= 0) {
                     daño = 0;
                 }
                 this.pv = daño - res;
@@ -532,6 +532,8 @@ public class Personaje {
      * @return Daño causado durante el turno
      */
     //RealizarTurno debería devolver la cantidad de daño a realizar -> atacar es el ataque estándar, la accion especial depende de la subclase y defender y pasar turno devuelven 0
+
+
     public int realizaTurno() {
         int daño = 0;
         String tipo;
@@ -546,15 +548,15 @@ public class Personaje {
             case "1":
                 System.out.println("Has decidido atacar");
                 daño = ataque();
-                defender(ataque(),"Fisico");
+                defender(ataque(), "Fisico");
                 break;
             case "2":
                 System.out.println("Un personaje generico no tiene ataque especial");
                 break;
             case "3":
                 System.out.println("Has decidido defender");
-                res += (res *0.20);
-                arm += (arm *0.20);
+                res += (res * 0.20);
+                arm += (arm * 0.20);
                 daño = 0;
                 break;
             case "4":
@@ -565,6 +567,16 @@ public class Personaje {
                 System.out.println("La opcion escogida no corresponde a las especificadas");
         }
         return daño;
+    }
+
+
+    public String devuelveDatos() {
+
+        return ("Vida : " + getPv()) + "\n" +
+                "Ataque : " + getAtq() + "\n" +
+                "Armadura : " + getArm() + "\n" +
+                "Velocidad : " + getVel() + "\n" +
+                "Resistencia mágica : " + getRes() + "\n";
     }
 
 
