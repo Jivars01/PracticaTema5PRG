@@ -202,4 +202,9 @@ public class Monstruo extends Personaje {
         return daño;
     }
 
+
+    public String getClase() {
+        return "Monstruo";
+    }
+
 }

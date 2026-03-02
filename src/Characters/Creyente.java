@@ -127,6 +127,11 @@ public abstract class Creyente extends Personaje{
     @Override
     public String devuelveDatos() {
         return super.devuelveDatos() +
-                "\nFe : " + getFe();
+                "Fe : " + getFe() + "\n";
+    }
+
+
+    public String getClase() {
+        return "Creyente";
     }
 }

@@ -196,7 +196,12 @@ public class Mago extends Personaje {
 
     public String devuelveDatos() {
         return super.devuelveDatos() +
-                "\nMagia : " + getMag();
+                "Magia:" + getMag() + "\n"
+        + "\n";
+    }
+
+    public String getClase(){
+        return "Mago";
     }
 
 }

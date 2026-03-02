@@ -25,8 +25,9 @@ public class GameTest {
      * @param def Int para la defenda fisica
      * @param mag Int para la resistencia magica
      * @return El personaje creado
+     * @deprecated
      */
-
+/*
     public static Personaje inicializarPersonaje(String nombre, int nivel, int pv, int atq, int def, int mag) {
         Personaje c1= new Personaje();
         c1.setNombre(nombre);
@@ -45,7 +46,7 @@ public class GameTest {
      * @param nombre2 String para el nombre de personaje
      * @return El personaje creado
      */
-
+/*
     public static Personaje randomizarPersonaje(String nombre2) {
         Personaje c2=new Personaje();
         c2.setNombre(nombre2);
@@ -57,4 +58,6 @@ public class GameTest {
         c2.setRes(r.nextInt(1,33));
         return c2;
     }
+
+ */
 }

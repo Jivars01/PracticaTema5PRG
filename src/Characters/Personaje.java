@@ -15,7 +15,7 @@ import GameMap.Trampa;
  * Version 2.0
  */
 
-public class Personaje {
+public abstract class Personaje {
     private String nombre;
     private int pv;
     private int atq;
@@ -61,6 +61,39 @@ public class Personaje {
         setNivel(nivel);
         setRes(res);
         setVel(vel);
+    }
+
+    public Personaje(File fichero) throws IOException {
+        String linea;
+        FileReader fr = new FileReader(fichero);
+        BufferedReader br = new BufferedReader(fr);
+        br.readLine();
+        String[] campos = new String[2];
+        while ((linea = br.readLine()) != null) {
+            campos = linea.split(":");
+
+            if (campos[0].equals("Nombre ")) {
+                setNombre(campos[1]);
+            }
+            if (campos[0].equals("Nivel")) {
+                setNivel(Integer.parseInt(campos[1]));
+            }
+            if (campos[0].equals("Vida")) {
+                setPv(Integer.parseInt(campos[1]));
+            }
+            if (campos[0].equals("Ataque")) {
+                setAtq(Integer.parseInt(campos[1]));
+            }
+            if (campos[0].equals("Armadura")) {
+                setArm(Integer.parseInt(campos[1]));
+            }
+            if (campos[0].equals("Velocidad")) {
+                setVel(Integer.parseInt(campos[1]));
+            }
+            if (campos[0].equals("Resistencia mágica")) {
+                setRes(Integer.parseInt(campos[1]));
+            }
+        }
     }
 
     /**
@@ -169,7 +202,7 @@ public class Personaje {
      */
 
     public void setPv(int vida) {
-        if (vida < 1 && checkAtributos(vida, "pv")) {
+        if (vida < 1) {// && checkAtributos(vida, "pv")) {
             System.out.println("Perfecto, la vida se econtrara en  uno");
             vida = 1;
             pv = vida;
@@ -195,12 +228,13 @@ public class Personaje {
      */
 
     public void setAtq(int ataque) {
-        if (ataque < 1 && checkAtributos(ataque, "atq")) {
+        if (ataque < 1) {// && checkAtributos(ataque, "atq")) {
             System.out.println("Perfecto, el ataque se econtrara en  uno");
             atq = 1;
             atq = ataque;
         } else atq = ataque;
     }
+
     /**
      * Getter de armadura que devuelve la armadura
      *
@@ -221,7 +255,7 @@ public class Personaje {
      */
 
     public void setArm(int defensa) {
-        if (defensa < 1 && checkAtributos(defensa, "def")) {
+        if (defensa < 1) {// && checkAtributos(defensa, "def")) {
             System.out.println("Perfecto, la defensa se econtrara en  uno");
             arm = 1;
             arm = defensa;
@@ -241,11 +275,11 @@ public class Personaje {
     /**
      * Metodo checkAtributos para limitar que la suma del atq, def y pv
      * no sean superiores a 100 y cumpla con lo establecido
-     *
+     * @deprecated Metodo obsoleto debido al avance de las practicas
      * @return devuelve True si la suma supera el 100 y si no se devuelve false
      */
 
-    public boolean checkAtributos(int nuevoValor, String atributo) {
+    /*public boolean checkAtributos(int nuevoValor, String atributo) {
         boolean res = false;
         switch (atributo) {
             case "pv":
@@ -263,6 +297,7 @@ public class Personaje {
         }
         return res;
     }
+*/
 
     /**
      * Setter del nivel que limita que sea mayor a 1 y menor a 100
@@ -297,7 +332,7 @@ public class Personaje {
     public void setRes(int res) {
         if (res <= 0) {
             this.res = 0;
-        }
+        } else this.res = res;
     }
 
     /**
@@ -319,6 +354,8 @@ public class Personaje {
     public void setVel(int vel) {
         if (vel <= 0) {
             this.vel = 0;
+        } else {
+            this.vel = vel;
         }
     }
 
@@ -445,17 +482,6 @@ public class Personaje {
     }
 
     /**
-     * Crea y devuelve una copia del personaje actual.
-     *
-     * @return Un nuevo objeto Personaje con los mismos valores
-     */
-
-    public Personaje clone() {
-        Personaje clon = new Personaje(this.nombre, this.atq, this.arm, this.pv, this.nivel, this.vel, this.res);
-        return clon;
-    }
-
-    /**
      * Compara dos personajes para comprobar si son iguales.
      * Dos personajes son iguales si coinciden en nombre, ataque,
      * armadura, vida y nivel.
@@ -531,9 +557,6 @@ public class Personaje {
      *
      * @return Daño causado durante el turno
      */
-    //RealizarTurno debería devolver la cantidad de daño a realizar -> atacar es el ataque estándar, la accion especial depende de la subclase y defender y pasar turno devuelven 0
-
-
     public int realizaTurno() {
         int daño = 0;
         String tipo;
@@ -569,15 +592,126 @@ public class Personaje {
         return daño;
     }
 
+    public int realizaTurnoALT(File fichero) throws IOException{
+        PrintWriter pw;
+        FileWriter fw = new FileWriter(fichero);
+        pw = new PrintWriter(fw);
+        int daño = 0;
+        String tipo;
+        Scanner scan = new Scanner(System.in);
+        pw.println("Introduzca por teclado que es lo que vas a hacer:" +
+                "\n1.Atacar" +
+                "\n2.Ataque especial (Solo algunos categorias pueden hacerlo)" +
+                "\n3.Defender" +
+                "\n4.Pasar turno");
+        tipo = scan.nextLine();
+        switch (tipo) {
+            case "1":
+                pw.println("Has decidido atacar");
+                daño = ataque();
+                defender(ataque(), "Fisico");
+                break;
+            case "2":
+                pw.println("Un personaje generico no tiene ataque especial");
+                break;
+            case "3":
+                pw.println("Has decidido defender");
+                res += (res * 0.20);
+                arm += (arm * 0.20);
+                daño = 0;
+                break;
+            case "4":
+                pw.println("Has decidido pasar el turno, tu personaje no hara ninguna accion");
+                daño = 0;
+                break;
+            default:
+                pw.println("La opcion escogida no corresponde a las especificadas");
+        }
+        pw.flush();
+        pw.close();
+        fw.close();
+        return daño;
 
-    public String devuelveDatos() {
-
-        return ("Vida : " + getPv()) + "\n" +
-                "Ataque : " + getAtq() + "\n" +
-                "Armadura : " + getArm() + "\n" +
-                "Velocidad : " + getVel() + "\n" +
-                "Resistencia mágica : " + getRes() + "\n";
     }
 
+    /**
+     * Metodo creado en la practica seis util para los ficheros
+     *
+     * @return Los datos del personaje creado que se modificara en las otras clases
+     */
+    public String devuelveDatos() {
 
+        return ("Vida:" + getPv()) + "\n" +
+                "Ataque:" + getAtq() + "\n" +
+                "Armadura:" + getArm() + "\n" +
+                "Velocidad:" + getVel() + "\n" +
+                "Resistencia mágica:" + getRes() + "\n";
+    }
+
+    public boolean verificaPersonaje(File fichero) throws IOException {
+        boolean verifica = true;
+        String linea;
+        String nombreFichero = " ";
+        int nivelFichero = 0;
+        int vidaFichero = 0;
+        int ataqueFichero = 0;
+        int armaduraFichero = 0;
+        int velocidadFichero = 0;
+        int resistenciaFichero = 0;
+
+
+        FileReader fr = new FileReader(fichero);
+        BufferedReader br = new BufferedReader(fr);
+        br.readLine();
+        String[] campos = new String[2];
+        while ((linea = br.readLine()) != null) {
+            campos = linea.split(":");
+
+            if (campos[0].equals("Nombre ")) {
+                nombreFichero = campos[1];
+            }
+            if (campos[0].equals("Nivel")) {
+                nivelFichero = Integer.parseInt(campos[1]);
+            }
+            if (campos[0].equals("Vida")) {
+                vidaFichero = Integer.parseInt(campos[1]);
+            }
+            if (campos[0].equals("Ataque")) {
+                ataqueFichero = (Integer.parseInt(campos[1]));
+            }
+            if (campos[0].equals("Armadura")) {
+                armaduraFichero = (Integer.parseInt(campos[1]));
+            }
+            if (campos[0].equals("Velocidad")) {
+                velocidadFichero = (Integer.parseInt(campos[1]));
+            }
+            if (campos[0].equals("Resistencia mágica")) {
+                resistenciaFichero = (Integer.parseInt(campos[1]));
+            }
+        }
+        if (!this.nombre.equals(nombreFichero))
+            verifica = false;
+
+        if (this.nivel != nivelFichero)
+            verifica = false;
+
+        if ((this.pv != vidaFichero))
+            verifica = false;
+
+        if (this.atq != ataqueFichero)
+            verifica = false;
+
+        if (this.arm != armaduraFichero)
+            verifica = false;
+
+        if(this.vel != velocidadFichero)
+            verifica = false;
+
+        if(this.res != resistenciaFichero)
+            verifica = false;
+
+        return verifica;
+    }
+
+    public abstract String getClase();
 }

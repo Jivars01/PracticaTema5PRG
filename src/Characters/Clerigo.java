@@ -166,5 +166,9 @@ public class Clerigo extends Creyente {
     }
 
 
+    public String getClase() {
+        return "Clerigo";
+    }
+
 }
 

@@ -198,4 +198,9 @@ public class Guerrero extends Personaje {
         return daño;
     }
 
+
+    public String getClase() {
+        return "Guerrero";
+    }
+
 }

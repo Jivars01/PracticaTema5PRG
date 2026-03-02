@@ -38,13 +38,11 @@ public class Combate_anticuado {
      * haga doble turno, y se podra indicar al personaje que haga una accion de cuatro disponibles,
      * atacar fisicamente, atacar magicamente, pasar turno o defenderte
      *
-     * @param c1 De la clase personaje que crea al primer jugador
-     * @param c2 De la clase personaje que crea al segundo jugador
      * @return devuelve quien es el ganador del combate
      */
 
     //public static void combatir(...)
-    public static Personaje combatir(Personaje c1, Personaje c2) {
+    /*public static Personaje combatir(Personaje c1, Personaje c2) {
         Personaje resultado = new Personaje(); //Sobra
         System.out.println("Empieza el combate entre " + c1.getNombre() + " y " + c2.getNombre());
         Trampa trampa = new Trampa(inicializaTrampa());
@@ -178,7 +176,7 @@ public class Combate_anticuado {
      * @return La trampa establecida al combate
      */
 
-    public static Trampa inicializaTrampa() {
+    /* public static Trampa inicializaTrampa() {
         Trampa trampa = new Trampa();
         trampa.setFracaso();
 
@@ -209,5 +207,5 @@ public class Combate_anticuado {
         Personaje.inspirar(trampa.getPerjuicio(), "def");
     }
 } */
-    
+
 }

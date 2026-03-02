@@ -134,4 +134,9 @@ public class Ladron extends Personaje {
         return daño;
     }
 
+
+    public String getClase() {
+        return "Ladron";
+    }
+
 }

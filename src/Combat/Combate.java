@@ -33,21 +33,6 @@ public class Combate {
      */
 
     public static void Combatir(Personaje c1, Personaje c2) {
-        /*
-            REALIZARTURNO SOLO LO UTILIZA EL PERSONAJE JUGABLE
-            Bucle do-while del combate
-            0. Comprobar que personaje tiene más velocidad
-            1. Ejecutar primera posibilidad
-                1.1. Comprobar si el personaje más veloz tiene doble turno
-                1.2. Realizar el turno adicional primero SI LO HUBIERA, utilizando defender con la cantidad de daño obtenida de realizarTurno
-                1.3. Realizar el turno habitual, utilizando igual defender con la cantidad de la llamada a realizarTurno
-                1.4. Realizar el turno del oponente
-                1.* DESPUÉS DE CADA GOLPE HAY QUE COMPROBAR SI EL GOLPE HA MATADO Y EL COMBATE TERMINA
-            2. Ejecutar segunda posibilidad
-                2.1. Repetir los pasos 1.1. a 1.*. con c1 y c2 invertidos
-            3. Declarar el ganador cuando se salga del bucle
-         */
-
         do {
             System.out.println("Empieza el combate entre " + c1.getNombre() + " y " + c2.getNombre());
             if (c1.getVel() > c2.getVel()) { //1

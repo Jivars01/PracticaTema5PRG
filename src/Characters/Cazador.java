@@ -7,6 +7,7 @@ import java.util.Scanner;
  * Clase Cazador.
  * Representa un tipo de personaje que puede tener una mascota
  * que le ayuda en combate y evoluciona junto a él.
+ *
  */
 
 public class Cazador extends Personaje {
@@ -132,7 +133,7 @@ public class Cazador extends Personaje {
          */
 
         public String toString() {
-            return super.toString() + "\nEs una mascota cuya raza es " + getRaza() ;
+            return super.toString() + "\nEs una mascota cuya raza es " + getClase() ;
         }
 
         /**
@@ -217,7 +218,7 @@ public class Cazador extends Personaje {
         /**
          * @return raza de la mascota
          */
-        public String getRaza() {
+        public String getClase() {
             return Raza;
         }
 
@@ -280,5 +281,10 @@ public class Cazador extends Personaje {
                 System.out.println("La opcion escogida no corresponde a las especificadas");
         }
         return daño;
+    }
+
+    @Override
+    public String getClase() {
+        return "Cazador";
     }
 }
