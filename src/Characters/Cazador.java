@@ -1,5 +1,9 @@
 package Characters;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -258,7 +262,6 @@ public class Cazador extends Personaje {
             case "1":
                 System.out.println("Has decidido atacar");
                 daño = ataque();
-                defender(ataque(), "Fisico");
                 break;
 
             case "2":
@@ -270,8 +273,8 @@ public class Cazador extends Personaje {
                 setRes((int) (getRes() / 0.80));
                 setArm((int) ((getArm()) / 0.80));
                 daño = 0;
-
                 break;
+
             case "4":
                 System.out.println("Has decidido pasar el turno tu personaje no hara ninguna accion");
                 daño = 0;
@@ -280,6 +283,49 @@ public class Cazador extends Personaje {
             default:
                 System.out.println("La opcion escogida no corresponde a las especificadas");
         }
+        return daño;
+    }
+
+    public int realizaTurnoALT(File fichero) throws IOException {
+        PrintWriter pw;
+        FileWriter fw = new FileWriter(fichero, true);
+        pw = new PrintWriter(fw);
+        int daño = 0;
+        String tipo;
+        Scanner scan = new Scanner(System.in);
+        pw.println("Introduzca por teclado que es lo que vas a hacer:" +
+                "\n1.Atacar" +
+                "\n2.Ataque especial (Solo algunos categorias pueden hacerlo)" +
+                "\n3.Defender" +
+                "\n4.Pasar turno");
+        tipo = scan.nextLine();
+        switch (tipo) {
+            case "1":
+                pw.println("Has decidido atacar");
+                daño = ataque();
+
+                break;
+            case "2":
+                pw.println("El cazador no tiene una habilidad especial");
+                break;
+
+            case "3":
+                pw.println("Has decidido defender");
+                setRes((int) (getRes() / 0.80));
+
+                setArm((int) ((getArm()) / 0.80));
+                daño = 0;
+                break;
+            case "4":
+                pw.println("Has decidido pasar el turno, tu personaje no hara ninguna accion");
+                daño = 0;
+                break;
+            default:
+                pw.println("La opcion escogida no corresponde a las especificadas");
+        }
+        pw.flush();
+        pw.close();
+        fw.close();
         return daño;
     }
 

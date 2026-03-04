@@ -104,7 +104,6 @@ public abstract class Creyente extends Personaje{
             case "1":
                 System.out.println("Has decidido atacar");
                 daño = ataque();
-                defender(ataque(),"Fisico");
                 break;
             case "2":
                 System.out.println("Un personaje creyente no tiene ataque especial");

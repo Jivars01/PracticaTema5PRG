@@ -169,7 +169,6 @@ public class Guerrero extends Personaje {
             case "1":
                 System.out.println("Has decidido atacar");
                 daño = ataque();
-                defender(ataque(), "Fisico");
                 break;
             case "2":
                 if (furia == false) {

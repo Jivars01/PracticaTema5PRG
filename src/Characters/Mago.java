@@ -170,7 +170,6 @@ public class Mago extends Personaje {
             case "1":
                 System.out.println("Has decidido atacar");
                 daño = ataque();
-                defender(ataque(), "Fisico");
                 break;
             case "2":
                 System.out.println("Has decidido lanzar un conjuro");

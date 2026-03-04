@@ -535,15 +535,19 @@ public abstract class Personaje {
                 //Si el daño - la armadura será menor que 0
                 if (daño - arm <= 0) {
                     daño = 0;
-                }
-                this.pv = daño - arm;
+                    System.out.println("No le hizo ni un rasguño");
+                } else
+                    this.pv -= (daño - arm);
+                if (this.pv <= 0)
+                    pv = 0;
                 break;
             case "Magico":
                 //Aquí igual pero con la RM
                 if (daño - res <= 0) {
                     daño = 0;
-                }
-                this.pv = daño - res;
+                    System.out.println("La magia no fue suficiente para hacer daño");
+                }else
+                    this.pv -= (daño - res);
                 break;
 
             default:
@@ -571,7 +575,6 @@ public abstract class Personaje {
             case "1":
                 System.out.println("Has decidido atacar");
                 daño = ataque();
-                defender(ataque(), "Fisico");
                 break;
             case "2":
                 System.out.println("Un personaje generico no tiene ataque especial");
@@ -609,7 +612,6 @@ public abstract class Personaje {
             case "1":
                 pw.println("Has decidido atacar");
                 daño = ataque();
-                defender(ataque(), "Fisico");
                 break;
             case "2":
                 pw.println("Un personaje generico no tiene ataque especial");
@@ -631,7 +633,6 @@ public abstract class Personaje {
         pw.close();
         fw.close();
         return daño;
-
     }
 
     /**

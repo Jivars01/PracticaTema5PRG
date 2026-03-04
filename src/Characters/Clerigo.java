@@ -129,7 +129,6 @@ public class Clerigo extends Creyente {
             case "1":
                 System.out.println("Has decidido atacar");
                 daño = ataque();
-                defender(ataque(),"Fisico");
                 break;
             case "2":
                 System.out.println("El clerigo prepara su ataque especial");
@@ -154,6 +153,10 @@ public class Clerigo extends Creyente {
         }
         return daño;
     }
+
+
+
+
     /**
      * Devuelve una descripción del Clérigo junto con la información heredada.
      *

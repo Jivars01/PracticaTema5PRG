@@ -111,7 +111,6 @@ public class Ladron extends Personaje {
             case "1":
                 System.out.println("Has decidido atacar");
                 daño = ataque();
-                defender(ataque(), "Fisico");
                 break;
             case "2":
                 System.out.println("El ladron se ha lanzado a robar");

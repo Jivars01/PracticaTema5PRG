@@ -19,6 +19,6 @@ public class Main {
         Paladin Joseador = new Paladin();
        // GameLogger.ArraysFicheros(party);
         //GameLogger.Escribeenfichero(Joseador);
-        GameLogger.CombatirGameLogger(P4,P5, new File("./Ficheros/Combate.txt"));
+        GameLogger.Combatir(P4,P5);
     }
 }

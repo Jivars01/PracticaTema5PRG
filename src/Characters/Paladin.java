@@ -139,7 +139,6 @@ public class Paladin extends Creyente{
             case "1":
                 System.out.println("Has decidido atacar");
                 daño = ataque();
-                defender(ataque(), "Fisico");
                 break;
             case "2":
                 System.out.println("El paladin se dispone a usar su plegaria");

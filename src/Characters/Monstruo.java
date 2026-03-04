@@ -1,5 +1,9 @@
 package Characters;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -28,13 +32,13 @@ public class Monstruo extends Personaje {
      * Constructor parametrizado.
      * Inicializa los atributos heredados y el tipo de monstruo.
      *
-     * @param nombre nombre del personaje
-     * @param pv puntos de vida
-     * @param atq valor de ataque
-     * @param arm valor de armadura
-     * @param nivel nivel del personaje
-     * @param vel velocidad
-     * @param res resistencia
+     * @param nombre   nombre del personaje
+     * @param pv       puntos de vida
+     * @param atq      valor de ataque
+     * @param arm      valor de armadura
+     * @param nivel    nivel del personaje
+     * @param vel      velocidad
+     * @param res      resistencia
      * @param Monstruo tipo de monstruo
      */
 
@@ -58,73 +62,73 @@ public class Monstruo extends Personaje {
                 break;
             case "No-Muerto":
                 subirnivelNo_Muerto();
-            break;
+                break;
             case "Gigante":
                 subirnivelGigante();
         }
     }
 
-    private void subirnivelBestia(){
+    private void subirnivelBestia() {
         int c;
         Random a = new Random();
 
-        if (a.nextInt(100 ) <= 50){
+        if (a.nextInt(100) <= 50) {
             setPv(getPv() + 1);
         }
-        if (a.nextInt(100 ) <= 80) {
+        if (a.nextInt(100) <= 80) {
             setAtq(getAtq() + 2);
 
         }
-        if (a.nextInt(100 ) <= 15){
+        if (a.nextInt(100) <= 15) {
             setArm(getArm() + 1);
         }
-        if (a.nextInt(100 ) <= 15){
+        if (a.nextInt(100) <= 15) {
             setRes(getRes() + 1);
         }
-        if (a.nextInt(100 ) <= 80){
+        if (a.nextInt(100) <= 80) {
             setVel(getVel() + 2);
         }
         setNivel(getNivel() + 1);
     }
 
-    private void subirnivelNo_Muerto(){
+    private void subirnivelNo_Muerto() {
         int c;
         Random a = new Random();
-        if (a.nextInt(100 ) <= 30){
+        if (a.nextInt(100) <= 30) {
             setPv(getPv() + 1);
         }
-        if (a.nextInt(100 ) <= 50) {
+        if (a.nextInt(100) <= 50) {
             setAtq(getAtq() + 1);
         }
-        if (a.nextInt(100 ) <= 30){
+        if (a.nextInt(100) <= 30) {
             setArm(getArm() + 1);
         }
-        if (a.nextInt(100 ) <= 70){
+        if (a.nextInt(100) <= 70) {
             setRes(getRes() + 4);
         }
-        if (a.nextInt(100 ) <= 5){
+        if (a.nextInt(100) <= 5) {
             setVel(getVel() + 1);
         }
         setNivel(getNivel() + 1);
     }
 
-    private void subirnivelGigante(){
+    private void subirnivelGigante() {
         int c;
         Random a = new Random();
-        if (a.nextInt(100 ) <= 50){
+        if (a.nextInt(100) <= 50) {
             setPv(getPv() + 2);
-        } else setPv(getPv()+3);
+        } else setPv(getPv() + 3);
 
-        if (a.nextInt(100 ) <= 50){
+        if (a.nextInt(100) <= 50) {
             setAtq(getAtq() + 1);
         }
-        if (a.nextInt(100 ) <= 50){
+        if (a.nextInt(100) <= 50) {
             setArm(getArm() + 1);
         }
-        if (a.nextInt(100 ) <= 50){
+        if (a.nextInt(100) <= 50) {
             setRes(getRes() + 4);
         }
-        if (a.nextInt(100 ) <= 50){
+        if (a.nextInt(100) <= 50) {
             setVel(getVel() + 1);
         }
         setNivel(getNivel() + 6);
@@ -132,6 +136,7 @@ public class Monstruo extends Personaje {
 
     /**
      * Devuelve el tipo de monstruo.
+     *
      * @return tipo de monstruo
      */
 
@@ -141,22 +146,24 @@ public class Monstruo extends Personaje {
 
     /**
      * Establece el tipo de monstruo.
+     *
      * @param monstruo tipo de monstruo
      */
 
     public void setMonstruo(String monstruo) {
-        if (Monstruo.equals("No-Muerto,")|| Monstruo.equals("Gigante") || Monstruo.equals("Bestia"))
+        if (Monstruo.equals("No-Muerto,") || Monstruo.equals("Gigante") || Monstruo.equals("Bestia"))
             this.Monstruo = monstruo;
         else this.Monstruo = "";
     }
 
     /**
      * Devuelve una descripción del monstruo.
+     *
      * @return cadena con la información del personaje
      */
 
     public String toString() {
-        return super.toString() + "Es un Monstruo cuya raza es " + getMonstruo() ;
+        return super.toString() + "Es un Monstruo cuya raza es " + getMonstruo();
     }
 
     /**
@@ -180,7 +187,6 @@ public class Monstruo extends Personaje {
             case "1":
                 System.out.println("Has decidido atacar");
                 daño = ataque();
-                defender(ataque(),"Fisico");
                 break;
             case "2":
                 System.out.println("Un Monstruo no tiene un ataque especial");
@@ -202,9 +208,47 @@ public class Monstruo extends Personaje {
         return daño;
     }
 
+    public int realizaTurnoALT(File fichero) throws IOException {
+        PrintWriter pw;
+        FileWriter fw = new FileWriter(fichero);
+        pw = new PrintWriter(fw);
+        int daño = 0;
+        String tipo;
+        Scanner scan = new Scanner(System.in);
+        pw.println("Introduzca por teclado que es lo que vas a hacer:" +
+                "\n1.Atacar" +
+                "\n2.Ataque especial (Solo algunos categorias pueden hacerlo)" +
+                "\n3.Defender" +
+                "\n4.Pasar turno");
+        tipo = scan.nextLine();
+        switch (tipo) {
+            case "1":
+                pw.println("Has decidido atacar");
+                daño = ataque();
+                break;
+            case "2":
+                pw.println("Un Monstruo no tiene un ataque especial");
+                break;
+            case "3":
+                pw.println("Has decidido defender");
+                setRes((int) (getRes() / 0.80));
 
-    public String getClase() {
+                setArm((int) ((getArm()) / 0.80));
+                daño = 0;
+                break;
+            case "4":
+                pw.println("Has decidido pasar el turno, tu personaje no hara ninguna accion");
+                daño = 0;
+                break;
+            default:
+                pw.println("La opcion escogida no corresponde a las especificadas");
+        }
+        pw.flush();
+        pw.close();
+        fw.close();
+        return daño;
+    }
+    public String getClase () {
         return "Monstruo";
     }
-
 }

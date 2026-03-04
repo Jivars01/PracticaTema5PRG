@@ -22,6 +22,41 @@ public class Combate_anticuado {
     private String turno;
     Scanner scan = new Scanner(System.in);
 
+    public static void combatt(Personaje c1, Personaje c2) {
+        do {
+            System.out.println("Empieza el combate entre " + c1.getNombre() + " y " + c2.getNombre());
+            if (c1.getVel() > c2.getVel()) { //1
+                System.out.println("El personaje 1 empieza el combate ");
+                if (c1.getVel() >= c2.getVel() * 2) { //1.1
+                    c2.defender(c1.realizaTurno(), "fisico");
+                    if (c2.getPv() <= 0) {
+                        Imprimeganador(c1);
+                    } else {
+                        c2.defender(c1.realizaTurno(), "fisico");
+                        if (c2.getPv() <= 0)
+                            Imprimeganador(c1);
+                        else
+                            System.out.println("El combate continua");
+                    }
+                }
+            } else //2
+                System.out.println("El personaje rival empieza el combate");
+            if (c1.getVel() >= c2.getVel() * 2) {
+                c1.defender(c2.ataque(), "fisico");
+                if (c2.getPv() <= 0) {
+                    Imprimeganador(c2);
+                } else {
+                    c2.defender(c1.realizaTurno(), "fisico");
+                    if (c2.getPv() <= 0)
+                        Imprimeganador(c1);
+                    else
+                        System.out.println("El combate continua");
+                }
+            }
+        } while (!c1.estarMuerto() && c2.estarMuerto());
+    }
+
+
     /*
      *Para implementar la trampa:
      *-> Crear un objeto de la clase GameMap.Trampa como variable local dentro del metodo combatir

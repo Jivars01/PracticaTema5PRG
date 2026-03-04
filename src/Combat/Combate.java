@@ -32,39 +32,6 @@ public class Combate {
      * @return devuelve quien es el ganador del combate
      */
 
-    public static void Combatir(Personaje c1, Personaje c2) {
-        do {
-            System.out.println("Empieza el combate entre " + c1.getNombre() + " y " + c2.getNombre());
-            if (c1.getVel() > c2.getVel()) { //1
-                System.out.println("El personaje 1 empieza el combate ");
-                if (c1.getVel() >= c2.getVel() * 2) { //1.1
-                    c2.defender(c1.realizaTurno(), "fisico");
-                    if (c2.getPv() <= 0) {
-                        Imprimeganador(c1);
-                    } else {
-                        c2.defender(c1.realizaTurno(), "fisico");
-                        if (c2.getPv() <= 0)
-                            Imprimeganador(c1);
-                        else
-                            System.out.println("El combate continua");
-                    }
-                }
-            } else //2
-                System.out.println("El personaje rival empieza el combate");
-            if (c1.getVel() >= c2.getVel() * 2) {
-                c1.defender(c2.ataque(), "fisico");
-                if (c2.getPv() <= 0) {
-                    Imprimeganador(c2);
-                } else {
-                    c2.defender(c1.realizaTurno(), "fisico");
-                    if (c2.getPv() <= 0)
-                        Imprimeganador(c1);
-                    else
-                        System.out.println("El combate continua");
-                }
-            }
-        } while (!c1.estarMuerto() && c2.estarMuerto());
-    }
 
     /**
      * Metodo que se usa para imprimir un mesaje segun el ganador del combate
@@ -105,6 +72,54 @@ public class Combate {
         return trampa;
     }
 
+    public static void Combatir(Personaje p1, Personaje p2) {
+        Personaje primero, segundo;
+        if (comprobarPrimero(p1, p2)) {
+            primero = p1;
+            segundo = p2;
+        } else {
+            primero = p2;
+            segundo = p1;
+        }
+        //Empieza el combate
+        do {
+            System.out.println("Empieza el combate entre " + p1.getNombre() + " y " + p2.getNombre() + ".");
+            muestraCombate(primero, segundo);
+            if (!hayMuertos(primero, segundo) && golpeaDosVeces(primero, segundo)) {
+                segundo.defender(primero.realizaTurno(), "Fisico"); //(Golpe doble)
+                muestraCombate(primero, segundo);
+            }
+            if (!hayMuertos(primero, segundo)) {
+                segundo.defender(primero.realizaTurno(), "Fisico"); //Golpe estándar
+                muestraCombate(primero, segundo);
+            }
+            if (!hayMuertos(primero, segundo)) {
+                primero.defender(segundo.realizaTurno(), "Fisico");
+                muestraCombate(primero, segundo);
+            }
+        } while (!p1.estarMuerto() && !p2.estarMuerto());
+
+        if (p1.estarMuerto())
+            System.out.println("El ganador es p2");
+        else System.out.println("El ganador es p1");
+    }
+
+    private static boolean comprobarPrimero(Personaje p1, Personaje p2) {
+        return p1.getVel() > p2.getVel();
+    }
+
+    private static boolean golpeaDosVeces(Personaje p1, Personaje p2) {
+        return (p1.getVel() > (p2.getVel() * 2));
+    }
+
+    private static boolean hayMuertos(Personaje p1, Personaje p2) {
+        return (p1.estarMuerto() || p2.estarMuerto());
+    }
+
+    private static void muestraCombate(Personaje p1, Personaje p2) {
+        System.out.println(p1.getNombre() + ": " + p1.getPv());
+        System.out.println(p2.getNombre() + ": " + p2.getPv());
+    }
 }
 
 
