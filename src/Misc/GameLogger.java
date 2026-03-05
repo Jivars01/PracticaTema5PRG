@@ -96,30 +96,35 @@ public class GameLogger {
         return ver;
     }
 
+
     public static void Combatir(Personaje p1, Personaje p2) throws IOException {
         PrintWriter pw;
         File fichero = new File("./Ficheros/" + p1.getNombre() + "vs" + p2.getNombre() + ".txt");
         FileWriter fw = new FileWriter(fichero);
         pw = new PrintWriter(fw);
         Personaje primero, segundo;
+
         if (comprobarPrimero(p1, p2)) {
+
             primero = p1;
             segundo = p2;
+
         } else {
+
             primero = p2;
             segundo = p1;
         }
-        //Empieza el combate
 
+        //Empieza el combate
+        pw.println("Empieza el combate entre " + p1.getNombre() + " y " + p2.getNombre() + ".");
         do {
-            pw.println("Empieza el combate entre " + p1.getNombre() + " y " + p2.getNombre() + ".");
             muestraCombate(primero, segundo);
             if (!hayMuertos(primero, segundo) && golpeaDosVeces(primero, segundo)) {
-                segundo.defender(primero.realizaTurno(), "Fisico"); //(Golpe doble)
+                segundo.defender(primero.realizaTurnoALT(fichero), "Fisico"); //(Golpe doble)
                 muestraCombate(primero, segundo);
             }
             if (!hayMuertos(primero, segundo)) {
-                segundo.defender(primero.realizaTurno(), "Fisico"); //Golpe estándar
+                segundo.defender(primero.realizaTurnoALT(fichero), "Fisico"); //Golpe estándar
                 muestraCombate(primero, segundo);
             }
             if (!hayMuertos(primero, segundo)) {
@@ -128,14 +133,13 @@ public class GameLogger {
             }
 
         } while (!p1.estarMuerto() && !p2.estarMuerto());
+
+        if (p1.estarMuerto())
+            pw.println("El ganador es " + p2.getNombre());
+        else pw.println("El ganador es " + p1.getNombre());
         pw.flush();
         pw.close();
         fw.close();
-
-        if (p1.estarMuerto())
-            pw.println("El ganador es p2");
-        else pw.println("El ganador es p1");
-
     }
 
     private static boolean comprobarPrimero(Personaje p1, Personaje p2) {
@@ -150,18 +154,29 @@ public class GameLogger {
         return (p1.estarMuerto() || p2.estarMuerto());
     }
 
-    private static void muestraCombate(Personaje p1, Personaje p2) throws IOException{
+    private static void muestraCombate(Personaje p1, Personaje p2) throws IOException {
         PrintWriter pw;
         FileWriter fw = new FileWriter(new File("./Ficheros/" + p1.getNombre() + "vs" + p2.getNombre() + ".txt"), true);
         pw = new PrintWriter(fw);
         pw.println(p1.getNombre() + ": " + p1.getPv());
         pw.println(p2.getNombre() + ": " + p2.getPv());
-        pw.flush();
-        pw.close();
-        fw.close();
     }
 
-    private void nivelCombate(Personaje[] personajes, File ficha) throws IOException {
+    public static void SubirnivelCombate(Personaje[] personajes, File ficha) throws IOException {
+        if (!ficha.canRead())
+            return;
+        FileReader fr = new FileReader(ficha);
+        BufferedReader br = new BufferedReader(fr);
+        br.readLine();
+        String a = br.readLine();
+        for(int i = 0; i < personajes.length; i++){
+            if(personajes[i].getNombre().equals(a.split("El ganador es ")[1]) ){
+                System.out.println("Se ha subido de nivel a " + personajes[i].getNombre());
+                personajes[i].subirNivel();
+            }
+        }
+        br.close();
+        fr.close();
     }
 
 }

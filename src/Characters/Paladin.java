@@ -165,7 +165,7 @@ public class Paladin extends Creyente{
 
     public int realizaTurnoALT(File fichero, Personaje c2) throws IOException {
         PrintWriter pw;
-        FileWriter fw = new FileWriter(fichero);
+        FileWriter fw = new FileWriter(fichero,true);
         pw = new PrintWriter(fw);
         int daño = 0;
         String tipo;
@@ -179,11 +179,9 @@ public class Paladin extends Creyente{
         switch (tipo) {
             case "1":
                 pw.println("Has decidido atacar");
-                daño = ataque();
-                defender(ataque(), "Fisico");
-                break;
+                daño = ataque();break;
             case "2":
-                pw.println("\"El paladin se dispone a usar su plegaria\"");
+                pw.println("El paladin se dispone a usar su plegaria");
                 plegaria(c2);
                 break;
             case "3":
@@ -200,9 +198,7 @@ public class Paladin extends Creyente{
             default:
                 pw.println("La opcion escogida no corresponde a las especificadas");
         }
-        pw.flush();
-        pw.close();
-        fw.close();
+
         return daño;
     }
 

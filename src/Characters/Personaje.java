@@ -597,7 +597,7 @@ public abstract class Personaje {
 
     public int realizaTurnoALT(File fichero) throws IOException{
         PrintWriter pw;
-        FileWriter fw = new FileWriter(fichero);
+        FileWriter fw = new FileWriter(fichero,true);
         pw = new PrintWriter(fw);
         int daño = 0;
         String tipo;
@@ -715,4 +715,6 @@ public abstract class Personaje {
     }
 
     public abstract String getClase();
+
+
 }

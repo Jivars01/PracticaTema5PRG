@@ -248,6 +248,9 @@ public class Monstruo extends Personaje {
         fw.close();
         return daño;
     }
+
+
+
     public String getClase () {
         return "Monstruo";
     }
