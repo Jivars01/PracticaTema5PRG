@@ -162,7 +162,14 @@ public class Paladin extends Creyente{
         return daño;
     }
 
-
+    /**
+     * Realiza un turno que se va a ver en un fichero
+     * (Ya termine con este metodo ALELUYA)
+     * @param fichero File
+     * @param c2 Personaje
+     * @return daño
+     * @throws IOException
+     */
     public int realizaTurnoALT(File fichero, Personaje c2) throws IOException {
         PrintWriter pw;
         FileWriter fw = new FileWriter(fichero,true);
@@ -202,7 +209,10 @@ public class Paladin extends Creyente{
         return daño;
     }
 
-
+    /**
+     * El unico que he usado para probar que funcionen los metodos
+     * @return Paladin
+     */
 
     public String getClase() {
         return "Paladin";

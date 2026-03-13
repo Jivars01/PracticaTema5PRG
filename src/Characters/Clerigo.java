@@ -159,7 +159,7 @@ public class Clerigo extends Creyente {
     }
 
     /**
-     * Para que se muestre en el Fichero el Combate
+     * Para que se muestre en el Fichero el Turno del Combate
      * @param fichero File
      * @param c2 Personaje
      * @return el dañoo

@@ -208,6 +208,13 @@ public class Monstruo extends Personaje {
         return daño;
     }
 
+    /**
+     * Muestra Turnos en un fichero
+     * @param fichero File
+     * @return daño
+     * @throws IOException
+     */
+
     public int realizaTurnoALT(File fichero) throws IOException {
         PrintWriter pw;
         FileWriter fw = new FileWriter(fichero);
@@ -250,7 +257,10 @@ public class Monstruo extends Personaje {
     }
 
 
-
+    /**
+     * Es un Monstruo aunque haya tres tipo...
+     * @return Monstruo
+     */
     public String getClase () {
         return "Monstruo";
     }

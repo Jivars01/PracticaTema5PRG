@@ -196,6 +196,13 @@ public class Mago extends Personaje {
         return daño;
     }
 
+    /**
+     * Basicamente hace lo mismo que el anterior pero para que se muestre en un fichero
+     * @param fichero File
+     * @return Daño
+     * @throws IOException
+     */
+
     public int realizaTurnoALT(File fichero) throws IOException {
         PrintWriter pw;
         FileWriter fw = new FileWriter(fichero,true);
@@ -238,12 +245,20 @@ public class Mago extends Personaje {
         return daño;
     }
 
-
+    /**
+     * Introduce a los datos basicos de personaje el atributo magia
+     * @return
+     */
     public String devuelveDatos() {
         return super.devuelveDatos() +
                 "Magia:" + getMag() + "\n"
         + "\n";
     }
+
+    /**
+     * Es un Mago
+     * @return Mago
+     */
 
     public String getClase(){
         return "Mago";

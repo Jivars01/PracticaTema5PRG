@@ -736,7 +736,7 @@ public abstract class Personaje {
 
     /**
      * Metodo abstracto que devuelve la clase del personaje
-     * @return
+     * @return La clase correspondiente
      */
 
     public abstract String getClase();
