@@ -6,7 +6,18 @@ import Combat.Combate;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Clse creada en la practica 6 para el uso de ficheros
+ * Como crear un personaje en un fichero, ealizar un combate por ficheros etc..
+ */
+
 public class GameLogger {
+
+    /**
+     * Metodo estático que escribe un personaje en un fichero
+     * Se usa un metodo de la clase personaje que obtiene los atributos simples de un personaje
+     * @param p
+     */
 
     public static void Escribeenfichero(Personaje p) {
         try {
@@ -25,6 +36,12 @@ public class GameLogger {
             System.err.println(ioe);
         }
     }
+
+    /**
+     * Metodo estatico que crea a varios personajes en un fichero
+     * @param grupo array de personajes
+     * @throws IOException
+     */
 
 
     public static void ArraysFicheros(Personaje[] grupo) throws IOException {
@@ -46,6 +63,14 @@ public class GameLogger {
         fw.close();
     }
 
+    /**
+     * Metodo privado que se usa para que en el anterior metodo
+     * aquel que tenga mas velocidad sea el primero en el fichero
+     * y se coloce su nombre
+     * @param personajes array de Personajes
+     * @return
+     */
+
     private static Personaje[] ordenaVelocidad(Personaje[] personajes) {
         int n = personajes.length;
         for (int i = 0; i < n - 1; i++) {
@@ -63,6 +88,14 @@ public class GameLogger {
         return personajes;
     }
 
+    /**
+     * Metodo que asegura al personaje
+     * @param paths array de Files
+     * @param nombre Strind del nombre de personaje
+     * @return
+     * @throws IOException
+     */
+
     public static boolean Asegurapersonajes(File[] paths, String nombre) throws IOException {
         boolean ver = true;
         for (int i = 0; i < paths.length; i++) {
@@ -77,6 +110,15 @@ public class GameLogger {
         }
         return ver;
     }
+
+    /**
+     * Comprobas si su clase es correcta
+     * @param paths Array ficheros
+     * @param nombre personaje
+     * @param clase su clase
+     * @return
+     * @throws IOException
+     */
 
     public static boolean AseguraClase(File[] paths, String nombre, String clase) throws IOException {
         boolean ver = true;
@@ -95,6 +137,14 @@ public class GameLogger {
         }
         return ver;
     }
+
+    /**
+     * Metodo combatir que se mostrara en un fichero
+     * @param p1 luchador 1
+     * @param p2 luchador 2
+     * Ivan esta da mucha pereza ayuda SOS
+     * @throws IOException
+     */
 
 
     public static void Combatir(Personaje p1, Personaje p2) throws IOException {
@@ -142,17 +192,45 @@ public class GameLogger {
         fw.close();
     }
 
+    /**
+     * Metodo  que comprueba quien es mas veloz
+     * @param p1 L1
+     * @param p2 L2
+     * @return El mas rapido
+     */
+
     private static boolean comprobarPrimero(Personaje p1, Personaje p2) {
         return p1.getVel() > p2.getVel();
     }
+
+    /**
+     * Metodo que comprueba si se hace un doble turno o nooooo
+     * @param p1 L1
+     * @param p2 L2
+     * @return
+     */
 
     private static boolean golpeaDosVeces(Personaje p1, Personaje p2) {
         return (p1.getVel() > (p2.getVel() * 2));
     }
 
+    /**
+     * Han muerto o no? Esa es la cuestion
+     * @param p1 L1
+     * @param p2 L2
+     * @return
+     */
+
     private static boolean hayMuertos(Personaje p1, Personaje p2) {
         return (p1.estarMuerto() || p2.estarMuerto());
     }
+
+    /**
+     * Para que se vean los nombres y la vida y se pueda seguir el combate con calma
+     * @param p1 L1
+     * @param p2 L2
+     * @throws IOException
+     */
 
     private static void muestraCombate(Personaje p1, Personaje p2) throws IOException {
         PrintWriter pw;
@@ -161,6 +239,13 @@ public class GameLogger {
         pw.println(p1.getNombre() + ": " + p1.getPv());
         pw.println(p2.getNombre() + ": " + p2.getPv());
     }
+
+    /**
+     * Metodo que quien gane el combate sube de nivel LOL
+     * @param personajes Array de los lchadores
+     * @param ficha Fichero donde esta el Ganador
+     * @throws IOException
+     */
 
     public static void SubirnivelCombate(Personaje[] personajes, File ficha) throws IOException {
         if (!ficha.canRead())

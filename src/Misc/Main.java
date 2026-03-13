@@ -4,6 +4,7 @@ import Characters.Creyente;
 import Characters.Mago;
 import Characters.Paladin;
 import Characters.Personaje;
+import Combat.Combate_anticuado;
 
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +21,7 @@ public class Main {
        // GameLogger.ArraysFicheros(party);
         //GameLogger.Escribeenfichero(Joseador);
         //GameLogger.Combatir(P4,P5);
-        GameLogger.SubirnivelCombate(party,new File("Ficheros/Jesus4vsJesus5.txt"));
+        //GameLogger.SubirnivelCombate(party,new File("Ficheros/Jesus4vsJesus5.txt"));
+        Combate_anticuado.pruebachar();
     }
 }

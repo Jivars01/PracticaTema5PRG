@@ -126,6 +126,15 @@ public abstract class Creyente extends Personaje{
         }
         return daño;
     }
+
+    /**
+     * Que este metodo sirve para que se muestre en ficheros el combateee
+     * @param fichero File
+     * @param c2 Personaje
+     * @return Mis ganas de vivir a 0.
+     * Era bait devuelve el daño
+     * @throws IOException no se que se pone aqui saludos
+     */
     public int realizaTurnoALT(File fichero, Personaje c2) throws IOException {
         PrintWriter pw;
         FileWriter fw = new FileWriter(fichero,true);
@@ -166,12 +175,20 @@ public abstract class Creyente extends Personaje{
         return daño;
     }
 
+    /**
+     * Añade a los datos basicos la Fe
+     * @return
+     */
     @Override
     public String devuelveDatos() {
         return super.devuelveDatos() +
                 "Fe : " + getFe() + "\n";
     }
 
+    /**
+     * Es un Creyente.
+     * @return Creyente
+     */
 
     public String getClase() {
         return "Creyente";

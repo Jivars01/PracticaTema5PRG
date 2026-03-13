@@ -137,6 +137,15 @@ public class Ladron extends Personaje {
         return daño;
     }
 
+    /**
+     * Me quedan tres mas por documentar ruina
+     * Que esto muestra el combate en ficheroooooooooooo
+     * @param fichero File
+     * @param c2 Un Personaje
+     * @return daño
+     * @throws IOException
+     */
+
     public int realizaTurnoALT(File fichero, Personaje c2) throws IOException {
         PrintWriter pw;
         FileWriter fw = new FileWriter(fichero,true);
@@ -176,7 +185,10 @@ public class Ladron extends Personaje {
         return daño;
     }
 
-
+    /**
+     * Este te distrae te deja sin nada
+     * @return Ladron
+     */
     public String getClase() {
         return "Ladron";
     }

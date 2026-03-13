@@ -158,6 +158,14 @@ public class Clerigo extends Creyente {
         return daño;
     }
 
+    /**
+     * Para que se muestre en el Fichero el Combate
+     * @param fichero File
+     * @param c2 Personaje
+     * @return el dañoo
+     * @throws IOException
+     */
+
     public int realizaTurnoALT(File fichero, Personaje c2) throws IOException {
         PrintWriter pw;
         FileWriter fw = new FileWriter(fichero,true);
@@ -213,7 +221,10 @@ public class Clerigo extends Creyente {
                 "Entre ellas encontramos sanacion, rezo sagrado o fogonazo sagrado-";
     }
 
-
+    /**
+     * Es un Clerigo.
+     * @return Clerigo
+     */
     public String getClase() {
         return "Clerigo";
     }

@@ -201,6 +201,13 @@ public class Guerrero extends Personaje {
         return daño;
     }
 
+    /**
+     * En lenguaje guerrero es ver lucha en cuadrados bonitos(ficheros)
+     * @param fichero File
+     * @return si ha dolido o no (daño)
+     * @throws IOException
+     */
+
     public int realizaTurnoALT(File fichero) throws IOException {
         PrintWriter pw;
         FileWriter fw = new FileWriter(fichero,true);
@@ -245,6 +252,11 @@ public class Guerrero extends Personaje {
         fw.close();
         return daño;
     }
+
+    /**
+     * UNGA UNGA (Devuelve Guerrero)
+     * @return Guerrero
+     */
 
     public String getClase() {
         return "Guerrero";

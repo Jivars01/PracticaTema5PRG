@@ -72,7 +72,19 @@ public class Combate {
         return trampa;
     }
 
-    public static void Combatir(Personaje p1, Personaje p2) {
+    /**
+     * Metodo Estatico Combatir de la Clase Personaje que establece el combate entre dos personajes
+     * que pueden ser de disintas clases, la velocidad indicara quien empieza el combate
+     * incluyendo que si un personaje tiene el doble de velocidad que el otro
+     * haga doble turno, y se podra indicar al personaje que haga una accion de cuatro disponibles,
+     * atacar fisicamente, atacar magicamente, pasar turno o defenderte
+     *
+     * @param p1 De la clase personaje que crea al primer jugador
+     * @param p2 De la clase personaje que crea al segundo jugador
+     * @return devuelve quien es el ganador del combate
+     */
+
+    public static void combatir(Personaje p1, Personaje p2) {
         Personaje primero, segundo;
         if (comprobarPrimero(p1, p2)) {
             primero = p1;

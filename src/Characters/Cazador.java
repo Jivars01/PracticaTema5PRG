@@ -286,6 +286,12 @@ public class Cazador extends Personaje {
         return daño;
     }
 
+    /**
+     * El combate en un fichero.
+     * @param fichero File
+     * @return daño
+     * @throws IOException
+     */
     public int realizaTurnoALT(File fichero) throws IOException {
         PrintWriter pw;
         FileWriter fw = new FileWriter(fichero, true);
@@ -328,6 +334,11 @@ public class Cazador extends Personaje {
         fw.close();
         return daño;
     }
+
+    /**
+     * Es un Cazador que mas explico ns
+     * @return Cazador
+     */
 
     @Override
     public String getClase() {

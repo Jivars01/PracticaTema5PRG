@@ -63,6 +63,12 @@ public abstract class Personaje {
         setVel(vel);
     }
 
+    /**
+     * Constructor de Personaje que crea a un personaje iniciado en un fiichero
+     * @param fichero File
+     * @throws IOException
+     */
+
     public Personaje(File fichero) throws IOException {
         String linea;
         FileReader fr = new FileReader(fichero);
@@ -581,19 +587,26 @@ public abstract class Personaje {
                 break;
             case "3":
                 System.out.println("Has decidido defender");
+
                 res += (res * 0.20);
                 arm += (arm * 0.20);
-                daño = 0;
+
                 break;
             case "4":
                 System.out.println("Has decidido pasar el turno, tu personaje no hara ninguna accion");
-                daño = 0;
                 break;
             default:
                 System.out.println("La opcion escogida no corresponde a las especificadas");
         }
         return daño;
     }
+
+    /**
+     * Metodo parecido al anterior pero realizado para que el combate se muestre por fichero
+     * @param fichero File
+     * @return daño si hace o no
+     * @throws IOException
+     */
 
     public int realizaTurnoALT(File fichero) throws IOException{
         PrintWriter pw;
@@ -648,6 +661,13 @@ public abstract class Personaje {
                 "Velocidad:" + getVel() + "\n" +
                 "Resistencia mágica:" + getRes() + "\n";
     }
+
+    /**
+     * Metodo que verifica si un personaje existe a traves de un fichero
+     * @param fichero File
+     * @return boolean si cumple o no
+     * @throws IOException
+     */
 
     public boolean verificaPersonaje(File fichero) throws IOException {
         boolean verifica = true;
@@ -713,6 +733,11 @@ public abstract class Personaje {
 
         return verifica;
     }
+
+    /**
+     * Metodo abstracto que devuelve la clase del personaje
+     * @return
+     */
 
     public abstract String getClase();
 

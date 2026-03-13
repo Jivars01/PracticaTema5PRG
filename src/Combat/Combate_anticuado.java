@@ -7,7 +7,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-
 /**
  * Para Ivan, esta clase posee el combate que esta mal implementado y lo dejo como una clase
  * para poder recuperar algunas partes si fuera neceseario implementarlo en futuras practicas
@@ -18,8 +17,13 @@ import java.util.Scanner;
 
 
 public class Combate_anticuado {
+    private  static char pedro;
     private Trampa trampa;
     private String turno;
+    public static void pruebachar(){
+        pedro = 'E';
+        System.out.println(pedro);
+    }
     Scanner scan = new Scanner(System.in);
 
     public static void combatt(Personaje c1, Personaje c2) {
