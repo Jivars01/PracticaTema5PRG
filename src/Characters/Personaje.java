@@ -741,5 +741,4 @@ public abstract class Personaje {
 
     public abstract String getClase();
 
-
 }
