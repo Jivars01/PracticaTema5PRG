@@ -1,6 +1,4 @@
-package Equpamiento;
-
-import Characters.Personaje;
+package Armamento;
 
 import java.util.HashMap;
 
@@ -51,19 +49,29 @@ public abstract class Equipamiento {
     }
 
     public String getNombre() {
-        return nombre;
+        if(nombre.length() >= 20 || nombre.length() <= 1)
+            return "";
+        else
+            return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public String getRareza() {
+    public String getRareza(){
         return rareza;
     }
 
     public void setRareza(String rareza) {
-        this.rareza = rareza;
+
+        switch (rareza){
+            case "común", "raro", "épico", "legendario":
+                this.rareza = rareza;
+                break;
+            default: this.rareza = "";
+        }
+
     }
 
     public int getValor() {
@@ -71,7 +79,10 @@ public abstract class Equipamiento {
     }
 
     public void setValor(int valor) {
-        this.valor = valor;
+        if(valor > 1)
+            this.valor = valor;
+        else
+            this.valor = -1;
     }
 
     public HashMap<String, Integer> getHashMap() {
