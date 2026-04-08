@@ -1,9 +1,12 @@
 package Combat;
 
+import Armamento.Equipamiento;
 import Characters.Personaje;
 
 import GameMap.Trampa;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -19,6 +22,7 @@ import java.util.Scanner;
  */
 
 public class Combate {
+    private static ArrayList<Equipamiento> tesoros;
 
     /**
      * Metodo Estatico Combatir de la Clase Personaje que establece el combate entre dos personajes
@@ -132,6 +136,25 @@ public class Combate {
         System.out.println(p1.getNombre() + ": " + p1.getPv());
         System.out.println(p2.getNombre() + ": " + p2.getPv());
     }
+    /**
+     * . (1) Añade un atributo estático en la clase Combate que permita almacenar una colección
+     * de Equipamiento llamado tesoros. Esta colección de tesoros se ofrecerá como premio
+     * al jugador si gana un Combate, por lo que deberás modificar el método combatir() para
+     * que se proporcione al ganador una pieza de Equipamiento aleatoria de la colección. Una
+     * vez otorgado como premio por la victoria, deberá eliminarse dicho tesoro de la
+     * colección.
+     * Los tesoros se encuentran en los ficheros armas.csv, armaduras.csv y artefactos.csv
+     * adjuntos a la práctica. La lista de tesoros no se restablece durante combates, sino que
+     * se inicializa al comenzar la ejecución del programa y sus cambios persisten entre
+     * Combates
+     */
+
+    /**
+     * 5. (1) Modifica el método combatir() de la clase Combate para que se tengan en cuenta
+     * los nuevos atributos añadidos a la clase Personaje. Para ello, asegúrate de que en cada
+     * intercambio de golpes entre los dos Personajes, se suman correctamente los valores de
+     * las estadísticas de su Equipamiento a sus estadísticas propias.
+     */
 }
 
 

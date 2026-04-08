@@ -25,7 +25,7 @@ public abstract class Equipamiento {
     private String nombre;
     private String rareza;
     private int valor;
-    private HashMap<String, Integer> estadisticaAsociada = new HashMap<>();
+    private HashMap<String, Integer> estadisticaAsociada;
 
     public Equipamiento (){
         nombre = rareza = "";
@@ -38,7 +38,6 @@ public abstract class Equipamiento {
         setRareza(rareza);
         setValor(valor);
         setEstadisticaAsociada(estadistica);
-        estadisticaAsociada = new HashMap<>();
     }
 
     public Equipamiento(Equipamiento copia){
@@ -49,14 +48,14 @@ public abstract class Equipamiento {
     }
 
     public String getNombre() {
-        if(nombre.length() >= 20 || nombre.length() <= 1)
-            return "";
-        else
-            return nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        if(nombre.length() >= 20 || nombre.length() <= 1)
+            this.nombre = "";
+        else
+            this.nombre = nombre;
     }
 
     public String getRareza(){
@@ -90,11 +89,15 @@ public abstract class Equipamiento {
     }
 
     public void setEstadisticaAsociada(HashMap<String, Integer> hashMap) {
-        this.estadisticaAsociada = hashMap;
+        this.estadisticaAsociada = new HashMap<>();
     }
 
     public Integer recuperaEstadistica(String recuperar){
-        return estadisticaAsociada.get(recuperar);
+        switch (recuperar) {
+            case "vida", "ataque", "armadura", "resistencia", "velocidad" , "fe", "magia" :
+            return estadisticaAsociada.get(recuperar);
+            default : return null;
+        }
 
     }
 

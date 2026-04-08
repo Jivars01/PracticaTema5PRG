@@ -20,6 +20,15 @@ public class Artefacto extends Equipamiento{
         this.tipo = copia.tipo;
     }
 
+    public Integer recuperaEstadistica(String recuperar) {
+        switch (recuperar) {
+            case "vida", "ataque", "armadura", "resistencia", "velocidad", "fe", "magia":
+                return super.recuperaEstadistica(recuperar);
+            default:
+                return null;
+        }
+    }
+
     public String getTipo() {
         return tipo;
     }

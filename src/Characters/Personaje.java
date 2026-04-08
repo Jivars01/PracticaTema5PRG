@@ -1,9 +1,13 @@
 package Characters;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
+import Armamento.Arma;
+import Armamento.Armadura;
+import Armamento.Artefacto;
 import GameMap.Trampa;
 
 /**
@@ -23,6 +27,10 @@ public abstract class Personaje {
     private int nivel;
     private int res;
     private int vel;
+    private ArrayList<Arma> arma;
+    private ArrayList<Armadura> armadura;
+    private ArrayList<Artefacto> artefacto;
+
 
     /**
      * Constructor por defecto que establece el valor de nombre con cadena vacia, la vida con 100
@@ -65,6 +73,7 @@ public abstract class Personaje {
 
     /**
      * Constructor de Personaje que crea a un personaje iniciado en un fiichero
+     *
      * @param fichero File
      * @throws IOException
      */
@@ -365,6 +374,17 @@ public abstract class Personaje {
         }
     }
 
+    public ArrayList<Arma> getArma() {
+        return arma;
+    }
+    public ArrayList<Armadura> getArmadura() {
+        return armadura;
+    }
+
+    public ArrayList<Artefacto> getArtefacto() {
+        return artefacto;
+    }
+
     /**
      * Metodo beberpocion que permite devolver vida al personaje si su vida es menor o igual a 30
      *
@@ -552,7 +572,7 @@ public abstract class Personaje {
                 if (daño - res <= 0) {
                     daño = 0;
                     System.out.println("La magia no fue suficiente para hacer daño");
-                }else
+                } else
                     this.pv -= (daño - res);
                 break;
 
@@ -603,14 +623,15 @@ public abstract class Personaje {
 
     /**
      * Metodo parecido al anterior pero realizado para que el combate se muestre por fichero
+     *
      * @param fichero File
      * @return daño si hace o no
      * @throws IOException
      */
 
-    public int realizaTurnoALT(File fichero) throws IOException{
+    public int realizaTurnoALT(File fichero) throws IOException {
         PrintWriter pw;
-        FileWriter fw = new FileWriter(fichero,true);
+        FileWriter fw = new FileWriter(fichero, true);
         pw = new PrintWriter(fw);
         int daño = 0;
         String tipo;
@@ -664,6 +685,7 @@ public abstract class Personaje {
 
     /**
      * Metodo que verifica si un personaje existe a traves de un fichero
+     *
      * @param fichero File
      * @return boolean si cumple o no
      * @throws IOException
@@ -725,10 +747,10 @@ public abstract class Personaje {
         if (this.arm != armaduraFichero)
             verifica = false;
 
-        if(this.vel != velocidadFichero)
+        if (this.vel != velocidadFichero)
             verifica = false;
 
-        if(this.res != resistenciaFichero)
+        if (this.res != resistenciaFichero)
             verifica = false;
 
         return verifica;
@@ -736,9 +758,60 @@ public abstract class Personaje {
 
     /**
      * Metodo abstracto que devuelve la clase del personaje
+     *
      * @return La clase correspondiente
      */
 
     public abstract String getClase();
+
+    //Todos los Personajes pueden llevar una sola unidad de Arma, hasta seis piezas
+    //de Armadura que no pueden repetirse (por ejemplo, no pueden llevarse dos
+    //yelmos o dos pares de guanteletes), y hasta tres Artefactos (dos anillos y un
+    //amuleto).
+
+
+   /* public void equipaArma(Arma arma) {
+        this.arma = arma;
+    }
+
+    */
+
+    public boolean aseguraArmadura() {
+        if (armadura.size() >= 6)
+            return false;
+       else return true;
+            //si el tipo de a coincide con el tipo recibido por parametros
+            //a = {"Yelmo", "Casco", Raro, 555} - "Casco";
+
+
+    }
+
+   /* public void equipaArmadura(ArrayList<Armadura> armadura) {
+        if(aseguraArmadura()) {
+            for (Armadura dura : armadura) {
+                if(dura.getTipo() == )
+                    armadura.add()
+            }
+        }
+    }
+
+    */
+
+    public void equipaArtefacto(ArrayList<Artefacto> artefacto) {
+        this.artefacto = artefacto;
+    }
+
+    public boolean aseguraArtefacto(String tipo) {
+        if (artefacto.size() >= 3)
+            return false;
+        for (Artefacto a : artefacto) {
+            if (a.getTipo() == tipo ) {
+                return false;
+            }
+            //si el tipo de a coincide con el tipo recibido por parametros
+            //a = {"Yelmo", "Casco", Raro, 555} - "Casco";
+        }
+        return true;
+    }
 
 }

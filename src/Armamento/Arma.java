@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class Arma extends Equipamiento{
+
     //Solo puede dar estadisticas de fuerza, magia, fe y velocidad
     //Para una mano, existen los siguientes tipos de arma: espada, maza,
     //hacha, cetro, daga. Para dos manos, pueden ser de los siguientes tipos:
@@ -34,12 +35,21 @@ public class Arma extends Equipamiento{
         this.tipo = copia.tipo;
     }
 
+    @Override
+    public Integer recuperaEstadistica(String recuperar) {
+        switch (recuperar){
+            case  "ataque", "velocidad" , "fe", "magia" :
+                return super.recuperaEstadistica(recuperar);
+            default : return null;
+        }
+    }
+
     public int getEmpuñadura() {
         return empuñadura;
     }
 
     public void setEmpuñadura(int empuñadura) {
-        if (empuñadura < 0 && empuñadura >= 2){
+        if (empuñadura < 0 || empuñadura > 2){
             this.empuñadura = empuñadura;
         }
         else this.empuñadura = -1;
@@ -50,17 +60,15 @@ public class Arma extends Equipamiento{
     }
 
     public void setTipo(String tipo) {
-        if(empuñadura == 1)
-            // espada, maza,
-            //hacha, cetro, daga. Para dos manos, pueden ser de los siguientes tipos:
-            //espadón, martillo, arco y bastón.
-            if (tipo.equals("espada") || tipo.equals("maza") || tipo.equals("hacha") || tipo.equals("cetro") || tipo.equals("daga"))
+        if(empuñadura == 1) {
+            if (tipo.equals("espada") || tipo.equals("maza") || tipo.equals("hacha") || tipo.equals("cetro") || tipo.equals("daga")) {
                 this.tipo = tipo;
-            else  this.tipo = "";
-        else
-        if (tipo.equals("espadon") || tipo.equals("martillo") || tipo.equals("arco") || tipo.equals("baston"))
-            this.tipo = tipo;
-        else this.tipo = "";
+            } else  this.tipo = "";
+        } else if(empuñadura == 2) {
+            if (tipo.equals("espadon") || tipo.equals("martillo") || tipo.equals("arco") || tipo.equals("baston")) {
+                this.tipo = tipo;
+            } else this.tipo = "";
+        }
     }
 
     public boolean equals(Arma otro) {

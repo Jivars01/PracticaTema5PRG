@@ -23,12 +23,24 @@ public class Armadura extends Equipamiento{
         this.material = copia.material;
     }
 
+    public Integer recuperaEstadistica(String recuperar) {
+        switch (recuperar) {
+            case "vida", "armadura", "resistencia", "velocidad":
+                return super.recuperaEstadistica(recuperar);
+            default:
+                return null;
+        }
+    }
+
     public String getTipo() {
         return tipo;
     }
 
+    //yelmos, pecheras, hombreras, guanteletes, grebas y botas
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        if (tipo.equals("yelmos") || tipo.equals("pecheras") || tipo.equals("hombreras") || tipo.equals("guanteletes") || tipo.equals("grebas") || tipo.equals("botas"))
+            this.tipo = tipo;
+        else  this.tipo = "";
     }
 
     public String getMaterial() {
