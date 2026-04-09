@@ -27,7 +27,7 @@ public abstract class Personaje {
     private int nivel;
     private int res;
     private int vel;
-    private ArrayList<Arma> arma;
+    private Arma arma;
     private ArrayList<Armadura> armadura;
     private ArrayList<Artefacto> artefacto;
 
@@ -374,9 +374,10 @@ public abstract class Personaje {
         }
     }
 
-    public ArrayList<Arma> getArma() {
+    public Arma getArma() {
         return arma;
     }
+
     public ArrayList<Armadura> getArmadura() {
         return armadura;
     }
@@ -764,54 +765,57 @@ public abstract class Personaje {
 
     public abstract String getClase();
 
-    //Todos los Personajes pueden llevar una sola unidad de Arma, hasta seis piezas
-    //de Armadura que no pueden repetirse (por ejemplo, no pueden llevarse dos
-    //yelmos o dos pares de guanteletes), y hasta tres Artefactos (dos anillos y un
-    //amuleto).
+    /*
+    O decir que si el arma esta ocupado o hacer que se cambie el arma;
+     */
+   /* public void equipaArma(Arma armaar) {
+        if(this.arma != null){
 
+        } else armaar.se
 
-   /* public void equipaArma(Arma arma) {
-        this.arma = arma;
     }
 
     */
 
-    public boolean aseguraArmadura() {
+    private boolean aseguraArmadura() {
         if (armadura.size() >= 6)
             return false;
        else return true;
             //si el tipo de a coincide con el tipo recibido por parametros
             //a = {"Yelmo", "Casco", Raro, 555} - "Casco";
-
-
     }
 
-   /* public void equipaArmadura(ArrayList<Armadura> armadura) {
+   public void equipaArmadura(Armadura arm) {
         if(aseguraArmadura()) {
             for (Armadura dura : armadura) {
-                if(dura.getTipo() == )
-                    armadura.add()
+                if(dura.getTipo().equals(arm.getTipo()))
+                    return;
+
             }
+            armadura.add(arm);
         }
     }
 
-    */
+    public void equipaArtefacto(Artefacto artefact) {
+        if(aseguraArtefacto()){
+            for (Artefacto art : artefacto) {
 
-    public void equipaArtefacto(ArrayList<Artefacto> artefacto) {
-        this.artefacto = artefacto;
+                if(art.getTipo().equals(artefact.getTipo())){
+                    if(art.getTipo() == "amuleto" && artefacto.size() >= 2 ){
+
+                    }
+
+                }
+            }
+            artefacto.add(artefact);
+        }
     }
 
-    public boolean aseguraArtefacto(String tipo) {
+    private boolean aseguraArtefacto() {
         if (artefacto.size() >= 3)
             return false;
-        for (Artefacto a : artefacto) {
-            if (a.getTipo() == tipo ) {
-                return false;
-            }
-            //si el tipo de a coincide con el tipo recibido por parametros
-            //a = {"Yelmo", "Casco", Raro, 555} - "Casco";
-        }
-        return true;
+        else
+            return true;
     }
 
 }

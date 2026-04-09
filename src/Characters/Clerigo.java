@@ -1,9 +1,6 @@
 package Characters;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -39,6 +36,39 @@ public class Clerigo extends Creyente {
 
     public Clerigo(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, int fe) {
         super(nombre, pv, atq, arm, nivel, vel, res, fe);
+    }
+
+    public Clerigo(File fichero) throws IOException {
+        String linea;
+        FileReader fr = new FileReader(fichero);
+        BufferedReader br = new BufferedReader(fr);
+        br.readLine();
+        String[] campos = new String[2];
+        while ((linea = br.readLine()) != null) {
+            campos = linea.split(":");
+
+            if (campos[0].equals("Nombre ")) {
+                setNombre(campos[1]);
+            }
+            if (campos[0].equals("Nivel")) {
+                setNivel(Integer.parseInt(campos[1]));
+            }
+            if (campos[0].equals("Vida")) {
+                setPv(Integer.parseInt(campos[1]));
+            }
+            if (campos[0].equals("Ataque")) {
+                setAtq(Integer.parseInt(campos[1]));
+            }
+            if (campos[0].equals("Armadura")) {
+                setArm(Integer.parseInt(campos[1]));
+            }
+            if (campos[0].equals("Velocidad")) {
+                setVel(Integer.parseInt(campos[1]));
+            }
+            if (campos[0].equals("Resistencia mágica")) {
+                setRes(Integer.parseInt(campos[1]));
+            }
+        }
     }
 
     /**
