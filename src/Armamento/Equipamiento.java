@@ -98,9 +98,7 @@ public abstract class Equipamiento {
             return estadisticaAsociada.get(recuperar);
             default : return null;
         }
-
     }
-
     public String toString(){
         return "El equipamiento" + nombre + "tiene una rareza de" + rareza + "\n tiene un valor de" + valor + "y sube las siguientes estadiisticas" + estadisticaAsociada;
     }

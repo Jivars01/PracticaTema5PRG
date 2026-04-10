@@ -1,5 +1,9 @@
 package Characters;
 
+import Armamento.Arma;
+import Armamento.Armadura;
+import Armamento.Artefacto;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -264,4 +268,30 @@ public class Mago extends Personaje {
         return "Mago";
     }
 
+    public void equipaArma(Arma armaar) {
+        if(getArma() != null){
+            System.err.println("Ya hay una arma escogida");
+        } else setArma(armaar);
+    }
+
+    public void equipaArmadura(Armadura arm) {
+        if(aseguraArmadura()) {
+            for (Armadura dura : getArmadura()) {
+                if(dura.getTipo().equals(arm.getTipo()) && dura.getMaterial() != "tela")
+                    return;
+            }
+            getArmadura().add(arm);
+        }
+    }
+
+    public void equipaArtefacto(Artefacto artefact) {
+        if(aseguraArtefacto()){
+            for (Artefacto art : getArtefacto()) {
+                if(art.getTipo() == "Amuletos"){
+                    return;
+                }
+            }
+            getArtefacto().add(artefact);
+        }
+    }
 }

@@ -1,5 +1,9 @@
 package Characters;
 
+import Armamento.Arma;
+import Armamento.Armadura;
+import Armamento.Artefacto;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,6 +22,7 @@ import java.util.Scanner;
 public class Guerrero extends Personaje {
 
     private boolean furia; /** Indica si el guerrero se encuentra en estado de furia*/
+    private Arma armasecundaria;
 
     /**
      * Constructor por defecto.
@@ -97,6 +102,14 @@ public class Guerrero extends Personaje {
 
     public void setFuria(boolean furia) {
         this.furia = furia;
+    }
+
+    public Arma getArmasecundaria() {
+        return armasecundaria;
+    }
+
+    public void setArmasecundaria(Arma armasecundaria) {
+        this.armasecundaria = armasecundaria;
     }
 
     /**
@@ -260,6 +273,56 @@ public class Guerrero extends Personaje {
 
     public String getClase() {
         return "Guerrero";
+    }
+/*
+Los Guerreros pueden empuñar cualquier tipo de Armas menos cetros, arcos y
+bastones. Además, podrán equiparse un Arma complementaria siempre que
+ambas sean de una mano. Solo pueden equiparse Armadura de metal
+ */
+
+// Comprobar si el arma es de dos manos o 1
+    //Si es de 1 mirar si ya hay una ocupada, si lo esta se coloca como principal, sino como secundaria
+    //Si es de 2 mirar si hay un arma o no
+    public void equipaArma(Arma armaar) {
+        if(getArma().getTipo().equals("cetros") || getArma().getTipo().equals("arcos")
+         || getArma().getTipo().equals("bastones")){
+            System.err.println("El arma no puede ser escogida");
+        }
+            if(getArma().getEmpuñadura() == 1){
+                if(getArma() == null){
+                    setArma(armaar);
+                } else if (getArmasecundaria() == null){
+                    setArmasecundaria(armaar);
+                }
+            }
+
+        if(getArma().getEmpuñadura() == 2){
+            if(getArma() == null){
+                setArma(armaar);
+            }
+        }
+
+    }
+
+    public void equipaArmadura(Armadura arm) {
+        if(aseguraArmadura()) {
+            for (Armadura dura : getArmadura()) {
+                if(dura.getTipo().equals(arm.getTipo()) && dura.getMaterial() != "metal")
+                    return;
+            }
+            getArmadura().add(arm);
+        }
+    }
+
+    public void equipaArtefacto(Artefacto artefact) {
+        if(aseguraArtefacto()){
+            for (Artefacto art : getArtefacto()) {
+                if(art.getTipo() == "Amuletos"){
+                    return;
+                }
+            }
+            getArtefacto().add(artefact);
+        }
     }
 
 }

@@ -1,5 +1,9 @@
 package Characters;
 
+import Armamento.Arma;
+import Armamento.Armadura;
+import Armamento.Artefacto;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -97,6 +101,24 @@ public class Cazador extends Personaje {
         mascota.subirNivel();
     }
 
+    public void equipaArma(Arma armaar) {
+        if(getArma() != null){
+            System.err.println("Ya hay una arma escogida");
+        } else if(getArma().getTipo() == "espadas" || getArma().getTipo() == "hachas"||
+                getArma().getTipo() == "dagas" || getArma().getTipo() == "arcos")
+            setArma(armaar);
+    }
+
+    public void equipaArmadura(Armadura arm) {
+        if (aseguraArmadura()) {
+            for (Armadura dura : getArmadura()) {
+                if (dura.getTipo().equals(arm.getTipo()) && dura.getMaterial() != "tela")
+                    return;
+            }
+            getArmadura().add(arm);
+        }
+    }
+
     /**
      * Clase Mascota.
      * Representa una mascota que acompaña al Cazador.
@@ -120,7 +142,7 @@ public class Cazador extends Personaje {
         /**
          * Constructor por parametros.
          *
-         * @param raza Raza de la mascota
+         * @param raza   Raza de la mascota
          * @param nombre Nombre de la mascota
          */
 
@@ -137,7 +159,7 @@ public class Cazador extends Personaje {
          */
 
         public String toString() {
-            return super.toString() + "\nEs una mascota cuya raza es " + getClase() ;
+            return super.toString() + "\nEs una mascota cuya raza es " + getClase();
         }
 
         /**
@@ -239,8 +261,20 @@ public class Cazador extends Personaje {
             else
                 Raza = raza;
         }
-    }
 
+        public void equipaArtefacto(Artefacto artefact) {
+            if (aseguraArtefactoAnimal()) {
+                getArtefacto().add(artefact);
+            }
+        }
+
+        protected boolean aseguraArtefactoAnimal() {
+            if (getArtefacto().size() > 1)
+                return false;
+            else
+                return true;
+        }
+    }
     /**
      * Permite al jugador realizar una acción durante su turno.
      * Muestra un menú por consola y ejecuta la acción seleccionada.

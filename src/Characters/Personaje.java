@@ -537,6 +537,18 @@ public abstract class Personaje {
         return res;
     }
 
+    public void setArma(Arma arma) {
+        this.arma = arma;
+    }
+
+    public void setArmadura(ArrayList<Armadura> armadura) {
+        this.armadura = new ArrayList<Armadura>(armadura);
+    }
+
+    public void setArtefacto(ArrayList<Artefacto> artefacto) {
+        this.artefacto = new ArrayList<>(artefacto);
+    }
+
     /**
      * Realiza un ataque estándar.
      *
@@ -768,16 +780,13 @@ public abstract class Personaje {
     /*
     O decir que si el arma esta ocupado o hacer que se cambie el arma;
      */
-   /* public void equipaArma(Arma armaar) {
+    public void equipaArma(Arma armaar) {
         if(this.arma != null){
-
-        } else armaar.se
-
+            System.err.println("Ya hay una arma escogida");
+        } else setArma(armaar);
     }
 
-    */
-
-    private boolean aseguraArmadura() {
+    protected boolean aseguraArmadura() {
         if (armadura.size() >= 6)
             return false;
        else return true;
@@ -799,19 +808,15 @@ public abstract class Personaje {
     public void equipaArtefacto(Artefacto artefact) {
         if(aseguraArtefacto()){
             for (Artefacto art : artefacto) {
-
-                if(art.getTipo().equals(artefact.getTipo())){
-                    if(art.getTipo() == "amuleto" && artefacto.size() >= 2 ){
-
+                    if(art.getTipo() == "Amuletos"){
+                        return;
                     }
-
-                }
             }
             artefacto.add(artefact);
         }
     }
 
-    private boolean aseguraArtefacto() {
+    protected boolean aseguraArtefacto() {
         if (artefacto.size() >= 3)
             return false;
         else

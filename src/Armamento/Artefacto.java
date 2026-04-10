@@ -22,7 +22,7 @@ public class Artefacto extends Equipamiento{
 
     public Integer recuperaEstadistica(String recuperar) {
         switch (recuperar) {
-            case "vida", "ataque", "armadura", "resistencia", "velocidad", "fe", "magia":
+            case "Vida", "Ataque", "Armadura", "Resistencia", "Velocidad", "Fe", "Magia":
                 return super.recuperaEstadistica(recuperar);
             default:
                 return null;
@@ -34,7 +34,7 @@ public class Artefacto extends Equipamiento{
     }
 
     public void setTipo(String tipo) {
-        if(tipo == "anillos" || tipo == "amuletos")
+        if(tipo == "Anillos" || tipo == "Amuletos")
             this.tipo = tipo;
         else this.tipo = "";
     }
