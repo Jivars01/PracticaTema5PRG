@@ -1,0 +1,9 @@
+Nombre:
+Clase:Paladin
+Nivel:1
+Vida:100
+Ataque:10
+Armadura:10
+Velocidad:10
+Resistencia mágica:10
+Fe : 0

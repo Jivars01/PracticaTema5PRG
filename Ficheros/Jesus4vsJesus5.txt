@@ -1,0 +1,30 @@
+Empieza el combate entre Jesus4 y Jesus5.
+El ganador es Jesus4
+2.Ataque especial (Solo algunos categorias pueden hacerlo)
+3.Defender
+4.Pasar turno
+Has decidido defender
+Introduzca por teclado que es lo que vas a hacer:
+1.Atacar
+2.Ataque especial (Solo algunos categorias pueden hacerlo)
+3.Defender
+4.Pasar turno
+Un personaje generico no tiene ataque especial
+Introduzca por teclado que es lo que vas a hacer:
+1.Atacar
+2.Ataque especial (Solo algunos categorias pueden hacerlo)
+3.Defender
+4.Pasar turno
+Has decidido pasar el turno, tu personaje no hara ninguna accion
+Introduzca por teclado que es lo que vas a hacer:
+1.Atacar
+2.Ataque especial (Solo algunos categorias pueden hacerlo)
+3.Defender
+4.Pasar turno
+Has decidido pasar el turno, tu personaje no hara ninguna accion
+Introduzca por teclado que es lo que vas a hacer:
+1.Atacar
+2.Ataque especial (Solo algunos categorias pueden hacerlo)
+3.Defender
+4.Pasar turno
+Has decidido atacar

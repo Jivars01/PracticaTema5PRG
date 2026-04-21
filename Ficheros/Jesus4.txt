@@ -1,0 +1,50 @@
+Nombre:Jesus4
+Clase:Paladin
+Nivel:34
+Vida:34
+Ataque:34
+Armadura:34
+Velocidad:34
+Resistencia mágica:34
+Fe : 34
+
+Nombre:Jesus5
+Clase:Paladin
+Nivel:5
+Vida:5
+Ataque:5
+Armadura:5
+Velocidad:5
+Resistencia mágica:5
+Fe : 5
+
+Nombre:Jesus3
+Clase:Paladin
+Nivel:4
+Vida:4
+Ataque:4
+Armadura:4
+Velocidad:4
+Resistencia mágica:4
+Fe : 4
+
+Nombre:Jesus2
+Clase:Paladin
+Nivel:3
+Vida:3
+Ataque:3
+Armadura:3
+Velocidad:3
+Resistencia mágica:3
+Fe : 3
+
+Nombre:Jesus1
+Clase:Paladin
+Nivel:2
+Vida:2
+Ataque:2
+Armadura:2
+Velocidad:2
+Resistencia mágica:2
+Fe : 2
+
