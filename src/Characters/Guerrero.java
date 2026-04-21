@@ -313,16 +313,4 @@ ambas sean de una mano. Solo pueden equiparse Armadura de metal
             getArmadura().add(arm);
         }
     }
-
-    public void equipaArtefacto(Artefacto artefact) {
-        if(aseguraArtefacto()){
-            for (Artefacto art : getArtefacto()) {
-                if(art.getTipo() == "Amuletos"){
-                    return;
-                }
-            }
-            getArtefacto().add(artefact);
-        }
-    }
-
 }

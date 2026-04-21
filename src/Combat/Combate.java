@@ -5,6 +5,10 @@ import Characters.Personaje;
 
 import GameMap.Trampa;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -136,6 +140,53 @@ public class Combate {
         System.out.println(p1.getNombre() + ": " + p1.getPv());
         System.out.println(p2.getNombre() + ": " + p2.getPv());
     }
+
+    private static void EquipaArmadura() throws IOException{
+       File fichero = new File("Ficheros/Jesus4vsJesus5.txt");
+            boolean verifica = true;
+            String linea;
+            String nombreFichero = " ";
+            int nivelFichero = 0;
+            int vidaFichero = 0;
+            int ataqueFichero = 0;
+            int armaduraFichero = 0;
+            int velocidadFichero = 0;
+            int resistenciaFichero = 0;
+
+
+            FileReader fr = new FileReader(fichero);
+            BufferedReader br = new BufferedReader(fr);
+            br.readLine();
+            String[] campos = new String[2];
+            while ((linea = br.readLine()) != null) {
+                campos = linea.split(":");
+
+                if (campos[0].equals("Nombre ")) {
+                    nombreFichero = campos[1];
+                }
+                if (campos[0].equals("Nivel")) {
+                    nivelFichero = Integer.parseInt(campos[1]);
+                }
+                if (campos[0].equals("Vida")) {
+                    vidaFichero = Integer.parseInt(campos[1]);
+                }
+                if (campos[0].equals("Ataque")) {
+                    ataqueFichero = (Integer.parseInt(campos[1]));
+                }
+                if (campos[0].equals("Armadura")) {
+                    armaduraFichero = (Integer.parseInt(campos[1]));
+                }
+                if (campos[0].equals("Velocidad")) {
+                    velocidadFichero = (Integer.parseInt(campos[1]));
+                }
+                if (campos[0].equals("Resistencia mágica")) {
+                    resistenciaFichero = (Integer.parseInt(campos[1]));
+                }
+            }
+            br.close();
+            fr.close();
+
+    }
     /**
      * . (1) Añade un atributo estático en la clase Combate que permita almacenar una colección
      * de Equipamiento llamado tesoros. Esta colección de tesoros se ofrecerá como premio
@@ -147,6 +198,13 @@ public class Combate {
      * adjuntos a la práctica. La lista de tesoros no se restablece durante combates, sino que
      * se inicializa al comenzar la ejecución del programa y sus cambios persisten entre
      * Combates
+     */
+
+    /*public static ArrayList<Equipamiento> almacenaEquipamiento(File fichero){
+        fichero = new File("a");
+        return Equipamiento;
+    }
+    
      */
 
     /**

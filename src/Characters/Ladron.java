@@ -200,30 +200,19 @@ public class Ladron extends Personaje {
 //de cuero o de tela.
     public void equipaArma(Arma armaar) {
         if(getArma() != null){
-
             System.err.println("Ya hay una arma escogida");
-        } else if(getArma().getTipo() == "espadas" || getArma().getTipo() == "dagas" )
+
+        } else if(getArma().getTipo().equals("espadas") || getArma().getTipo().equals("dagas"))
             setArma(armaar);
     }
 
     public void equipaArmadura(Armadura arm) {
         if(aseguraArmadura()) {
             for (Armadura dura : getArmadura()) {
-                if(dura.getTipo().equals(arm.getTipo()) && dura.getMaterial() == "metal")
+                if(dura.getTipo().equals(arm.getTipo()) && dura.getMaterial().equals("metal"))
                     return;
             }
             getArmadura().add(arm);
-        }
-    }
-
-    public void equipaArtefacto(Artefacto artefact) {
-        if(aseguraArtefacto()){
-            for (Artefacto art : getArtefacto()) {
-                if(art.getTipo() == "Amuletos"){
-                    return;
-                }
-            }
-            getArtefacto().add(artefact);
         }
     }
 

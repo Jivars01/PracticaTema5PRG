@@ -38,13 +38,13 @@ public class Mago extends Personaje {
      * Inicializa los atributos heredados y los puntos de magia.
      *
      * @param nombre nombre del personaje
-     * @param pv puntos de vida
-     * @param atq valor de ataque
-     * @param arm valor de armadura
-     * @param nivel nivel del personaje
-     * @param vel velocidad
-     * @param res resistencia
-     * @param mag puntos de magia
+     * @param pv     puntos de vida
+     * @param atq    valor de ataque
+     * @param arm    valor de armadura
+     * @param nivel  nivel del personaje
+     * @param vel    velocidad
+     * @param res    resistencia
+     * @param mag    puntos de magia
      */
 
     public Mago(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, int mag) {
@@ -91,6 +91,7 @@ public class Mago extends Personaje {
 
     /**
      * Devuelve los puntos de magia del mago.
+     *
      * @return puntos de magia
      */
 
@@ -100,6 +101,7 @@ public class Mago extends Personaje {
 
     /**
      * Establece los puntos de magia del mago.
+     *
      * @param mag nueva cantidad de magia
      */
 
@@ -150,6 +152,7 @@ public class Mago extends Personaje {
 
     /**
      * Devuelve una descripción del mago.
+     *
      * @return cadena con la información del personaje
      */
 
@@ -185,9 +188,9 @@ public class Mago extends Personaje {
                 break;
             case "3":
                 System.out.println("Has decidido defender");
-                setRes((int) (getRes() /0.80));
+                setRes((int) (getRes() / 0.80));
 
-                setArm((int) ((getArm()) /0.80));
+                setArm((int) ((getArm()) / 0.80));
                 daño = 0;
                 break;
             case "4":
@@ -202,6 +205,7 @@ public class Mago extends Personaje {
 
     /**
      * Basicamente hace lo mismo que el anterior pero para que se muestre en un fichero
+     *
      * @param fichero File
      * @return Daño
      * @throws IOException
@@ -209,7 +213,7 @@ public class Mago extends Personaje {
 
     public int realizaTurnoALT(File fichero) throws IOException {
         PrintWriter pw;
-        FileWriter fw = new FileWriter(fichero,true);
+        FileWriter fw = new FileWriter(fichero, true);
         pw = new PrintWriter(fw);
         int daño = 0;
         String tipo;
@@ -231,9 +235,9 @@ public class Mago extends Personaje {
                 break;
             case "3":
                 pw.println("Has decidido defender");
-                setRes((int) (getRes() /0.80));
+                setRes((int) (getRes() / 0.80));
 
-                setArm((int) ((getArm()) /0.80));
+                setArm((int) ((getArm()) / 0.80));
                 daño = 0;
                 break;
             case "4":
@@ -251,47 +255,41 @@ public class Mago extends Personaje {
 
     /**
      * Introduce a los datos basicos de personaje el atributo magia
+     *
      * @return
      */
     public String devuelveDatos() {
         return super.devuelveDatos() +
                 "Magia:" + getMag() + "\n"
-        + "\n";
+                + "\n";
     }
 
     /**
      * Es un Mago
+     *
      * @return Mago
      */
 
-    public String getClase(){
+    public String getClase() {
         return "Mago";
     }
 
     public void equipaArma(Arma armaar) {
-        if(getArma() != null){
+        if (getArma() != null) {
             System.err.println("Ya hay una arma escogida");
-        } else setArma(armaar);
+        }
+        if(getArma().getTipo().equals("cetro") || getArma().getTipo().equals("baston"))
+            setArma(armaar);
+
     }
 
     public void equipaArmadura(Armadura arm) {
-        if(aseguraArmadura()) {
+        if (aseguraArmadura()) {
             for (Armadura dura : getArmadura()) {
-                if(dura.getTipo().equals(arm.getTipo()) && dura.getMaterial() != "tela")
+                if (dura.getTipo().equals(arm.getTipo()) && !dura.getMaterial().equals("tela"))
                     return;
             }
             getArmadura().add(arm);
-        }
-    }
-
-    public void equipaArtefacto(Artefacto artefact) {
-        if(aseguraArtefacto()){
-            for (Artefacto art : getArtefacto()) {
-                if(art.getTipo() == "Amuletos"){
-                    return;
-                }
-            }
-            getArtefacto().add(artefact);
         }
     }
 }
