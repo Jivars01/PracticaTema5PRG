@@ -806,11 +806,25 @@ public abstract class Personaje {
     }
 
     public void equipaArtefacto(Artefacto artefact) {
+        int Artefactos = 0;
+        int Anillos = 0;
         if(aseguraArtefacto()){
             for (Artefacto art : artefacto) {
-                    if(art.getTipo() == "Amuletos"){
-                        return;
+                    if(art.getTipo().equals("Artefactos") ){
+                        Artefactos++;
                     }
+                    if(art.getTipo().equals("Anillos") ){
+                        Anillos++;
+                    }
+            }
+            if(Artefactos >=1) {
+                System.err.println("Lo siento, ya hay un artefacto equipado");
+                return;
+            }
+
+            if(Anillos >= 2) {
+                System.err.println("Lo siento, ya hay dos anillos equipados");
+                return;
             }
             artefacto.add(artefact);
         }

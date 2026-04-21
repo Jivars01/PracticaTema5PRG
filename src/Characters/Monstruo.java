@@ -1,5 +1,9 @@
 package Characters;
 
+import Armamento.Arma;
+import Armamento.Armadura;
+import Armamento.Artefacto;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -264,4 +268,39 @@ public class Monstruo extends Personaje {
     public String getClase () {
         return "Monstruo";
     }
+
+    public void equipaArma(Arma armaar) {
+        if(getArma() != null){
+            System.err.println("Ya hay una arma escogida");
+        }
+        if(getMonstruo().equals("No-Muerto"))
+            setArma(armaar);
+    }
+
+    public void equipaArmadura(Armadura arm) {
+        if(aseguraArmadura()) {
+            for (Armadura dura : getArmadura()) {
+                if(dura.getTipo().equals(arm.getTipo()) && !dura.getMaterial().equals("cuero") &&
+                !getMonstruo().equals("Gigante"))
+                    return;
+            }
+            getArmadura().add(arm);
+        }
+    }
+
+    public void equipaArtefacto(Artefacto artefact) {
+        if (aseguraArtefactoBestia()) {
+            if(artefact.getTipo().equals("Amuleto") && getMonstruo().equals("Bestia"))
+                getArtefacto().add(artefact);
+        } else
+            System.err.println("La Bestia ya lleva un amuleto equipado");
+    }
+
+    private boolean aseguraArtefactoBestia() {
+        if (getArtefacto().size() > 1)
+            return false;
+        else
+            return true;
+    }
+
 }

@@ -4,6 +4,7 @@ import Armamento.Arma;
 import Armamento.Armadura;
 import Armamento.Artefacto;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -112,7 +113,7 @@ public class Cazador extends Personaje {
     public void equipaArmadura(Armadura arm) {
         if (aseguraArmadura()) {
             for (Armadura dura : getArmadura()) {
-                if (dura.getTipo().equals(arm.getTipo()) && dura.getMaterial() != "tela")
+                if (dura.getTipo().equals(arm.getTipo()) && !dura.getMaterial().equals("cuero"))
                     return;
             }
             getArmadura().add(arm);
@@ -264,16 +265,19 @@ public class Cazador extends Personaje {
 
         public void equipaArtefacto(Artefacto artefact) {
             if (aseguraArtefactoAnimal()) {
-                getArtefacto().add(artefact);
-            }
+                if(artefact.getTipo().equals("Amuleto"))
+                    getArtefacto().add(artefact);
+            } else
+                System.err.println("El animal ya lleva un amuleto equipado");
         }
 
-        protected boolean aseguraArtefactoAnimal() {
+        private boolean aseguraArtefactoAnimal() {
             if (getArtefacto().size() > 1)
                 return false;
             else
                 return true;
         }
+
     }
     /**
      * Permite al jugador realizar una acción durante su turno.
@@ -378,4 +382,7 @@ public class Cazador extends Personaje {
     public String getClase() {
         return "Cazador";
     }
+
+
+
 }

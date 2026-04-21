@@ -1,5 +1,8 @@
 package Characters;
 
+import Armamento.Arma;
+import Armamento.Armadura;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -217,4 +220,23 @@ public class Paladin extends Creyente{
     public String getClase() {
         return "Paladin";
     }
+
+    public void equipaArma(Arma armaar) {
+        if(getArma() != null){
+            System.err.println("Ya hay una arma escogida");
+        }
+        if(!getArma().getTipo().equals("arco") || !getArma().getTipo().equals("baston"))
+            setArma(armaar);
+    }
+
+    public void equipaArmadura(Armadura arm) {
+        if(aseguraArmadura()) {
+            for (Armadura dura : getArmadura()) {
+                if(dura.getTipo().equals(arm.getTipo()) && !dura.getMaterial().equals("metal"))
+                    return;
+            }
+            getArmadura().add(arm);
+        }
+    }
+
 }
