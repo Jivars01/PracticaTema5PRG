@@ -1,5 +1,8 @@
 package Combat;
 
+import Armamento.Arma;
+import Armamento.Armadura;
+import Armamento.Artefacto;
 import Armamento.Equipamiento;
 import Characters.Personaje;
 
@@ -27,6 +30,14 @@ import java.util.Scanner;
 
 public class Combate {
     private static ArrayList<Equipamiento> tesoros;
+
+    static {
+        try {
+            tesoros = tesoros();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     /**
      * Metodo Estatico Combatir de la Clase Personaje que establece el combate entre dos personajes
@@ -119,9 +130,14 @@ public class Combate {
             }
         } while (!p1.estarMuerto() && !p2.estarMuerto());
 
-        if (p1.estarMuerto())
+        if (p1.estarMuerto()) {
+
             System.out.println("El ganador es p2");
-        else System.out.println("El ganador es p1");
+            p1.se
+
+        } else {
+            System.out.println("El ganador es p1");
+        }
     }
 
     private static boolean comprobarPrimero(Personaje p1, Personaje p2) {
@@ -142,183 +158,149 @@ public class Combate {
     }
 
 
-    private static void EquipaArmadura() throws IOException {
-        File fichero = new File("Ficheros/Jesus4vsJesus5.txt");
-        boolean verifica = true;
-        String linea;
-        String nombreFichero = " ";
-        int nivelFichero = 0;
-        int vidaFichero = 0;
-        int ataqueFichero = 0;
-        int armaduraFichero = 0;
-        int velocidadFichero = 0;
-        int resistenciaFichero = 0;
-
-
-        FileReader fr = new FileReader(fichero);
-        BufferedReader br = new BufferedReader(fr);
-        br.readLine();
-        String[] campos = new String[2];
-        while ((linea = br.readLine()) != null) {
-            campos = linea.split(":");
-
-            if (campos[0].equals("Nombre ")) {
-                nombreFichero = campos[1];
-            }
-            if (campos[0].equals("Nivel")) {
-                nivelFichero = Integer.parseInt(campos[1]);
-            }
-            if (campos[0].equals("Vida")) {
-                vidaFichero = Integer.parseInt(campos[1]);
-            }
-            if (campos[0].equals("Ataque")) {
-                ataqueFichero = (Integer.parseInt(campos[1]));
-            }
-            if (campos[0].equals("Armadura")) {
-                armaduraFichero = (Integer.parseInt(campos[1]));
-            }
-            if (campos[0].equals("Velocidad")) {
-                velocidadFichero = (Integer.parseInt(campos[1]));
-            }
-            if (campos[0].equals("Resistencia mágica")) {
-                resistenciaFichero = (Integer.parseInt(campos[1]));
-            }
-        }
-        br.close();
-        fr.close();
-
+    private static ArrayList<Equipamiento> tesoros() throws IOException{
+        cargarArmadura();
+        cargarArtefacto();
+        cargarArma();
     }
 
-
-    public static ArrayList<Equipamiento> ArrmaduraFichero() throws IOException {
-        String nombreArmadura, Rareza, Pieza;
-        int Valor;
-        HashMap<String, Integer> Estadisticas;
+    private static ArrayList<Equipamiento> cargarArmadura() throws IOException { //Armadura a.[0]
+        String nombreArmadura, rareza, pieza, tipo;
+        int valor;
+        HashMap<String, Integer> estadisticas = new HashMap<>();
+        ArrayList<Equipamiento> local = new ArrayList<>();
         File fichero = new File("Ficheros/armadura.csv");
         if (!fichero.canRead()) {
             System.err.println("No se puede leer el fichero introducido.");
-            return null;
-        }
-        BufferedReader br = new BufferedReader(new FileReader(fichero));
-        String linea;
-        String[] columnas;
-        int i = 0;
-        br.readLine();
-        while ((linea = br.readLine()) != null) {
-            columnas = linea.split(",");
-            /*
-            columnas[0] -> nombre
-            columnas[1] -> rareza
-            columnas[2] -> pieza
-            columnas[3] -> estadistica
-            columnas[4] -> valor
-             */
-            nombreArmadura = columnas[0];
-            Rareza = columnas[1];
-            Pieza = columnas[2];
-            Valor = Integer.parseInt(columnas[4]);
-            Estadisticas = columnas[5];
-        }
-        br.close();
-        return null;
-    }
-
-
-    public static ArrayList<Equipamiento> ArmtefactoFichero() throws IOException {
-        String nombreArtefacto, Rareza, Pieza;
-        int Valor;
-        HashMap<String, Integer> Estadisticas;
-        File fichero = new File("Ficheros/artefactos.csv");
-        if (!fichero.canRead()) {
-            System.err.println("No se puede leer el fichero introducido.");
-            return null;
-        }
-
-        BufferedReader br = new BufferedReader(new FileReader(fichero));
-        String linea;
-        String[] columnas;
-        String[] multivaluado;
-        int i = 0;
-        br.readLine();
-        while ((linea = br.readLine()) != null) {
-            columnas = linea.split(",");
-            /*
-            columnas[0] -> nombre
-            columnas[1] -> rareza
-            columnas[2] -> pieza
-            columnas[3] -> estadistica
-            columnas[4] -> valor
-             */
-            nombreArtefacto = columnas[0];
-            Rareza = columnas[1];
-            Pieza = columnas[2];
-            if (linea.contains("\(")) { //Genero multivaluado
-                String[] multivaluado = linea.split("\"");
-                generoVideojuego = multivaluado[1];
-
-                columnas = multivaluado[0].split(",");
-                tituloVideojuego = columnas[0];
-                jugadoresVideojuego = Integer.parseInt(columnas[1]);
-
-                columnas = multivaluado[2].split(",");
-                puntuacionVideojuego = Integer.parseInt(columnas[1]);
-                plataformaVideojuego = columnas[2];
-                edadVideojuego = columnas[3];
-                Estadisticas = columnas[3];
-                Valor = Integer.parseInt(columnas[4]);
-
-            }
-            br.close();
-            return null;
-        }
-
-
-        public static ArrayList<Equipamiento> ArmaFichero () throws IOException {
-            String nombreArtefacto, Rareza, Pieza;
-            int Valor;
-            HashMap<String, Integer> Estadisticas;
-            File fichero = new File("Ficheros/armas.csv");
-            if (!fichero.canRead()) {
-                System.err.println("No se puede leer el fichero introducido.");
-                return null;
-            }
+        } else {
             BufferedReader br = new BufferedReader(new FileReader(fichero));
             String linea;
             String[] columnas;
+            String[] stats;
             int i = 0;
             br.readLine();
             while ((linea = br.readLine()) != null) {
-                if (linea.contains("\"")) { //Genero multivaluado
-                    String[] multivaluado = linea.split("\"");
-                    generoVideojuego = multivaluado[1];
+                columnas = linea.split(",");
 
-                    columnas = multivaluado[0].split(",");
-                    tituloVideojuego = columnas[0];
-                    jugadoresVideojuego = Integer.parseInt(columnas[1]);
+                nombreArmadura = columnas[0];
+                rareza = columnas[1];
+                pieza = columnas[2];
+                tipo = columnas[3];
+                stats = columnas[4].split("-");
+                estadisticas.put("Armadura", Integer.parseInt(stats[0]));
+                estadisticas.put("Resistencia", Integer.parseInt(stats[1]));
+                estadisticas.put("Vida", Integer.parseInt(stats[2]));
+                valor = Integer.parseInt(columnas[5]);
 
-                    columnas = multivaluado[2].split(",");
-                    puntuacionVideojuego = Integer.parseInt(columnas[1]);
-                    plataformaVideojuego = columnas[2];
-                    edadVideojuego = columnas[3];
-                } else { //Lectura normal
-                    columnas = linea.split(",");
-                /*
-            columnas[0] -> titulo
-            columnas[1] -> maxJugadores
-            columnas[2] -> genero
-            columnas[3] -> puntuacion
-            columnas[4] -> plataforma
-            columnas[5] -> edadRecomendada
-             */
-                    tituloVideojuego = columnas[0];
-                    jugadoresVideojuego = Integer.parseInt(columnas[1]);
-                    generoVideojuego = columnas[2];
-                    puntuacionVideojuego = Integer.parseInt(columnas[3]);
-                    plataformaVideojuego = columnas[4];
-                    edadVideojuego = columnas[5];
-                }
+                Armadura a = new Armadura(nombreArmadura, rareza, valor, estadisticas, tipo, pieza);
+                local.add(a);
+                 // sustituir tesoros por un array local y luego Hacer un return con un array
 
             }
+            br.close();
+        }
+        return local;
+    }
+
+    private static ArrayList<Equipamiento> cargarArtefacto() throws IOException {
+        String nombreArtefacto, rareza, tipo;
+        int valor;
+        HashMap<String, Integer> stat = new HashMap<>();
+        File fichero = new File("Ficheros/artefactos.csv");
+        if (!fichero.canRead()) {
+            System.err.println("No se puede leer el fichero introducido.");
+        } else {
+            BufferedReader br = new BufferedReader(new FileReader(fichero));
+            String linea;
+            String[] columnas;
+            String[] stats;
+            int i = 0;
+            br.readLine();
+            while ((linea = br.readLine()) != null) {
+                columnas = linea.split(",");
+
+                nombreArtefacto = columnas[0];
+                rareza = columnas[1];
+                tipo = columnas[2];
+                stats = columnas[3].split("-");
+                stat.put("Ataque", Integer.parseInt(stats[0]));
+                stat.put("Velocidad", Integer.parseInt(stats[1]));
+                stat.put("Magia", Integer.parseInt(stats[2]));
+                stat.put("Fe", Integer.parseInt(stats[3]));
+                stat.put("Armadura", Integer.parseInt(stats[4]));
+                stat.put("Resistencia", Integer.parseInt(stats[5]));
+                stat.put("Vida", Integer.parseInt(stats[6]));
+                valor = Integer.parseInt(columnas[5]);
+
+                Artefacto b = new Artefacto(nombreArtefacto,rareza, valor, stat, tipo);
+                tesoros.add(b);
+
+            }
+            br.close();
+        }
+    }
+
+
+    private static ArrayList<Equipamiento> cargarArma() throws IOException {
+        String nombreArma, rareza, tipo;
+        int valor;
+        HashMap<String, Integer> stat = new HashMap<>();
+        File fichero = new File("Ficheros/armas.csv");
+        if (!fichero.canRead()) {
+            System.err.println("No se puede leer el fichero introducido.");
+        } else {
+            BufferedReader br = new BufferedReader(new FileReader(fichero));
+            String linea;
+            String[] columnas;
+            String[] multivaluado;
+            String[] stats;
+            int i = 0;
+            br.readLine();
+            while ((linea = br.readLine()) != null) {
+                if(linea.contains("\"")) { //Genero multivaluado
+                    multivaluado = linea.split("\"");
+                    nombreArma = multivaluado[1];
+
+                    columnas = multivaluado[2].split(",");
+                    rareza = columnas[0];
+                    tipo = columnas[1];
+                    stats = columnas[2].split("-");
+
+                    stat.put("Ataque", Integer.parseInt(stats[0]));
+                    stat.put("Velocidad", Integer.parseInt(stats[1]));
+                    stat.put("Magia", Integer.parseInt(stats[2]));
+                    stat.put("Fe", Integer.parseInt(stats[3]));
+
+                    valor = Integer.parseInt(columnas[3]);
+
+                    Arma c1 = new Arma(nombreArma, rareza, valor, stat, tipo);
+                    tesoros.add(c1);
+                } else {
+                    columnas = linea.split(",");
+
+                    nombreArma= columnas[0];
+                    rareza = columnas[1];
+                    tipo = columnas[2];
+                    stats = columnas[3].split("-");
+                    stat.put("Ataque", Integer.parseInt(stats[0]));
+                    stat.put("Velocidad", Integer.parseInt(stats[1]));
+                    stat.put("Magia", Integer.parseInt(stats[2]));
+                    stat.put("Fe", Integer.parseInt(stats[3]));
+                    stat.put("Armadura", Integer.parseInt(stats[4]));
+                    stat.put("Resistencia", Integer.parseInt(stats[5]));
+                    stat.put("Vida", Integer.parseInt(stats[6]));
+                    valor = Integer.parseInt(columnas[5]);
+
+                    Arma c2 = new Arma(nombreArma, rareza, valor, stat, tipo);
+                    tesoros.add(c2);
+                }
+            }
+            br.close();
+        }
+    }
+
+
+}
 
 
             /**
@@ -341,9 +323,6 @@ public class Combate {
              * intercambio de golpes entre los dos Personajes, se suman correctamente los valores de
              * las estadísticas de su Equipamiento a sus estadísticas propias.
              */
-        }
-    }
-}
 
 
 

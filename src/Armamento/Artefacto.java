@@ -10,7 +10,7 @@ public class Artefacto extends Equipamiento{
         tipo = "";
     }
 
-    public Artefacto(String nombre, String rareza, int valor, HashMap estadistica, String tipo, String material) {
+    public Artefacto(String nombre, String rareza, int valor, HashMap estadistica, String tipo) {
         super(nombre, rareza, valor, estadistica);
         this.tipo = tipo;
     }

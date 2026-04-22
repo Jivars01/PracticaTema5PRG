@@ -23,7 +23,7 @@ public class Arma extends Equipamiento{
         this.tipo = tipo;
     }
 
-    public Arma(String nombre, String rareza, int valor, HashMap estadistica, int empuñadura, String tipo) {
+    public Arma(String nombre, String rareza, int valor, HashMap estadistica, String tipo) {
         super(nombre, rareza, valor, estadistica);
         this.empuñadura = empuñadura;
         this.tipo = tipo;
@@ -60,16 +60,16 @@ public class Arma extends Equipamiento{
     }
 
     public void setTipo(String tipo) {
-        if(empuñadura == 1) {
             if (tipo.equals("Espada") || tipo.equals("Maza") || tipo.equals("Hacha") || tipo.equals("Cetro") || tipo.equals("Daga")) {
+                empuñadura = 1;
                 this.tipo = tipo;
-            } else  this.tipo = "";
-        } else if(empuñadura == 2) {
-            if (tipo.equals("Espadon") || tipo.equals("Martillo") || tipo.equals("Arco") || tipo.equals("Baston")) {
-                this.tipo = tipo;
+            } else
+                if (tipo.equals("Espadon") || tipo.equals("Martillo") || tipo.equals("Arco") || tipo.equals("Baston")) {
+                    empuñadura = 2;
+                    this.tipo = tipo;
             } else this.tipo = "";
         }
-    }
+
 
     public boolean equals(Arma otro) {
         boolean res = true;
