@@ -61,11 +61,11 @@ public class Arma extends Equipamiento{
 
     public void setTipo(String tipo) {
         if(empuñadura == 1) {
-            if (tipo.equals("espada") || tipo.equals("maza") || tipo.equals("hacha") || tipo.equals("cetro") || tipo.equals("daga")) {
+            if (tipo.equals("Espada") || tipo.equals("Maza") || tipo.equals("Hacha") || tipo.equals("Cetro") || tipo.equals("Daga")) {
                 this.tipo = tipo;
             } else  this.tipo = "";
         } else if(empuñadura == 2) {
-            if (tipo.equals("espadon") || tipo.equals("martillo") || tipo.equals("arco") || tipo.equals("baston")) {
+            if (tipo.equals("Espadon") || tipo.equals("Martillo") || tipo.equals("Arco") || tipo.equals("Baston")) {
                 this.tipo = tipo;
             } else this.tipo = "";
         }

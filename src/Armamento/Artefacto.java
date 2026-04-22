@@ -34,7 +34,7 @@ public class Artefacto extends Equipamiento{
     }
 
     public void setTipo(String tipo) {
-        if(tipo == "Anillos" || tipo == "Amuletos")
+        if(tipo == "Anillo" || tipo == "Amuleto")
             this.tipo = tipo;
         else this.tipo = "";
     }

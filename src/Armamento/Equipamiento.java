@@ -65,7 +65,7 @@ public abstract class Equipamiento {
     public void setRareza(String rareza) {
 
         switch (rareza){
-            case "común", "raro", "épico", "legendario":
+            case "Comun", "Raro", "Epico", "Legendario":
                 this.rareza = rareza;
                 break;
             default: this.rareza = "";

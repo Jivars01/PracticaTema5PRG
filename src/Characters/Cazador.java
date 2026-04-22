@@ -105,15 +105,15 @@ public class Cazador extends Personaje {
     public void equipaArma(Arma armaar) {
         if(getArma() != null){
             System.err.println("Ya hay una arma escogida");
-        } else if(getArma().getTipo() == "espadas" || getArma().getTipo() == "hachas"||
-                getArma().getTipo() == "dagas" || getArma().getTipo() == "arcos")
+        } else if(getArma().getTipo() == "Espada" || getArma().getTipo() == "Hacha"||
+                getArma().getTipo() == "Daga" || getArma().getTipo() == "Arco")
             setArma(armaar);
     }
 
     public void equipaArmadura(Armadura arm) {
         if (aseguraArmadura()) {
             for (Armadura dura : getArmadura()) {
-                if (dura.getTipo().equals(arm.getTipo()) && !dura.getMaterial().equals("cuero"))
+                if (dura.getTipo().equals(arm.getTipo()) && !dura.getMaterial().equals("Cuero"))
                     return;
             }
             getArmadura().add(arm);

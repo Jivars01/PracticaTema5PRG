@@ -38,7 +38,8 @@ public class Armadura extends Equipamiento{
 
     //yelmos, pecheras, hombreras, guanteletes, grebas y botas
     public void setTipo(String tipo) {
-        if (tipo.equals("yelmos") || tipo.equals("pecheras") || tipo.equals("hombreras") || tipo.equals("guanteletes") || tipo.equals("grebas") || tipo.equals("botas"))
+        if (tipo.equals("Yelmo") || tipo.equals("Pechera") || tipo.equals("Hombreras") ||
+                tipo.equals("Guanteletes") || tipo.equals("Brebas") || tipo.equals("Botas"))
             this.tipo = tipo;
         else  this.tipo = "";
     }
@@ -48,7 +49,7 @@ public class Armadura extends Equipamiento{
     }
 
     public void setMaterial(String material) {
-        if(this.material.equals("tela") || this.material.equals("cuero") || this.material.equals("metal") )
+        if(this.material.equals("Tela") || this.material.equals("Cuero") || this.material.equals("Metal") )
             this.material = material;
         else this.material = "";
     }
