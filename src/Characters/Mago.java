@@ -292,4 +292,18 @@ public class Mago extends Personaje {
             getArmadura().add(arm);
         }
     }
+
+    @Override
+    protected int calcularEstadisticas(String estadistica) {
+        if(estadistica.equals("magia")){
+            int resultado = 0;
+                resultado += mag;
+                resultado += getArma().recuperaEstadistica("magia");
+                for(Artefacto a : getArtefacto()){
+                    resultado += a.recuperaEstadistica("magia");
+                }
+        }
+        return super.calcularEstadisticas(estadistica);
+
+    }
 }

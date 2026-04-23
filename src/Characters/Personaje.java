@@ -290,7 +290,7 @@ public abstract class Personaje {
     /**
      * Metodo checkAtributos para limitar que la suma del atq, def y pv
      * no sean superiores a 100 y cumpla con lo establecido
-     * @deprecated Metodo obsoleto debido al avance de las practicas
+     * deprecated Metodo obsoleto debido al avance de las practicas
      * @return devuelve True si la suma supera el 100 y si no se devuelve false
      */
 
@@ -556,7 +556,7 @@ public abstract class Personaje {
      */
 
     public int ataque() {
-        return getAtq();
+        return calcularEstadisticas("ataque");
     }
 
     /**
@@ -568,30 +568,80 @@ public abstract class Personaje {
      * @param tipo Tipo de daño ("Fisico" o "Magico")
      */
 
+
     public void defender(int daño, String tipo) {
         switch (tipo) {
             case "Fisico":
                 //Si el daño - la armadura será menor que 0
-                if (daño - arm <= 0) {
+                if (daño - calcularEstadisticas("armadura") <= 0) {
                     daño = 0;
                     System.out.println("No le hizo ni un rasguño");
-                } else
-                    this.pv -= (daño - arm);
+                } else this.pv -= (this.pv + calcularEstadisticas("vida")) - (daño - calcularEstadisticas("armadura"));
                 if (this.pv <= 0)
                     pv = 0;
                 break;
             case "Magico":
                 //Aquí igual pero con la RM
-                if (daño - res <= 0) {
+                if (daño - calcularEstadisticas("resistencia") <= 0) {
                     daño = 0;
                     System.out.println("La magia no fue suficiente para hacer daño");
-                } else
-                    this.pv -= (daño - res);
+                } else this.pv -= (this.pv + calcularEstadisticas("vida")) - (daño - calcularEstadisticas("resistencia"));
                 break;
 
             default:
                 daño = 0;
         }
+    }
+
+    protected int calcularEstadisticas(String estadistica){
+        int resultado = 0;
+        switch (estadistica){
+            case "ataque" :
+                resultado += atq;
+                resultado += arma.recuperaEstadistica("ataque");
+                for(Artefacto a : artefacto){
+                    resultado += a.recuperaEstadistica("ataque");
+                }
+            break;
+            case "armadura":
+                resultado += arm;
+                for(Armadura armar : armadura){
+                    resultado += armar.recuperaEstadistica("armadura");
+                }
+                for(Artefacto a : artefacto){
+                    resultado += a.recuperaEstadistica("armadura");
+                }
+                break;
+
+            case "vida":
+                for(Armadura armar : armadura){
+                    resultado += armar.recuperaEstadistica("vida");
+                }
+                for(Artefacto a : artefacto){
+                    resultado += a.recuperaEstadistica("vida");
+                }
+                break;
+
+            case "resistencia":
+                resultado += res;
+                for(Armadura armar : armadura){
+                    resultado += armar.recuperaEstadistica("resistencia");
+                }
+                for(Artefacto a : artefacto){
+                    resultado += a.recuperaEstadistica("resistencia");
+                }
+                break;
+
+            case "velocidad":
+                resultado += vel;
+                resultado += arma.recuperaEstadistica("velocidad");
+                for(Artefacto a : artefacto){
+                    resultado += a.recuperaEstadistica("velocidad");
+                }
+                break;
+        }
+
+        return resultado;
     }
 
     /**

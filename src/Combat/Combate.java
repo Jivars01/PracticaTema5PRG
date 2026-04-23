@@ -29,15 +29,8 @@ import java.util.Scanner;
  */
 
 public class Combate {
-    private static ArrayList<Equipamiento> tesoros;
+    private static ArrayList<Equipamiento> tesoros = tesoros();
 
-    static {
-        try {
-            tesoros = tesoros();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     /**
      * Metodo Estatico Combatir de la Clase Personaje que establece el combate entre dos personajes
@@ -131,10 +124,23 @@ public class Combate {
         } while (!p1.estarMuerto() && !p2.estarMuerto());
 
         if (p1.estarMuerto()) {
-
             System.out.println("El ganador es p2");
-            p1.se
+            Random r = new Random();
+            Equipamiento premio = tesoros.get(r.nextInt(0, tesoros().size()));
+            switch (premio.getClass().getSimpleName()){
+                case "Arma":
+                    p2.equipaArma( (Arma)premio);
+                    break;
+                case "Artefacto":
+                    p2.equipaArtefacto((Artefacto)premio);
+                    break;
 
+                case "Armadura":
+                    p2.equipaArmadura((Armadura)premio);
+                    break;
+                default:
+                    System.err.println("El equipamiento no corresponde con los casos vistos");
+            }
         } else {
             System.out.println("El ganador es p1");
         }
@@ -158,17 +164,26 @@ public class Combate {
     }
 
 
-    private static ArrayList<Equipamiento> tesoros() throws IOException{
-        cargarArmadura();
-        cargarArtefacto();
-        cargarArma();
+    private static ArrayList<Equipamiento> tesoros(){
+        ArrayList<Equipamiento> resultados;
+        try {
+            resultados = new ArrayList<>();
+            resultados.addAll(cargarArmadura());
+            resultados.addAll(cargarArtefacto());
+            resultados.addAll(cargarArma());
+        }catch (IOException e){
+            System.err.println(e);
+        }finally{
+            resultados = new ArrayList<Equipamiento>();
+        }
+        return resultados;
     }
 
-    private static ArrayList<Equipamiento> cargarArmadura() throws IOException { //Armadura a.[0]
+    private static ArrayList<Armadura> cargarArmadura() throws IOException { //Armadura a.[0]
         String nombreArmadura, rareza, pieza, tipo;
         int valor;
         HashMap<String, Integer> estadisticas = new HashMap<>();
-        ArrayList<Equipamiento> local = new ArrayList<>();
+        ArrayList<Armadura> local = new ArrayList<>();
         File fichero = new File("Ficheros/armadura.csv");
         if (!fichero.canRead()) {
             System.err.println("No se puede leer el fichero introducido.");
@@ -202,10 +217,11 @@ public class Combate {
         return local;
     }
 
-    private static ArrayList<Equipamiento> cargarArtefacto() throws IOException {
+    private static ArrayList<Artefacto> cargarArtefacto() throws IOException {
         String nombreArtefacto, rareza, tipo;
         int valor;
         HashMap<String, Integer> stat = new HashMap<>();
+        ArrayList<Artefacto> local = new ArrayList<>();
         File fichero = new File("Ficheros/artefactos.csv");
         if (!fichero.canRead()) {
             System.err.println("No se puede leer el fichero introducido.");
@@ -233,18 +249,20 @@ public class Combate {
                 valor = Integer.parseInt(columnas[5]);
 
                 Artefacto b = new Artefacto(nombreArtefacto,rareza, valor, stat, tipo);
-                tesoros.add(b);
+                local.add(b);
 
             }
             br.close();
         }
+        return local;
     }
 
 
-    private static ArrayList<Equipamiento> cargarArma() throws IOException {
+    private static ArrayList<Arma> cargarArma() throws IOException {
         String nombreArma, rareza, tipo;
         int valor;
         HashMap<String, Integer> stat = new HashMap<>();
+        ArrayList<Arma> local = new ArrayList<>();
         File fichero = new File("Ficheros/armas.csv");
         if (!fichero.canRead()) {
             System.err.println("No se puede leer el fichero introducido.");
@@ -292,11 +310,12 @@ public class Combate {
                     valor = Integer.parseInt(columnas[5]);
 
                     Arma c2 = new Arma(nombreArma, rareza, valor, stat, tipo);
-                    tesoros.add(c2);
+                    local.add(c2);
                 }
             }
             br.close();
         }
+        return local;
     }
 
 

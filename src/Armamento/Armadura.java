@@ -25,7 +25,7 @@ public class Armadura extends Equipamiento{
 
     public Integer recuperaEstadistica(String recuperar) {
         switch (recuperar) {
-            case "vida", "armadura", "resistencia", "velocidad":
+            case "vida", "armadura", "resistencia":
                 return super.recuperaEstadistica(recuperar);
             default:
                 return null;
