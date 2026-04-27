@@ -1,8 +1,11 @@
 package GameMap;
 
+import Armamento.Equipamiento;
 import Characters.Monstruo;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Random;
 
 /**
  *  Crea una clase Mazmorra que permita representar un área con diversos monstruos.
@@ -63,17 +66,31 @@ public class Mazmorra {
     }
 
     public void setNivel(int nivel) {
-        //if(nivel + 3 >=  || nivel-3<=)
         this.nivel = nivel;
     }
 
-    public void combateAleatorio(){
-
+    public ArrayList<Monstruo> combateAleatorio(){
+        ArrayList<Monstruo> resultado = new ArrayList<>();
+        Random r = new Random();
+        for(int io = 0; io < r.nextInt(1,4); io ++) {
+            Monstruo unidad = new Monstruo(monstruos.get(r.nextInt(0, monstruos.size())));
+            for (int i = 0; i < r.nextInt(nivel - 3, nivel + 3); i++) {
+                unidad.subirNivel();
+            }
+            resultado.add(unidad);
+        }
+            return resultado;
     }
+
 
     @Override
     public String toString() {
-        return "Esta mazmorra llamada " + nombre + "posee un conjunto de monstruos llamados \n" + monstruos.toString() + "posee un nivel promedio de " + nivel ;
+        String guarda = "Esta mazmorra llamada " + nombre + "posee un conjunto de monstruos llamados: \n";
+
+        for (Monstruo a : monstruos) {
+            guarda+= a.toString();
+        }
+        return guarda ;
     }
 }
 

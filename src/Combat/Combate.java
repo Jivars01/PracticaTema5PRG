@@ -164,6 +164,58 @@ public class Combate {
     }
 
 
+    public  static void combatirGrupos(ArrayList<Personaje> grupo1,ArrayList<Personaje> grupo2){
+        Personaje primero, segundo;
+        if (comprobarPrimero(p1, p2)) {
+            primero = p1;
+            segundo = p2;
+        } else {
+            primero = p2;
+            segundo = p1;
+        }
+        //Empieza el combate
+        do {
+            System.out.println("Empieza el combate entre " + p1.getNombre() + " y " + p2.getNombre() + ".");
+            muestraCombate(primero, segundo);
+            if (!hayMuertos(primero, segundo) && golpeaDosVeces(primero, segundo)) {
+                segundo.defender(primero.realizaTurno(), "Fisico"); //(Golpe doble)
+                muestraCombate(primero, segundo);
+            }
+            if (!hayMuertos(primero, segundo)) {
+                segundo.defender(primero.realizaTurno(), "Fisico"); //Golpe estándar
+                muestraCombate(primero, segundo);
+            }
+            if (!hayMuertos(primero, segundo)) {
+                primero.defender(segundo.realizaTurno(), "Fisico");
+                muestraCombate(primero, segundo);
+            }
+        } while (!p1.estarMuerto() && !p2.estarMuerto());
+
+        if (p1.estarMuerto()) {
+            System.out.println("El ganador es p2");
+            Random r = new Random();
+            Equipamiento premio = tesoros.get(r.nextInt(0, tesoros().size()));
+            switch (premio.getClass().getSimpleName()){
+                case "Arma":
+                    p2.equipaArma( (Arma)premio);
+                    break;
+                case "Artefacto":
+                    p2.equipaArtefacto((Artefacto)premio);
+                    break;
+
+                case "Armadura":
+                    p2.equipaArmadura((Armadura)premio);
+                    break;
+                default:
+                    System.err.println("El equipamiento no corresponde con los casos vistos");
+            }
+        } else {
+            System.out.println("El ganador es p1");
+        }
+    }
+    }
+
+
     private static ArrayList<Equipamiento> tesoros(){
         ArrayList<Equipamiento> resultados;
         try {

@@ -32,6 +32,8 @@ public class Monstruo extends Personaje {
         Monstruo = "";
     }
 
+
+
     /**
      * Constructor parametrizado.
      * Inicializa los atributos heredados y el tipo de monstruo.
@@ -49,6 +51,11 @@ public class Monstruo extends Personaje {
     public Monstruo(String nombre, int pv, int atq, int arm, int nivel, int vel, int res, String Monstruo) {
         super(nombre, pv, atq, arm, nivel, vel, res);
         setMonstruo(Monstruo);
+    }
+
+    public Monstruo(Monstruo otro){
+        super(otro);
+        this.Monstruo = otro.Monstruo;
     }
 
     /**
