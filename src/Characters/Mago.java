@@ -278,7 +278,7 @@ public class Mago extends Personaje {
         if (getArma() != null) {
             System.err.println("Ya hay una arma escogida");
         }
-        if(getArma().getTipo().equals("cetro") || getArma().getTipo().equals("baston"))
+        if(getArma().getTipo().equals("Cetro") || getArma().getTipo().equals("Baston"))
             setArma(armaar);
 
     }

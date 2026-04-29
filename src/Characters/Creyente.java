@@ -1,5 +1,7 @@
 package Characters;
 
+import Armamento.Artefacto;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -189,6 +191,20 @@ public abstract class Creyente extends Personaje{
      * Es un Creyente.
      * @return Creyente
      */
+
+
+    protected int calcularEstadisticas(String estadistica) {
+        if(estadistica.equals("fe")){
+            int resultado = 0;
+            resultado += fe;
+            resultado += getArma().recuperaEstadistica("fe");
+            for(Artefacto a : getArtefacto()){
+                resultado += a.recuperaEstadistica("fe");
+            }
+        }
+        return super.calcularEstadisticas(estadistica);
+
+    }
 
     public String getClase() {
         return "Creyente";
